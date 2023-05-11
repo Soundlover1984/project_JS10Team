@@ -1,0 +1,13 @@
+import './js/api/fetchBooks';
+import './js/auth-modal/auth-modal';
+import './js/book-modal/modal';
+import './js/dark-theme/dark-theme';
+import './js/firebase/auth';
+import './js/header/header';
+import './js/home/home-collection';
+import './js/other/scrollUp';
+import './js/other/spinerLoader';
+import './js/shopping-list/shoppingList';
+import './js/side-bar/categories';
+import './js/side-bar/support';
+import './js/side-bar/supportFundArray';
