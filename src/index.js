@@ -1,4 +1,4 @@
-import './js/api/fetchBooks';
+import './js/api/booksApiService';
 import './js/home-collection/homeCollection';
 import './js/auth-modal/auth-modal';
 import './js/book-modal/modal';
