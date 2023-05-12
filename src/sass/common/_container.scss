@@ -15,7 +15,24 @@
     padding: 0px 24px;
   }
 }
-
+.side-bar {
+  width: 100%;
+    padding-top: 40px;
+  
+    @media screen and (min-width: 768px) {
+      padding-bottom: 60px;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    @media screen and (min-width: 1440px) {
+      width: 356px;
+      display: block;
+      flex-shrink: 0;
+  
+      padding-bottom: 0px;
+    }
+}
 .page-wrapper {
   @media screen and (min-width: 1440px) {
     display: flex;

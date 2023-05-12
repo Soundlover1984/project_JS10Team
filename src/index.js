@@ -9,5 +9,6 @@ import './js/other/scrollUp';
 import './js/other/spinerLoader';
 import './js/shopping-list/shoppingList';
 import './js/side-bar/categories';
-import './js/side-bar/support';
 import './js/side-bar/supportFundArray';
+import './js/side-bar/supportCreateList';
+import './js/side-bar/supportSwiper';
