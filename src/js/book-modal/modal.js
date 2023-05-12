@@ -22,6 +22,8 @@ function renderBookDetails(book) {
     title,
     author,
     description,
+    buy_links,
+
   } = book
 
   const markup = `
@@ -32,9 +34,7 @@ function renderBookDetails(book) {
         <h3>${author}</h3>
         <p class="book-info">${description}</p>
         <ul class="">
-          <li class=""></li>
-          <li class=""></li>
-          <li class=""></li>
+          ${renderBuyLinks(buy_links)}
         </ul>
         <button
           class="btn-close"
@@ -49,4 +49,38 @@ function renderBookDetails(book) {
 }
 
 //функція яка повинна викликатися при натисканні на картку книги, рендерить інфо модалки
-// getBookDetails();
+getBookDetails();
+
+function renderBuyLinks(buyLinks) {
+  return buyLinks
+  .map((link) => {
+    const {name, url } = link;
+    const iconUrl = getIconUrlForStore();
+    return `<li class="buy-link">
+    <a href="${url}" target="_blank" rel="noopener noreferrer nofollow"><img
+      srcset="
+        ${iconUrl},
+        ${iconUrl2x}
+      "
+      src="${iconUrl}"
+      alt="${name}"
+      width="370"
+      height="294"
+    /></a>
+  </li>`
+  })
+  .join("");
+}
+
+function getIconUrlForStore(storeName) {
+  switch(storeName) {
+    case "Amazon":
+      return "./src/images/modal/image-1@1x.png";
+      case "Apple Books":
+      return "./src/images/modal/image-2@1x.png";
+      case "Bookshop":
+        return "./src/images/modal/image-3@1x.png"
+       default:
+        return "";
+  }
+}
