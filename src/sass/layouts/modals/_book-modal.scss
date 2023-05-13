@@ -1,3 +1,134 @@
-.book-details {
+.button {
+  padding: 10px 32px;
+  min-width: 216px;
+  align-items: center;
+  text-align: center;
+  color: red;
+  background-color: black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  line-height: 1.9;
+
+  transition: background-color 250ms var(--timing-function);
+}
+
+.btn-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.btn-close:hover,
+.btn-close:focus {
   background-color: $primary-background-color;
 }
+
+body.show-modal .backdrop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: inherit;
+}
+
+body.show-modal .modal-for-book {
+  transform: translate(-50%, -50%) scale(2.3);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.4);
+pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);;
+}
+
+.modal-for-book {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 335px;
+  height: 762px;
+  max-width: 400px;
+  height: 100%;
+  max-height: 300px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border: 2px solid #111111;
+  border-radius: 18px;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms var(--timing-function);
+  overflow: auto; /* Додано прокрутку */
+  
+}
+
+.book-details {
+  background-color: #fff;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  &__cover {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  &__info {
+    margin-bottom: 20px;
+  }
+
+  &_title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  &__author {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  &__description {
+    margin-bottom: 10px;
+  }
+}
+
+.shopping-list__item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.buy-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+
+  &-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+}
+
+

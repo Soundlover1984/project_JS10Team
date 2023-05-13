@@ -3,9 +3,21 @@ import { BooksApiService } from "../api/booksApiService";
 const booksApiService = new BooksApiService;
 
 const refs = {
-  bookModal: document.querySelector('.book-modal'),
+  bookModal: document.querySelector('.modal-for-book'),
+  openModalBtn: document.querySelector("[data-modal-open]"),
+  closeModalBtn: document.querySelector("[data-modal-close]"),
+  backdrop: document.querySelector(".js-backdrop"),
 };
 
+    refs.openModalBtn.addEventListener("click", toggleModal);
+    refs.closeModalBtn.addEventListener("click", toggleModal);
+
+    function toggleModal() {
+      document.body.classList.toggle("show-modal");
+      getBookDetails();
+    }
+
+  
 async function getBookDetails() {
   try {
     const book = await booksApiService.getBookOnId();
@@ -23,25 +35,29 @@ function renderBookDetails(book) {
     author,
     description,
     buy_links,
-
-  } = book
+  } = book;
 
   const markup = `
+  <button class="btn-close" data-modal-close type="button" aria-label="close">
+    <svg class="icon" width="18" height="18">
+      <use href="./images/modal/icon-x-close.svg"></use>
+    </svg>
+  </button>
   <div class="book-details">
-      <img class="book-cover" src="${book_image}" alt="${title}" />
-      <div class="info">
-        <h2>${title}</h2>
-        <h3>${author}</h3>
-        <p class="book-info">${description}</p>
-        <ul class="">
+      <img class="book-details__cover" src="${book_image}" alt="${title}" />
+      <div class="book-details__info">
+        <h2 class="book-details__title>${title}</h2>
+        <h3 class="book-details__author>${author}</h3>
+        <p class="book-details__description">${description}</p>
+        <ul class="shopping-list">
           ${renderBuyLinks(buy_links)}
         </ul>
         <button
-          class="btn-close"
-          data-modal-close
+          class="btn-book-modal"
+          data-book-modal
           type="button"
           aria-label="close"
-        ></button>
+        >Add to shopping list</button>
       </div>
     </div>`;
 
@@ -52,35 +68,59 @@ function renderBookDetails(book) {
 getBookDetails();
 
 function renderBuyLinks(buyLinks) {
-  return buyLinks
-  .map((link) => {
-    const {name, url } = link;
-    const iconUrl = getIconUrlForStore();
-    return `<li class="buy-link">
-    <a href="${url}" target="_blank" rel="noopener noreferrer nofollow"><img
-      srcset="
-        ${iconUrl},
-        ${iconUrl2x}
-      "
-      src="${iconUrl}"
-      alt="${name}"
-      width="370"
-      height="294"
-    /></a>
-  </li>`
-  })
-  .join("");
+  const supportedStores = ["Amazon", "Apple Books", "Bookshop"];
+
+  const filteredLinks = buyLinks.filter(link => supportedStores.includes(link.name));
+
+  return filteredLinks
+    .map((link) => {
+      const { name, url } = link;
+      const { iconUrl, iconUrl2x } = getIconUrlForStore(name);
+      return `<li class="shopping-list__item">
+        <a class="buy-link" href="${url}" target="_blank" rel="noopener noreferrer nofollow">
+        <img class="buy-link__img"
+          srcset="
+            ${iconUrl},
+            ${iconUrl2x}
+          "
+          src="${iconUrl}"
+          alt="${name}"
+          width="40"
+          height="40"
+        /></a>
+      </li>`;
+    })
+    .join("");
 }
 
 function getIconUrlForStore(storeName) {
-  switch(storeName) {
-    case "Amazon":
-      return "./src/images/modal/image-1@1x.png";
+    switch (storeName) {
+      case "Amazon":
+        return {
+          iconUrl: "/images/modal/image-1@1x.png",
+          iconUrl2x: "/images/modal/image-1@2x.png"
+        };
       case "Apple Books":
-      return "./src/images/modal/image-2@1x.png";
+        return {
+          iconUrl: "/images/modal/image-2@1x.png",
+          iconUrl2x: "/images/modal/image-2@2x.png"
+        };
       case "Bookshop":
-        return "./src/images/modal/image-3@1x.png"
-       default:
-        return "";
-  }
+        return {
+          iconUrl: "/images/modal/image-3@1x.png",
+          iconUrl2x: "/images/modal/image-3@2x.png"
+        };
+    }
+  
+  // Повертаємо порожні значення для ігнорування інших магазинів
+  return {
+    iconUrl: "",
+    iconUrl2x: ""
+  };
 }
+
+
+
+
+
+
