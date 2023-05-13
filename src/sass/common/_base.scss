@@ -4,7 +4,8 @@ body {
   letter-spacing: -0.04em;
 
   color: #111111;
-  background-color: $primary-background-color;
+  // background-color: $primary-background-color;
+  background-color: green;
   transition: background-color $cubic-time;
 
   &.modal-open {
@@ -12,6 +13,18 @@ body {
     height: 100vh;
   }
 }
+.shop-card {
+  display: flex;
+  width: 335px;
+  height: 170px;
+  padding: 14px;
+  border: 2px solid rgba(79, 46, 232, 0.4);
+  border-radius: 16px;
+}
+.shop-category {
+  color: #4F2EE8;
+}
+
 
 h1,
 h2,
