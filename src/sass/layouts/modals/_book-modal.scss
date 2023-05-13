@@ -113,10 +113,17 @@ pointer-events: none;
   }
 }
 
-.shopping-list__item {
+
+.shopping-list {
   display: flex;
   margin-bottom: 10px;
+
+  &__item {
+    display: flex;
+    margin-bottom: 10px;
+  }
 }
+
 
 .buy-link {
   display: flex;
