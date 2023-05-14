@@ -1,11 +1,10 @@
-import { createOneBookMarkup } from './homeCollection-oneBookMarkup';
+import { createOneBookMarkup } from './home-collection-oneBookMarkup';
 
 function createOneCategoryMarkup(books) {
-  console.log('books:', books);
   const markup = books
     .map(book => {
       return `
-        <li>
+        <li class="book">
           ${createOneBookMarkup(book)}
         </li>
         `;

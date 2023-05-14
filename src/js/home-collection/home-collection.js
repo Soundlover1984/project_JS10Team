@@ -1,6 +1,6 @@
 import { BooksApiService } from '../api/booksApiService';
-import { createHomeCollectionMarkup } from './homeCollection-markup';
-import { createOneBookMarkup } from './homeCollection-oneBookMarkup';
+import { createHomeCollectionMarkup } from './home-collection-markup';
+import { createOneBookMarkup } from './home-collection-oneBookMarkup';
 
 const markupContainer = document.querySelector('.home-collection');
 const booksApiService = new BooksApiService();
@@ -8,7 +8,6 @@ const booksApiService = new BooksApiService();
 async function drawTopBooks() {
   try {
     const categories = await booksApiService.getTopBooks();
-
     markupContainer.innerHTML = `
         <h1 class="home-collection__title">title h1</h1>
         <h2 class="home-collection__subtitle">Best Sellers Books</h2>

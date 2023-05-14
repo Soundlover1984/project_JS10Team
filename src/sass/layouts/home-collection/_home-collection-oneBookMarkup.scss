@@ -2,11 +2,14 @@
   width: 180px;
   height: 306px;
 
-  &__image-frame {
+  &__link {
+  }
+
+  &__frame {
     width: 180px;
     height: 306px;
     border-radius: 8px;
-    background-color: $dark-color;
+    background-color: red;
   }
   &__image {
     height: 100%;

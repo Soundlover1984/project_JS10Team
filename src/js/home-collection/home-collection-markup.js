@@ -1,12 +1,9 @@
-import { createOneCategoryMarkup } from './homeCollection-oneCategoryMarkup';
+import { createOneCategoryMarkup } from './home-collection-oneCategoryMarkup';
 
 function createHomeCollectionMarkup(collection) {
-  // console.log('collection:', collection);
-
   return collection
     .map(category => {
       const { books, list_name } = category;
-
       return `
           <li class="category">
               <p class="category__title">${list_name}</p>
