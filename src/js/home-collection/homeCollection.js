@@ -23,7 +23,7 @@ async function drawTopBooks() {
 }
 
 //=====================================
-drawCategoryBooks();
+// drawCategoryBooks();
 drawTopBooks();
 // drawBookDetails();
 //=====================================
