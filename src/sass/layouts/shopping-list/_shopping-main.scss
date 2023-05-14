@@ -1,4 +1,19 @@
 
+@media screen and (min-width: 40px) and (max-width: 1439px) {
+    .sh-list__books__support{
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        border: 0;
+        padding: 0;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        margin: -1px;
+      }
+  }
+
 .shTitle{
     //position: absolute;
     width: 193px;
@@ -75,6 +90,117 @@
         width: 322px;
     }
 }
+
+
+@media (min-width: 1440px){
+
+    .shTitle{
+       margin-top: 0px;
+    }
+    .sh-list__page{
+        display: flex;
+    }
+    .nullInList{
+        margin-top: 232px;
+    }
+}
+
+
+
+
+
+    .sh-list__pagination{
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .sh-list__pagination-btn{
+        border-radius: 50px;
+        width: 38px;
+        height: 38px;
+        margin-right: 8px;
+        border: 1px solid $dark-color;
+        color: $dark-color;
+        background-color: $white-color;
+
+    }
+
+    .beginning{
+        background: $dark-color;
+        color: $text-gray-color;
+        margin: 0px;
+    }
+
+    .page_back{
+        background: $dark-color;
+        color: $text-gray-color;
+        margin-right: 14px;
+        margin-left: 5px;
+    }
+
+    .currentPage{
+        background: $dark-color;
+        color:$white-color;
+    }
+
+    .pageThre{
+        visibility: hidden;
+    }
+
+    .btnLoadMore{
+        margin-right: 0px;
+    }
+
+    .nextPage{
+      
+        margin-left: 14px;
+        margin-right: 5px;
+        background-color: $yellow-color;
+    }
+
+    .lastPage{
+        background-color: $yellow-color;
+        margin: 0px;
+    }
+
+    @media (min-width: 768px){
+        .sh-list__pagination-btn{
+            width: 44px;
+            height: 44px;
+        }
+        .sh-list__pagination-btn{
+            margin-right: 10px;
+        }
+
+        .beginning{
+            margin: 0px;
+        }
+
+        .page_back{
+            margin-right: 24px;
+            margin-left: 8px;
+        }
+
+        
+
+        .pageThre{
+            visibility: visible;
+        }
+
+        .btnLoadMore{
+            margin-right: 0px;
+        }
+
+        .nextPage{
+            margin-right: 8px;
+            margin-left: 24px;
+        }
+
+        .lastPage{
+            margin: 0px;
+        }
+    }
 
 
 
