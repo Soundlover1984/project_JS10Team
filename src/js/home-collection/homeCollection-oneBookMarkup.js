@@ -1,14 +1,20 @@
-function createBookMarkup(book) {
-  const { author, title, list_name, book_image = defaultBookImage } = book;
-  return `  
-    <li class="book">
-        <div class="book__image-frame">
-            <img class="book__image" src="${book_image}" ></img>
-        </div>
-        <p class="book__title">${title}</p>
-        <p class="book__author">${author}</p> 
-    </li> 
-    `;
+const defaultBookImage = './images/icons.svg#іcon-plug';
+
+function createOneBookMarkup(book) {
+  const { _id, author, title, list_name, book_image = defaultBookImage } = book;
+  return `
+      <a href="/" class='category-books__link'>
+        <img
+          class=""
+          src='${book_image}'
+          alt='book image '
+          data-id="${_id}"
+          loading="lazy"
+        />
+      </a>
+      <h3 class="book__title" >${title}</h3>
+      <p class="book__author">${author}</p>
+      `;
 }
 
-export { createBookMarkup };
+export { createOneBookMarkup };
