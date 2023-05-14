@@ -11,7 +11,7 @@ const refs = {
 };
 
 refs.openModalBtn.addEventListener('click', openModal);
-
+refs.closeModalBtn.addEventListener('click', removeModal)
 /**
  * Отримання деталей книги
  * @param {Object} refs - Об'єкт з посиланнями на елементи DOM
@@ -32,40 +32,9 @@ async function getBookDetails() {
 function openModal() {
   getBookDetails();
   document.body.classList.add('show-modal');
-  refs.closeModalBtn.addEventListener('click', removeModal);
   refs.backdrop.addEventListener('click', backdropClickHandler);
   document.addEventListener('keydown', keydownHandler);
-}
-
-/**
- * Закриття модального вікна
- */
-function removeModal() {
-  document.body.classList.remove('show-modal');
-  refs.bookModal.innerHTML = '';
-  refs.closeModalBtn.removeEventListener('click', removeModal);
-  refs.backdrop.removeEventListener('click', backdropClickHandler);
-  document.removeEventListener('keydown', keydownHandler);
-}
-
-/**
- * Обробник кліку на підкладці (backdrop)
- * @param {Event} event - Об'єкт події
- */
-function backdropClickHandler(event) {
-  if (event.target === refs.backdrop) {
-    removeModal();
-  }
-}
-
-/**
- * Обробник натискання клавіші
- * @param {KeyboardEvent} event - Об'єкт події
- */
-function keydownHandler(event) {
-  if (event.code === 'Escape') {
-    removeModal();
-  }
+  refs.closeModalBtn.addEventListener('click', removeModal);
 }
 
 /**
@@ -95,12 +64,12 @@ function createBookDetailsMarkup(book) {
       class="btn-book-modal"
       aria-label=""
       type="button"
-      data-book="${JSON.stringify(book)}"
+      data-book
     >Add to shopping list</button>
         </div>`;
   return markup;
 }
-
+// "${JSON.stringify(book)}
 /**
         
         Створення розмітки посилань на покупку
@@ -142,8 +111,9 @@ function createBookDetailsMarkup(book) {
 function renderBookDetails(book) {
   const markup = createBookDetailsMarkup(book);
   refs.bookModal.innerHTML = markup;
-
-  localStorage.setItem('SHOPPING_LIST', JSON.stringify(book));
+  const addToShoppingListBtn= document.querySelector('[data-book]');
+  addToShoppingListBtn.addEventListener('clik', handleAddToShoppingList)
+  // localStorage.setItem('SHOPPING_LIST', JSON.stringify(book));
 }
 /**
         
@@ -167,15 +137,58 @@ function getIconUrlForStore(storeName) {
 }
 
 
-
-
-const SHOPPING_LIST = JSON.parse(localStorage.getItem('SHOPPING_LIST')) || [];
-
 function addToShoppingList(book) {
-  SHOPPING_LIST.push(book);
-  localStorage.setItem('SHOPPING_LIST', JSON.stringify(SHOPPING_LIST));
-  console.log('Book added to shopping list:', book);
+  const updatedShoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST')) || [];
+  const bookIndex = updatedShoppingList.findIndex(item => item.title === book.title);
+  
+  if (bookIndex !== -1) {
+    // Книга вже присутня у списку, тому видаляємо її
+    updatedShoppingList.splice(bookIndex, 1);
+    console.log('Book removed from shopping list:', book);
+  } else {
+    // Книги немає у списку, додаємо її
+    updatedShoppingList.push(book);
+    console.log('Book added to shopping list:', book);
+  }
+
+  localStorage.setItem('SHOPPING_LIST', JSON.stringify(updatedShoppingList));
 }
 
-const book = JSON.parse(localStorage.getItem('book')); // Отримання об'єкта книги з локального сховища
-addToShoppingList(book);
+function handleAddToShoppingList() {
+  const addToShoppingListButton = document.querySelector('.btn-book-modal');
+  const book = JSON.parse(addToShoppingListButton.getAttribute('data-book'));
+  addToShoppingList(book);
+}
+// отримати оновлений список покупок
+// const shoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST'));
+
+/**
+ * Закриття модального вікна
+ */
+function removeModal() {
+  refs.bookModal.innerHTML = '';
+  document.body.classList.remove('show-modal');
+  refs.closeModalBtn.removeEventListener('click', removeModal);
+  refs.backdrop.removeEventListener('click', backdropClickHandler);
+  document.removeEventListener('keydown', keydownHandler);
+}
+
+/**
+ * Обробник кліку на підкладці (backdrop)
+ * @param {Event} event - Об'єкт події
+ */
+function backdropClickHandler(event) {
+  if (event.target === refs.backdrop) {
+    removeModal();
+  }
+}
+
+/**
+ * Обробник натискання клавіші
+ * @param {KeyboardEvent} event - Об'єкт події
+ */
+function keydownHandler(event) {
+  if (event.code === 'Escape') {
+    removeModal();
+  }
+}
