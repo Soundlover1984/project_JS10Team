@@ -1,0 +1,11 @@
+.home-collection {
+  &__category-list {
+    display: flex;
+    row-gap: 40px;
+    column-gap: 24px;
+    flex-wrap: wrap;
+  }
+  &__title--lastWord:last-child {
+    color: $blue-color;
+  }
+}
