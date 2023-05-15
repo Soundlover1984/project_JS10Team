@@ -1,30 +1,38 @@
-<div class="sh-list__books__support"><include src="./partials/side-bar/support.html">support</include></div>
-
+<div class="sh-list__books__support">
+  <include src="./partials/side-bar/support.html">support</include>
+</div>
 
 <div class="sh-list__page">
   <h1 class="shTitle">Shopping <span class="shTitle__List">List</span></h1>
-<div class="nullInList">
-  <p class="sh-list__default__masseg">This page is empty, add some books and proceed to order.</p>
-  <div class="sh-list__books__containner">
-    <picture class="sh-list__img__books">
-    <source srcset="./images/shopingListImg/emptyList-530.png 1x, ./images/shopingListImg/emptyList-644.png 2x"  media="(min-width: 1200px)" type="png" />
-    <source srcset="./images/shopingListImg/emptyList-322.png" media="(min-width: 768px)" type="png"/>
-    <source srcset="./images/shopingListImg/emptyList-265.png" media="(max-width:767px)" type="png" />
-    <img src="./images/shopingListImg/emptyList-530.png"  alt="books" />
-  </picture>
+  <div class="nullInList">
+    <p class="sh-list__default__masseg">
+      This page is empty, add some books and proceed to order.
+    </p>
+    <div class="sh-list__books__containner">
+      <picture class="sh-list__img__books">
+        <source
+          srcset="
+            ./images/shopingListImg/emptyList-530.png 1x,
+            ./images/shopingListImg/emptyList-644.png 2x
+          "
+          media="(min-width: 1200px)"
+          type="png"
+        />
+        <source
+          srcset="./images/shopingListImg/emptyList-322.png"
+          media="(min-width: 768px)"
+          type="png"
+        />
+        <source
+          srcset="./images/shopingListImg/emptyList-265.png"
+          media="(max-width:767px)"
+          type="png"
+        />
+        <img src="./images/shopingListImg/emptyList-530.png" alt="books" />
+      </picture>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+<ul class="listWithBoks"></ul>
 
-
-
-<ul class="sh-list__pagination">
-  <li><button class="sh-list__pagination-btn beginning"> << </button></li>
-  <li><button class="sh-list__pagination-btn page_back"> < </button></li>
-  <li><button class="sh-list__pagination-btn currentPage"> 1 </button> </li>
-  <li><button class="sh-list__pagination-btn"> 2 </button></li>
-  <!-- <li><button class="sh-list__pagination-btn pageThre"> 3 </button></li> -->
-  <li><button class="sh-list__pagination-btn btnLoadMore"> ... </button></li>
-  <li> <button class="sh-list__pagination-btn nextPage"> > </button> </li>
-  <li> <button class="sh-list__pagination-btn lastPage"> >> </button> </li>
-</ul>
+<ul class="sh-list__pagination"></ul>
