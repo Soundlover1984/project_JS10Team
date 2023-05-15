@@ -1,7 +1,12 @@
 
 .button {
+  position: absolute;
+  top: 300px;
+  left: 200px;
+  display: flex;
   align-items: center;
   text-align: center;
+  margin-right: 300px;
   color: red;
   background-color: black;
   padding: 10px 32px;
@@ -83,7 +88,7 @@ body.show-modal .modal-for-book {
   top: 50%;
   left: 50%;
   width: calc(100% - 20px * 2);
-  height: 350px;
+  width: 300px;
   background: $white-color;
   border: 2px solid $dark-color;
   border-radius: 18px;
@@ -92,6 +97,7 @@ body.show-modal .modal-for-book {
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     max-height: calc(100% - 20px * 2);
+    
     overflow-y: scroll;
   }
 
@@ -239,8 +245,8 @@ body.show-modal .modal-for-book {
   padding-right: 23px;
 }
 
-.remove-book-cover.is-hidden,
-.remobe-btn-message.is-hidden {
+.btn-modal-add-book.is-hidden,
+.remove-book-cover.is-hidden {
   position: absolute;
   opacity: 0;
   visibility: hidden;
