@@ -10,6 +10,10 @@ class BooksApiService {
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
+  /**
+   * Отримання списку категорій
+   * @returns {Array} - Масив з категоріями
+   */
   async getCategoryList() {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category-list`);
@@ -22,6 +26,10 @@ class BooksApiService {
     }
   }
 
+  /**
+   * Отримання списку популярних книг
+   * @returns {Array} - Масив з популярними книгами
+   */
   async getTopBooks() {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/top-books`);
@@ -34,6 +42,10 @@ class BooksApiService {
     }
   }
 
+  /**
+   * Отримання списку книг за обраною категорією
+   * @returns {Array} - Масив з книгами в обраній категорії
+   */
   async getCategoryBooks() {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category`, {
@@ -50,6 +62,10 @@ class BooksApiService {
     }
   }
 
+  /**
+   * Отримання даних про книгу за її ідентифікатором
+   * @returns {Object} - Об'єкт з даними книги
+   */
     async getBookOnId() {
       try {
       const response = await axios.get(`${this.BASE_URL}/books/${this.bookId}`);
@@ -66,12 +82,12 @@ class BooksApiService {
 
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
-const booksApiService = new BooksApiService();
+// const booksApiService = new BooksApiService();
 
-booksApiService.getCategoryList();
-booksApiService.getTopBooks();
-booksApiService.getCategoryBooks();
-booksApiService.getBookOnId();
+// booksApiService.getCategoryList();
+// booksApiService.getTopBooks();
+// booksApiService.getCategoryBooks();
+// booksApiService.getBookOnId();
 
 
 export { BooksApiService };
