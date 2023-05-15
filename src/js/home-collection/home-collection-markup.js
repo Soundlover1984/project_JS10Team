@@ -1,6 +1,6 @@
 import { createOneCategoryMarkup } from './home-collection-oneCategoryMarkup';
 
-function createHomeCollectionMarkup(collection) {
+function createFullMarkup(collection) {
   return collection
     .map(category => {
       const { books, list_name } = category;
@@ -8,9 +8,9 @@ function createHomeCollectionMarkup(collection) {
           <li class="category">
               <p class="category__title">${list_name}</p>
               <ul class="category__books-list">
-                ${createOneCategoryMarkup(books)}
-                <button class="category__button more-js">SEE MORE</button>
+                ${createOneCategoryMarkup(books)}                
               </ul>
+              <button class="category__button more-js">SEE MORE</button>
           </li>
         `;
     })
@@ -18,4 +18,4 @@ function createHomeCollectionMarkup(collection) {
   4;
 }
 
-export { createHomeCollectionMarkup };
+export { createFullMarkup };

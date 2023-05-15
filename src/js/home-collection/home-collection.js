@@ -1,5 +1,5 @@
 import { BooksApiService } from '../api/booksApiService';
-import { createHomeCollectionMarkup } from './home-collection-markup';
+import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-oneBookMarkup';
 
 const markupContainer = document.querySelector('.home-collection');
@@ -11,8 +11,8 @@ async function drawTopBooks() {
     markupContainer.innerHTML = `
         <h1 class="home-collection__title">title h1</h1>
         <h2 class="home-collection__subtitle">Best Sellers Books</h2>
-        <ul class="home-collection__categories-list"> 
-            ${createHomeCollectionMarkup(categories)}
+        <ul class="home-collection__categories-list--topBooks"> 
+            ${createFullMarkup(categories)}
         </ul>
         `;
   } catch (error) {
@@ -22,8 +22,8 @@ async function drawTopBooks() {
 }
 
 //=====================================
-// drawCategoryBooks();
-drawTopBooks();
+drawCategoryBooks();
+// drawTopBooks();
 // drawBookDetails();
 //=====================================
 
@@ -37,7 +37,7 @@ async function drawCategoryBooks() {
       <h1 class="home-collection__title">title h1</h1>
     <h2 class="home-collection__title">${books[0].list_name}</h2>
     <h3 class="home-collection__subtitle">${books[0].list_name}</h3>
-    <ul class="home-collection__category-list">
+    <ul class="home-collection__categories-list--oneCategory">
           ${markup}
       </ul>`;
   } catch (error) {

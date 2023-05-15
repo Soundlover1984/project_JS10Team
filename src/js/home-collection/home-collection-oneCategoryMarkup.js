@@ -3,10 +3,8 @@ import { createOneBookMarkup } from './home-collection-oneBookMarkup';
 function createOneCategoryMarkup(books) {
   const markup = books
     .map(book => {
-      return `
-        <li class="book">
-          ${createOneBookMarkup(book)}
-        </li>
+      return `       
+          ${createOneBookMarkup(book)}      
         `;
     })
     .join('');
