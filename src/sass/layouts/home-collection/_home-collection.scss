@@ -4,11 +4,11 @@ li {
 }
 
 .home-collection {
-  &__title {
+  &__h1 {
     visibility: hidden;
   }
 
-  &__subtitle {
+  &__title {
   }
 
   &__categories-list--topBooks {
@@ -44,10 +44,23 @@ li {
   }
 
   &__button {
+    width: 124px;
+    height: 46px;
+    border: 2px solid #4f2ee8;
+    border-radius: 40px;
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
 }
 
 .book {
+  width: 180px;
   &__link {
   }
 
@@ -71,7 +84,7 @@ li {
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
-    line-height: 18px;
+    line-height: 1.13;
     letter-spacing: -0.04em;
     text-transform: uppercase;
     color: $dark-color;
@@ -86,7 +99,7 @@ li {
     font-style: italic;
     font-weight: 400;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 1.17;
     letter-spacing: -0.04em;
     color: $text-gray-color;
   }
