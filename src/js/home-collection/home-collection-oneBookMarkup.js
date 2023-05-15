@@ -1,6 +1,5 @@
-// const defaultBookImage = './images/icons.svg#іcon-plug';
-// const defaultBookImage = './../../images/animal_01.png';
-const defaultBookImage = '../../images/animal_01.png';
+// const defaultBookImage = require('../../images/icons.svg#icon-plug');
+const defaultBookImage = require('../../images/defaultBook_180_x_256.png');
 
 function createOneBookMarkup(book) {
   const { _id, author, title, list_name, book_image = defaultBookImage } = book;
@@ -10,11 +9,14 @@ function createOneBookMarkup(book) {
         <div class="book__frame">
           <img
             class="book__image"
-            src='${defaultBookImage}'
+            src='${book_image}'
             alt='book image '
             data-id="${_id}"
             loading="lazy"
-        />
+          />
+          <div class="book__overlay">
+            <p class="book__view">quick view</p>
+          </div>
         </div>
       </a>
       <h3 class="book__title" >${title}</h3>
