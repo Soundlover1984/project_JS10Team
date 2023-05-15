@@ -17,7 +17,8 @@ async function drawTopBooks() {
         </ul>
         `;
 
-    addListeners();
+    addEventListenerForBook();
+    addEventListenerForButton();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch top books');
@@ -37,7 +38,7 @@ async function drawCategoryBooks() {
           ${markup}
       </ul>`;
 
-    addListeners();
+    addEventListenerForBook();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category books');
@@ -45,14 +46,46 @@ async function drawCategoryBooks() {
 }
 
 //=====================================
-// drawTopBooks();
-drawCategoryBooks();
+drawTopBooks();
+// drawCategoryBooks();
 //=====================================
 
-function addListeners() {
-  // Creating "click" listeners for books
-  let links = document.querySelectorAll('.book__link');
-  links.forEach(element => {
-    element.addEventListener('click', openModal);
+function addEventListenerForBook() {
+  const elemRef = document.querySelectorAll('.book__link');
+  elemRef.forEach(elem => {
+    elem.addEventListener('click', openModal);
   });
 }
+
+function addEventListenerForButton() {
+  const elemRef = document.querySelectorAll('.category');
+  elemRef.forEach(elem => {
+    elem.addEventListener('click', buttonHandler);
+  });
+}
+
+function buttonHandler(event) {
+  // console.log(event.target.closest('.category__title'));
+  // console.log(event.currentTarget);
+  // const current = event.target;
+  // let prevSibling = current.previousElementSibling;
+  // while (prevSibling) {
+  //   console.log(prevSibling);
+  //   prevSibling = current.previousElementSibling;
+  // }
+}
+
+// ==========-> Calculating width <-=============
+// window.addEventListener('resize', calculateNumberOfBooks);
+
+// function calculateNumberOfBooks() {
+//   let currentWidth = window.innerWidth;
+
+//   if (currentWidth <= 375) {
+//     return 1;
+//   } else if (currentWidth <= 768) {
+//     return 3;
+//   } else {
+//     return 5;
+//   }
+// }
