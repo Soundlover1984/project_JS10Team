@@ -10,14 +10,13 @@ async function drawTopBooks() {
   try {
     const categories = await booksApiService.getTopBooks();
     markupContainer.innerHTML = `
-        <h1 class="home-collection__h1">title h1</h1>
-        <h2 class="home-collection__title">Best Sellers Books</h2>
-        <ul class="home-collection__categories-list--topBooks"> 
-            ${createFullMarkup(categories)}
-        </ul>
-        `;
-
-    addEventListenerForBook();
+          <h1 class="home-collection__h1">title h1</h1>
+          <h2 class="home-collection__title">Best Sellers Books</h2>
+          <ul class="home-collection__categories-list--topBooks">
+              ${createFullMarkup(categories)}
+          </ul>
+          `;
+    // addEventListenerForBook();
     addEventListenerForButton();
   } catch (error) {
     console.error(error);
@@ -25,37 +24,30 @@ async function drawTopBooks() {
   }
 }
 
-async function drawCategoryBooks() {
+async function drawCategoryBooks(categoryName) {
   try {
-    const books = await booksApiService.getCategoryBooks();
+    const books = await booksApiService.getCategoryBooks(categoryName);
     console.log('books:', books);
     const markup = books.map(book => createOneBookMarkup(book)).join('');
 
     markupContainer.innerHTML = `
-      <h1 class="home-collection__h1">title h1</h1>
       <h2 class="home-collection__title">${books[0].list_name}</h2>
       <ul class="home-collection__categories-list--oneCategory">
           ${markup}
       </ul>`;
-
-    addEventListenerForBook();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category books');
   }
 }
 
-//=====================================
-drawTopBooks();
-// drawCategoryBooks();
-//=====================================
+export { drawTopBooks };
 
-function addEventListenerForBook() {
-  const elemRef = document.querySelectorAll('.book__link');
-  elemRef.forEach(elem => {
-    elem.addEventListener('click', openModal);
-  });
-}
+//=====================================
+// drawTopBooks();
+// drawCategoryBooks('Audio Fiction');
+getCategory('Audio Fiction');
+//=====================================
 
 function addEventListenerForButton() {
   const elemRef = document.querySelectorAll('.category');
@@ -65,27 +57,76 @@ function addEventListenerForButton() {
 }
 
 function buttonHandler(event) {
-  // console.log(event.target.closest('.category__title'));
-  // console.log(event.currentTarget);
-  // const current = event.target;
-  // let prevSibling = current.previousElementSibling;
-  // while (prevSibling) {
-  //   console.log(prevSibling);
-  //   prevSibling = current.previousElementSibling;
-  // }
+  const elButton = event.target;
+  const categoryName =
+    elButton.parentNode.querySelector('.category__title').textContent;
+
+  console.log(categoryName);
+  getCategory(categoryName);
 }
 
-// ==========-> Calculating width <-=============
-// window.addEventListener('resize', calculateNumberOfBooks);
+async function getCategory(categoryName) {
+  try {
+    const listSelectCategoryBooks = await booksApiService.getCategoryBooks(
+      categoryName
+    );
+    console.log(listSelectCategoryBooks);
+    // renderSelectBooks(listSelectCategoryBooks);
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch category list');
+  }
+}
 
-// function calculateNumberOfBooks() {
-//   let currentWidth = window.innerWidth;
+async function renderSelectBooks(books) {
+  await drawCategoryTitle(booksApiService.selectedCategory);
 
-//   if (currentWidth <= 375) {
-//     return 1;
-//   } else if (currentWidth <= 768) {
-//     return 3;
-//   } else {
-//     return 5;
-//   }
-// }
+  categoryList.innerHTML = '';
+
+  if (books.length === 0) {
+    Notiflix.Notify.info(
+      'Unfortunately, nothing was found. Please try changing the parameters and performing a new search.',
+      {
+        width: '500px',
+        position: 'center-center',
+        fontSize: '20px',
+        messageMaxLength: 500,
+        opacity: 0.6,
+        cssAnimation: true,
+        cssAnimationDuration: 1000,
+        cssAnimationStyle: 'zoom',
+        clickToClose: true,
+        showOnlyTheLastOne: true,
+      }
+    );
+  } else {
+    const oneBook = createOneCategoryMarkup(books);
+    categoryList.insertAdjacentHTML('beforeend', oneBook);
+  }
+}
+
+//------------------------------------------------------------
+async function drawCategoryTitle(categoryName) {
+  try {
+    const books = await booksApiService.getCategoryBooks(categoryName);
+    title = categoryName.split(' ');
+    const titleLast = title.pop();
+    const titleFirst = title.join(' ');
+    categoryTitle.innerHTML = `${titleFirst}<span class="title_last-word" style = "color: #4f2ee8"> ${titleLast}</span>`;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to draw category title');
+  }
+}
+
+async function getTopBooksAndSetBookId() {
+  try {
+    const topBooks = await booksApiService.getTopBooks();
+    if (topBooks.length > 0) {
+      const bookId = topBooks[0]._id;
+      booksApiService.setBookId(bookId); // Передача значення bookId до BooksApiService
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -1,3 +1,0 @@
-function openModal() {}
-
-export { openModal };
