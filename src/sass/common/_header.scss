@@ -1,5 +1,26 @@
+
+  // @media screen and (min-width: 375px) {
+
+  // }
+
+
+  // @media screen and (min-width: 768px) {
+
+  // }
+
+  // @media screen and (min-width: 1440px) {
+
+  // }
+
+
+.header-sighUp {
+  display: none;
+}
+
 .header {
-  padding: 10px 20px;
+  border: 1.5px solid $dark-color;
+  border-radius: 0 0 8px 8px;
+  padding: 18px 20px;
 }
 
 .header-wrapper {
@@ -58,7 +79,6 @@ form > div {
   width: 100%;
   height: 100%;
   background-color: $primary-background-color;
-  padding: 10px;
   transition: left 0.3s;
 }
 
@@ -88,18 +108,27 @@ form > div {
   font-size: 28px;
 }
 
-.close-nav {
+// .header-close-nav a {
+//   left: 20px;
+// }
+
+.header-close-nav {
+  display: flex;
+  justify-content: space-between;
+  border: 1.5px solid #111;
+  border-radius: 0 0 8px 8px;
+  padding: 18px 20px;
   text-align: right;
-  margin-bottom: 20px;
 }
 
-.close-nav button {
+.header-close-nav button {
+  padding: 0;
   border: none;
   background: $primary-background-color;
   cursor: pointer;
 }
 
-.close-nav button:hover {
+.header-close-nav button:hover {
   color: $dark-gray-color;
   background: white;
 }
@@ -133,6 +162,7 @@ a.header-shopping.header-active {
 .header-controls {
   display: flex;
   align-items: center;
+  gap: 14px;
 }
 
 .header-menu button {
@@ -141,7 +171,10 @@ a.header-shopping.header-active {
   cursor: pointer;
 }
 
-@media (min-width: 550px) {
+@media (min-width: 768px) {
+  .header-sighUp {
+    display: block;
+  }
   .header-navbar {
     all: unset;
     display: block;
@@ -153,7 +186,7 @@ a.header-shopping.header-active {
   .header-navbar ul a {
     font-size: inherit;
   }
-  .close-nav,
+  .header-close-nav,
   .header-menu {
     display: none;
   }
