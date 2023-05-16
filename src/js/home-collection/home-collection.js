@@ -46,7 +46,7 @@ export { drawTopBooks };
 //=====================================
 // drawTopBooks();
 // drawCategoryBooks('Audio Fiction');
-getCategory('Audio Fiction');
+getCategory('Young Adult Paperback Monthly');
 //=====================================
 
 function addEventListenerForButton() {
@@ -67,9 +67,10 @@ function buttonHandler(event) {
 
 async function getCategory(categoryName) {
   try {
-    const listSelectCategoryBooks = await booksApiService.getCategoryBooks(
-      categoryName
-    );
+    const listSelectCategories = await booksApiService.getCategoryList();
+    console.log('listSelectCategories:', listSelectCategories);
+    booksApiService.selectedCategory = categoryName;
+    const listSelectCategoryBooks = await booksApiService.getCategoryBooks();
     console.log(listSelectCategoryBooks);
     // renderSelectBooks(listSelectCategoryBooks);
   } catch (error) {
@@ -130,3 +131,7 @@ async function getTopBooksAndSetBookId() {
     console.error(error);
   }
 }
+
+booksApiService.getBookOnId(id) {
+
+};
