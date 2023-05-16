@@ -98,16 +98,10 @@ function onClick(evt) {
     currentPage = 1;
     localStorage.setItem('currentPage', currentPage);
     listWithBoks.innerHTML = '';
+    pageTwo.classList.remove('currentPage');
     createBoksCard(result[0]);
     pageOne.classList.add('currentPage');
-  }
-
-  //  else if(currentPageStyl.classList[1] === 'page_back'){
-  //   listWithBoks.innerHTML = '';
-  //   createBoksCard(result[0])
-  //   pageOne.classList.add('currentPage')
-  // }
-  else if (btnClass[2] === 'pageOne') {
+  } else if (btnClass[2] === 'pageOne') {
     currentPage = 1;
     localStorage.setItem('currentPage', currentPage);
     listWithBoks.innerHTML = '';
@@ -124,8 +118,6 @@ function onClick(evt) {
     listWithBoks.innerHTML = '';
     createBoksCard(result[result.length - 1]);
   } else if (btnClass[2] === 'btnLoadMore') {
-    pageTwo.classList.remove('currentPage');
-    pageOne.classList.add('currentPage');
     localStorage.setItem('currentPage', 3);
     listWithBoks.innerHTML = '';
     createBoksCard(result[2]);
@@ -139,9 +131,12 @@ function onClickMore() {
   if (allPages > 3) {
     return;
   }
-  pageOne.textContent = 3;
-  pageTwo.textContent = 4;
+  pageOne.textContent = 2;
+  pageTwo.textContent = 3;
 }
+
+nextPage.addEventListener('click', updatePage('nextPage'));
+lastPage.addEventListener('click', updatePage('page_back'));
 
 function updatePage(action) {
   if (action === 'page_back' && currentPage > 1) {
@@ -173,13 +168,25 @@ function renderCards() {
 function addCarenPageStyl() {
   let crPg = Number(localStorage.getItem('currentPage'));
 
-  if ((crPg = 1)) {
+  if (crPg === 1) {
     pageOne.classList.add('currentPage');
     return;
-  } else if ((crPg = 2)) {
+  } else if (crPg === 2) {
     pageOne.classList.remove('currentPage');
     pageTwo.classList.add('currentPage');
     return;
+  } else if (crPg === 3) {
+    pageOne.classList.add('currentPage');
+    pageTwo.classList.remove('currentPage');
+
+    pageOne.textContent = 3;
+    pageTwo.textContent = 4;
+  }
+}
+
+function addCarentPage(allPages) {
+  for (let i = 1; i <= allPages; i += 1) {
+    localStorage.setItem('currentPage', [i]);
   }
 }
 
