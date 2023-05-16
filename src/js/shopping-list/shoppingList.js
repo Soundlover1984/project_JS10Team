@@ -3,12 +3,12 @@ const refs = {
     shopCard: document.getElementsByClassName("shop"),
 }
 
-refs.btnRemove.addEventListener('click', onRemoveCard);
+// refs.btnRemove.addEventListener('click', onRemoveCard);
 
-function onRemoveCard(ev) {
-    ev.preventDefault();
-    localStorage.removeItem(SHOPPING_LIST_KEY);
-}
+// function onRemoveCard(ev) {
+//     ev.preventDefault();
+//     localStorage.removeItem(SHOPPING_LIST_KEY);
+// }
 
 function renderMarkup(book) {
     const markup = createCardBook(book);
