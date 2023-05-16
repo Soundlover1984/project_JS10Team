@@ -44,9 +44,9 @@ async function drawCategoryBooks(categoryName) {
 export { drawTopBooks };
 
 //=====================================
-// drawTopBooks();
-// drawCategoryBooks('Audio Fiction');
-getCategory('Young Adult Paperback Monthly');
+drawTopBooks();
+// drawCategoryBooks('Combined Print and E-Book Nonfiction');
+// getCategory('Young Adult Paperback Monthly');
 //=====================================
 
 function addEventListenerForButton() {
@@ -62,48 +62,7 @@ function buttonHandler(event) {
     elButton.parentNode.querySelector('.category__title').textContent;
 
   console.log(categoryName);
-  getCategory(categoryName);
-}
-
-async function getCategory(categoryName) {
-  try {
-    const listSelectCategories = await booksApiService.getCategoryList();
-    console.log('listSelectCategories:', listSelectCategories);
-    booksApiService.selectedCategory = categoryName;
-    const listSelectCategoryBooks = await booksApiService.getCategoryBooks();
-    console.log(listSelectCategoryBooks);
-    // renderSelectBooks(listSelectCategoryBooks);
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to fetch category list');
-  }
-}
-
-async function renderSelectBooks(books) {
-  await drawCategoryTitle(booksApiService.selectedCategory);
-
-  categoryList.innerHTML = '';
-
-  if (books.length === 0) {
-    Notiflix.Notify.info(
-      'Unfortunately, nothing was found. Please try changing the parameters and performing a new search.',
-      {
-        width: '500px',
-        position: 'center-center',
-        fontSize: '20px',
-        messageMaxLength: 500,
-        opacity: 0.6,
-        cssAnimation: true,
-        cssAnimationDuration: 1000,
-        cssAnimationStyle: 'zoom',
-        clickToClose: true,
-        showOnlyTheLastOne: true,
-      }
-    );
-  } else {
-    const oneBook = createOneCategoryMarkup(books);
-    categoryList.insertAdjacentHTML('beforeend', oneBook);
-  }
+  drawCategoryBooks(categoryName);
 }
 
 //------------------------------------------------------------
@@ -120,18 +79,18 @@ async function drawCategoryTitle(categoryName) {
   }
 }
 
-async function getTopBooksAndSetBookId() {
+//============================
+// const booksApiService = new BooksApiService();
+async function test() {
   try {
-    const topBooks = await booksApiService.getTopBooks();
-    if (topBooks.length > 0) {
-      const bookId = topBooks[0]._id;
-      booksApiService.setBookId(bookId); // Передача значення bookId до BooksApiService
-    }
+    // console.log(await booksApiService.getCategoryList());
+    // console.log(await booksApiService.getTopBooks());
+    // console.log(await booksApiService.getCategoryBooks('Business Books'));
+    // console.log(await booksApiService.getBookOnId('643282b2e85766588626a0de'));
   } catch (error) {
     console.error(error);
+    throw new Error('Failed to draw category title');
   }
 }
 
-booksApiService.getBookOnId(id) {
-
-};
+test();

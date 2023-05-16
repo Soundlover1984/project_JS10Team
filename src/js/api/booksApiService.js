@@ -46,11 +46,11 @@ class BooksApiService {
    * Отримання списку книг за обраною категорією
    * @returns {Array} - Масив з книгами в обраній категорії
    */
-  async getCategoryBooks() {
+  async getCategoryBooks(categoryName) {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category`, {
         params: {
-          category: this.selectedCategory,
+          category: categoryName,
         },
       });
       const booksCategori = response.data;
@@ -66,9 +66,9 @@ class BooksApiService {
    * Отримання даних про книгу за її ідентифікатором
    * @returns {Object} - Об'єкт з даними книги
    */
-  async getBookOnId() {
+  async getBookOnId(id) {
     try {
-      const response = await axios.get(`${this.BASE_URL}/books/${this.bookId}`);
+      const response = await axios.get(`${this.BASE_URL}/books/${id}`);
       const book = response.data;
       // console.log('Book:', book);
       return book;
@@ -84,8 +84,8 @@ class BooksApiService {
 
 // booksApiService.getCategoryList();
 // booksApiService.getTopBooks();
-// booksApiService.getCategoryBooks();
-// booksApiService.getBookOnId();
+// booksApiService.getCategoryBooks('Middle Grade Paperback Monthly');
+// booksApiService.getBookOnId('643282b1e85766588626a085');
 
 export { BooksApiService };
 
