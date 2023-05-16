@@ -1,7 +1,24 @@
 
 
 
-
+const refs = {
+    btnRemove: document.querySelectorAll('.shop-card__delete'),
+    shopCard: document.querySelector('.listWithBoks'),
+  };
+  
+  refs.btnRemove.forEach((btn) => {
+    btn.addEventListener('click', onRemoveCard);
+  });
+  
+  function onRemoveCard(ev) {
+    ev.preventDefault();
+    localStorage.removeItem(SHOPPING_LIST_KEY);
+  }
+  
+  function renderMarkup(books) {
+    const cardsMarkup = books.map((book) => createCardBookMarkup(book)).join('');
+    refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
+  }
 
 export default function createCardBook(book) {
   const oneBook = book
@@ -105,20 +122,3 @@ const pngUrls = [
   },
 ];
 
-const btnRemove = document.querySelector(".shop-card__delete");
-
-btnRemove.addEventListener("click", onRemoveCard);
-
-function onRemoveCard(ev) {
-    if (ev.target.dataset.action !== 'delete') {
-    return;
-    }
-
-    const closetNode = ev.target.closest('.shop-card');
-    const bookRemoveId = closetNode.dataset.id;
-
-    bookRemoveId.classList.add('is-hidden');
-    bookRemoveId.remove();
-    localStorage.removeItem(SHOPPING_LIST_KEY);
-    return;
-}
