@@ -184,11 +184,11 @@ function addCarenPageStyl() {
   }
 }
 
-function addCarentPage(allPages) {
-  for (let i = 1; i <= allPages; i += 1) {
-    localStorage.setItem('currentPage', [i]);
-  }
-}
+// function addCarentPage(allPages) {
+//   for (let i = 1; i <= allPages; i += 1) {
+//     localStorage.setItem('currentPage', [i]);
+//   }
+// }
 
 const prevButton = document.querySelector('.page_back');
 prevButton.addEventListener('click', () => {
