@@ -14,10 +14,6 @@ form > div {
   margin: 40px 0;
 }
 
-.header-toggle {
-  padding-right: 10px;
-}
-
 .header-toggle input {
   opacity: 0;
 }
@@ -130,7 +126,7 @@ a.header-shopping.header-active {
   gap: 8px;
   width: 156px;
   height: 34px;
-  background:  $yellow-color;
+  background: $yellow-color;
   border-radius: 36px;
 }
 
@@ -161,4 +157,20 @@ a.header-shopping.header-active {
   .header-menu {
     display: none;
   }
+}
+
+.sighUp-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $blue-color;
+  border-radius: 20px;
+  color: $white-color;
+  padding: 14px;
+  margin: 12px 24px;
+  border: none;
+  cursor: pointer;
+  width: 184px;
+  height: 48px;
+  font-size: 14px;
 }
