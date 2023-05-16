@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+    <link rel="shortcut icon" type="image/svg" href="./images/logo.svg" />
+    <link rel="stylesheet" href="./sass/index.scss" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <include src="./partials/header/header.html"></include>
+    <div class="container page-wrapper">
+      <h1 class="shTitle">Shopping <span class="shTitle__List">List</span></h1>
+      <div class="nullInList">
+        <p class="sh-list__default__masseg">
+          This page is empty, add some books and proceed to order.
+        </p>
+        <div class="sh-list__books__containner">
+          <picture class="sh-list__img__books">
+            <source
+              srcset="
+                ./images/shopingListImg/emptyList-530.png 1x,
+                ./images/shopingListImg/emptyList-644.png 2x
+              "
+              media="(min-width: 1200px)"
+              type="png"
+            />
+            <source
+              srcset="./images/shopingListImg/emptyList-322.png"
+              media="(min-width: 768px)"
+              type="png"
+            />
+            <source
+              srcset="./images/shopingListImg/emptyList-265.png"
+              media="(max-width:767px)"
+              type="png"
+            />
+            <img src="./images/shopingListImg/emptyList-530.png" alt="books" />
+          </picture>
+        </div>
+      </div>
+      <ul class="listWithBoks"></ul>
+
+      <ul class="sh-list__pagination"></ul>
+
+      <include src="./partials/shopping-list/shopping-main.html"></include>
+      <include src="./partials/shopping-list/shopping-sidebar.html"></include>
+    </div>
+    <include src="./partials/modals/auth-modal.html"></include>
+    <include src="./partials/other/scroll-up.html"></include>
+    <include src="./partials/other/spiner.html"></include>
+  </body>
+</html>
