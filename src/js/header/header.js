@@ -10,8 +10,8 @@ function showHide() {
 openNav.onclick = showHide;
 closeNav.onclick = showHide;
 
-const headerList = document.querySelector("header-list");
-const active = headerList.querySelector("header-current");
+const headerList = document.querySelector(".header-list");
+const active = headerList.querySelector(".header-current");
 
 for (let i = 0; i < active.length; i++) {
   active[i].addEventListener("click", function() {
