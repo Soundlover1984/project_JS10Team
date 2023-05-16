@@ -108,35 +108,30 @@ form > div {
   background: white;
 }
 
-// .header-home:active {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: flex-start;
-//   padding: 8px 16px;
-//   gap: 10px;
-//   width: 72px;
-//   height: 34px;
-//   background: $yellow-color;
-//   border-radius: 36px;
-// }
+a.header-home.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 10px;
+  width: 72px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
+}
 
-// .header-shopList:active {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 7px 16px;
-//   gap: 8px;
-//   width: 156px;
-//   height: 34px;
-//   background: #EAC645;
-//   border-radius: 36px;
-// }
-
-.active,
-.header-current:hover {
-  background-color: $yellow-color;
-  color: $dark-color;
+a.header-shopping.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 8px;
+  width: 156px;
+  height: 34px;
+  background:  $yellow-color;
+  border-radius: 36px;
 }
 
 .header-controls {
