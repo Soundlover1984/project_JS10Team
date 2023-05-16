@@ -8,6 +8,7 @@ import './js/header/header';
 import './js/other/scrollUp';
 import './js/other/spinerLoader';
 import './js/shopping-list/shoppingList';
+import './js/shopping-list/shoping-list-pagination';
 import './js/side-bar/categories';
 import './js/side-bar/supportFundArray';
 import './js/side-bar/supportCreateList';
