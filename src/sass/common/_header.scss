@@ -1,3 +1,15 @@
+.header {
+  padding: 10px 20px;
+}
+
+.header-wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 form > div {
   margin: 40px 0;
 }
@@ -11,6 +23,7 @@ form > div {
 }
 
 .header-toggle label {
+  cursor: pointer;
   width: 40px;
   height: 20px;
   background: $white-theme-switcher-linear-gradient;
@@ -39,18 +52,6 @@ form > div {
 
 .header-toggle input[id='togle-swith']:checked + label {
   background: $dark-theme-switcher-linear-gradient;
-}
-
-header {
-  padding: 10px 20px;
-}
-
-header .header-wrapper {
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .header-navbar {
@@ -107,9 +108,30 @@ header .header-wrapper {
   background: white;
 }
 
-.active, .header-current:hover {
-  background-color: $yellow-color;
-  color: $dark-color;
+a.header-home.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 10px;
+  width: 72px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
+}
+
+a.header-shopping.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 8px;
+  width: 156px;
+  height: 34px;
+  background:  $yellow-color;
+  border-radius: 36px;
 }
 
 .header-controls {
@@ -122,12 +144,6 @@ header .header-wrapper {
   background: $primary-background-color;
   cursor: pointer;
 }
-
-// .container {
-//   max-width: 900px;
-//   margin: 0 auto;
-//   padding: 30px;
-// }
 
 @media (min-width: 550px) {
   .header-navbar {
