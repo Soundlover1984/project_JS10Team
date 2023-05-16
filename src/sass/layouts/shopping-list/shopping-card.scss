@@ -1,5 +1,6 @@
 .shop-card {
     display: flex;
+    justify-content: space-between;
     max-width: 335px;
     height: 170px;
     padding: 14px;
@@ -14,13 +15,13 @@
     @media screen and (min-width: 1200px) {
         max-width: 996px;
     }
-    // &__img{
-    //     display: block;
-    //     border-radius: 8px;
-        // @media screen and (min-width: 768px) {
-        //        width: 116px;
-        //     }
-    // }
+    &__img{
+        display: block;
+        border-radius: 8px;
+        @media screen and (min-width: 768px) {
+               width: 116px;
+            }
+    }
 
     &__inform {
             margin-left: 14px;
