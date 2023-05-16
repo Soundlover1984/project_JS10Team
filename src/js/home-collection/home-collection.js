@@ -1,7 +1,8 @@
+import debounce from 'lodash.debounce';
 import { BooksApiService } from '../api/booksApiService';
 import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-oneBookMarkup';
-// import { openModal } from './../book-modal/modal';
+// import { openBookDetail } from './../book-modal/modal';
 
 const markupContainer = document.querySelector('.home-collection');
 const booksApiService = new BooksApiService();
@@ -16,7 +17,7 @@ async function drawTopBooks() {
               ${createFullMarkup(categories)}
           </ul>
           `;
-    coloriseCategoryTitle();
+    colorizeCategoryTitle();
     addEventListenerForButton();
   } catch (error) {
     console.error(error);
@@ -35,7 +36,7 @@ async function drawCategoryBooks(categoryName) {
       <ul class="home-collection__categories-list--oneCategory">
           ${markup}
       </ul>`;
-    coloriseCategoryTitle();
+    colorizeCategoryTitle();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category books');
@@ -45,27 +46,7 @@ async function drawCategoryBooks(categoryName) {
 export { drawTopBooks };
 export { drawCategoryBooks };
 
-//=====================================
-// drawTopBooks();
-// drawCategoryBooks(categoryName);
-//=====================================
-
-function addEventListenerForButton() {
-  const elem = document.querySelector(
-    '.home-collection__categories-list--topBooks'
-  );
-  elem.addEventListener('click', buttonHandler);
-}
-
-function buttonHandler(event) {
-  const elButton = event.target;
-  const categoryName =
-    elButton.parentNode.querySelector('.category__title').textContent;
-  drawCategoryBooks(categoryName);
-}
-
-//------------------------------------------------------------
-async function coloriseCategoryTitle() {
+function colorizeCategoryTitle() {
   try {
     const categoryTitleRef = document.querySelector('.home-collection__title');
     const categoryTitle = categoryTitleRef.textContent;
@@ -81,23 +62,22 @@ async function coloriseCategoryTitle() {
   }
 }
 
-//============================
-// const booksApiService = new BooksApiService();
-async function test() {
-  try {
-    // booksApiService.selectedCategory = 'Audio Nonfiction';
-    // getCategoryBooks('Trade Fiction Paperback');
-    // console.log(await booksApiService.getCategoryList());
-    // console.log(await booksApiService.getTopBooks());
-    // console.log(await booksApiService.getCategoryBooks());
-    // console.log(await booksApiService.getBookOnId());
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to draw category title');
+function addEventListenerForButton() {
+  const elem = document.querySelector(
+    '.home-collection__categories-list--topBooks'
+  );
+  elem.addEventListener('click', buttonMoreHandler);
+}
+
+function buttonMoreHandler(event) {
+  const elButton = event.target;
+  if (elButton.className == 'category__button') {
+    const categoryName =
+      elButton.parentNode.querySelector('.category__title').textContent;
+    drawCategoryBooks(categoryName);
   }
 }
 
-// test();
 //========================================
 drawTopBooks();
 // drawCategoryBooks(categoryName);

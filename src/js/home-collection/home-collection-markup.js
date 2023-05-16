@@ -10,7 +10,7 @@ function createFullMarkup(collection) {
               <ul class="category__books-list">
                 ${createOneCategoryMarkup(books)}                
               </ul>
-              <button class="category__button more-js">SEE MORE</button>
+              <button class="category__button">SEE MORE</button>
           </li>
         `;
     })
