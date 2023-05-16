@@ -4,9 +4,9 @@ class BooksApiService {
   constructor() {
     this.BASE_URL = 'https://books-backend.p.goit.global';
     // Для дінамічної зміної book categori
-    this.selectedCategory = 'Paperback Nonfiction';
+    this._selectedCategory = 'Business Books';
     // Для дінамічної зміної book Id
-    this.bookId = '643282b1e85766588626a085';
+    this._bookId = '643282b1e85766588626a0b4';
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
@@ -50,7 +50,7 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category`, {
         params: {
-          category: categoryName,
+          category: this.selectedCategory,
         },
       });
       const booksCategori = response.data;
@@ -66,9 +66,9 @@ class BooksApiService {
    * Отримання даних про книгу за її ідентифікатором
    * @returns {Object} - Об'єкт з даними книги
    */
-  async getBookOnId(id) {
+  async getBookOnId() {
     try {
-      const response = await axios.get(`${this.BASE_URL}/books/${id}`);
+      const response = await axios.get(`${this.BASE_URL}/books/${this.bookId}`);
       const book = response.data;
       // console.log('Book:', book);
       return book;
@@ -77,15 +77,37 @@ class BooksApiService {
       throw new Error('Failed to fetch Book');
     }
   }
+
+  get selectedCategory() {
+    return this._selectedCategory;
+  }
+
+  /**
+   * @param {any} categoryName
+   */
+  set selectedCategory(categoryName) {
+    this._selectedCategory = categoryName;
+  }
+
+  get bookId() {
+    return this._bookId;
+  }
+
+  /**
+   * @param {any} bookId
+   */
+  set bookId(bookId) {
+    this._bookId = bookId;
+  }
 }
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
-// const booksApiService = new BooksApiService();
+const booksApiService = new BooksApiService();
 
-// booksApiService.getCategoryList();
-// booksApiService.getTopBooks();
-// booksApiService.getCategoryBooks('Middle Grade Paperback Monthly');
-// booksApiService.getBookOnId('643282b1e85766588626a085');
+booksApiService.getCategoryList();
+booksApiService.getTopBooks();
+booksApiService.getCategoryBooks();
+booksApiService.getBookOnId();
 
 export { BooksApiService };
 
