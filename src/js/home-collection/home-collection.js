@@ -1,7 +1,7 @@
 import { BooksApiService } from '../api/booksApiService';
 import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-oneBookMarkup';
-import { openModal } from './../book-modal/modal';
+// import { openModal } from './../book-modal/modal';
 
 const markupContainer = document.querySelector('.home-collection');
 const booksApiService = new BooksApiService();
@@ -16,7 +16,7 @@ async function drawTopBooks() {
               ${createFullMarkup(categories)}
           </ul>
           `;
-    // addEventListenerForBook();
+    coloriseCategoryTitle();
     addEventListenerForButton();
   } catch (error) {
     console.error(error);
@@ -26,8 +26,8 @@ async function drawTopBooks() {
 
 async function drawCategoryBooks(categoryName) {
   try {
-    const books = await booksApiService.getCategoryBooks(categoryName);
-    console.log('books:', books);
+    booksApiService.selectedCategory = categoryName;
+    const books = await booksApiService.getCategoryBooks();
     const markup = books.map(book => createOneBookMarkup(book)).join('');
 
     markupContainer.innerHTML = `
@@ -35,6 +35,7 @@ async function drawCategoryBooks(categoryName) {
       <ul class="home-collection__categories-list--oneCategory">
           ${markup}
       </ul>`;
+    coloriseCategoryTitle();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category books');
@@ -42,37 +43,38 @@ async function drawCategoryBooks(categoryName) {
 }
 
 export { drawTopBooks };
+export { drawCategoryBooks };
 
 //=====================================
-drawTopBooks();
-// drawCategoryBooks('Combined Print and E-Book Nonfiction');
-// getCategory('Young Adult Paperback Monthly');
+// drawTopBooks();
+// drawCategoryBooks(categoryName);
 //=====================================
 
 function addEventListenerForButton() {
-  const elemRef = document.querySelectorAll('.category');
-  elemRef.forEach(elem => {
-    elem.addEventListener('click', buttonHandler);
-  });
+  const elem = document.querySelector(
+    '.home-collection__categories-list--topBooks'
+  );
+  elem.addEventListener('click', buttonHandler);
 }
 
 function buttonHandler(event) {
   const elButton = event.target;
   const categoryName =
     elButton.parentNode.querySelector('.category__title').textContent;
-
-  console.log(categoryName);
   drawCategoryBooks(categoryName);
 }
 
 //------------------------------------------------------------
-async function drawCategoryTitle(categoryName) {
+async function coloriseCategoryTitle() {
   try {
-    const books = await booksApiService.getCategoryBooks(categoryName);
-    title = categoryName.split(' ');
-    const titleLast = title.pop();
+    const categoryTitleRef = document.querySelector('.home-collection__title');
+    const categoryTitle = categoryTitleRef.textContent;
+
+    const title = categoryTitle.split(' ');
+    const titleLastWord = title.pop();
     const titleFirst = title.join(' ');
-    categoryTitle.innerHTML = `${titleFirst}<span class="title_last-word" style = "color: #4f2ee8"> ${titleLast}</span>`;
+
+    categoryTitleRef.innerHTML = `${titleFirst}<span class="home-collection__title--last-word"> ${titleLastWord}</span>`;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to draw category title');
@@ -83,14 +85,40 @@ async function drawCategoryTitle(categoryName) {
 // const booksApiService = new BooksApiService();
 async function test() {
   try {
+    // booksApiService.selectedCategory = 'Audio Nonfiction';
+    // getCategoryBooks('Trade Fiction Paperback');
     // console.log(await booksApiService.getCategoryList());
     // console.log(await booksApiService.getTopBooks());
-    // console.log(await booksApiService.getCategoryBooks('Business Books'));
-    // console.log(await booksApiService.getBookOnId('643282b2e85766588626a0de'));
+    // console.log(await booksApiService.getCategoryBooks());
+    // console.log(await booksApiService.getBookOnId());
   } catch (error) {
     console.error(error);
     throw new Error('Failed to draw category title');
   }
 }
 
-test();
+// test();
+//========================================
+drawTopBooks();
+// drawCategoryBooks(categoryName);
+//----------------------------------------
+// categoryName:
+
+// 'Advice How-To and Miscellaneous';
+// 'Picture Books';
+// 'Mass Market Monthly';
+//  'Hardcover Fiction';
+//  'Young Adult Paperback Monthly';
+//  'Middle Grade Paperback Monthly';
+//  'Business Books';
+//  'Paperback Nonfiction';
+//  'Combined Print and E-Book Fiction';
+//  'Young Adult Hardcover';
+//  'Audio Fiction';
+//  'Trade Fiction Paperback';
+//  'Combined Print and E-Book Nonfiction';
+//  'Childrens Middle Grade Hardcover';
+//  'Hardcover Nonfiction';
+//  'Series Books';
+//  'Audio Nonfiction';
+//  'Graphic Books and Manga';

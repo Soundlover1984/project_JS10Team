@@ -46,7 +46,7 @@ class BooksApiService {
    * Отримання списку книг за обраною категорією
    * @returns {Array} - Масив з книгами в обраній категорії
    */
-  async getCategoryBooks(categoryName) {
+  async getCategoryBooks() {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category`, {
         params: {
@@ -104,10 +104,10 @@ class BooksApiService {
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
 const booksApiService = new BooksApiService();
 
-booksApiService.getCategoryList();
-booksApiService.getTopBooks();
-booksApiService.getCategoryBooks();
-booksApiService.getBookOnId();
+// booksApiService.getCategoryList();
+// booksApiService.getTopBooks();
+// booksApiService.getCategoryBooks();
+// booksApiService.getBookOnId();
 
 export { BooksApiService };
 
