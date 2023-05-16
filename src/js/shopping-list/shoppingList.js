@@ -1,7 +1,7 @@
 const refs = {
-    btnRemove: document.getElementsByClassName("shop-card__delete"),
-    shopCard: document.getElementsByClassName("shop"),
-}
+  btnRemove: document.getElementsByClassName('shop-card__delete'),
+  shopCard: document.getElementsByClassName('shop'),
+};
 
 // refs.btnRemove.addEventListener('click', onRemoveCard);
 
@@ -11,25 +11,17 @@ const refs = {
 // }
 
 function renderMarkup(book) {
-    const markup = createCardBook(book);
-    refs.shopCard.insertAdjacentHTML('beforeend', markup);
-    return;
+  const markup = createCardBook(book);
+  refs.shopCard.insertAdjacentHTML('beforeend', markup);
+  return;
 }
 
-function createCardBook(book) {
-  return book
-    .map(
-        ({
-            book_image,
-            title,
-            list_name,
-            description,
-            author,
-            buy_links,
+const listWithBoks = document.querySelector('.listWithBoks');
 
-
-      }) => {
-        return `  <div class="shop-card">
+export default function createCardBook(book) {
+  const card = book
+    .map(({ book_image, title, list_name, description, author, buy_links }) => {
+      `  <li class="shop-card">
             <div>
                <img class="shop-card__img" src="${book_image}" alt="${title}" width="100" height="142" /> 
             </div>
@@ -71,8 +63,8 @@ function createCardBook(book) {
                     </ul>
                 </div>
             </div>
-        </div>`;
-      }
-    )
+        </li>`;
+    })
     .join('');
+  return listWithBoks.insertAdjacentHTML('beforeend', card);
 }

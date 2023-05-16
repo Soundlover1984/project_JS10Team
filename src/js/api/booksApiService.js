@@ -2,11 +2,11 @@ import axios from 'axios';
 
 class BooksApiService {
   constructor() {
-    this.BASE_URL = "https://books-backend.p.goit.global";
+    this.BASE_URL = 'https://books-backend.p.goit.global';
     // Для дінамічної зміної book categori
-    this.selectedCategory = nall;
+    this.selectedCategory = '';
     // Для дінамічної зміної book Id
-    this.bookId = nall;
+    this.bookId = '643282b1e85766588626a080';
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
@@ -50,8 +50,8 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category`, {
         params: {
-          category: this.selectedCategory
-        }
+          category: this.selectedCategory,
+        },
       });
       const booksCategori = response.data;
       console.log('BooksCategori:', booksCategori);
@@ -66,40 +66,37 @@ class BooksApiService {
    * Отримання даних про книгу за її ідентифікатором
    * @returns {Object} - Об'єкт з даними книги
    */
-    async getBookOnId() {
-      try {
+  async getBookOnId() {
+    try {
       const response = await axios.get(`${this.BASE_URL}/books/${this.bookId}`);
       const book = response.data;
       console.log('Book:', book);
       return book;
-  } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch Book');
-      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to fetch Book');
     }
-    }
-  
-
+  }
+}
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
-// const booksApiService = new BooksApiService();
+const booksApiService = new BooksApiService();
 
 // booksApiService.getCategoryList();
-// booksApiService.getTopBooks();
+booksApiService.getTopBooks();
 // booksApiService.getCategoryBooks();
 // booksApiService.getBookOnId();
-
 
 export { BooksApiService };
 
 // приклад підключення до свого файлу
-// 
+//
 // імпортуймо до свого файлу
 // import { BooksApiService } from './booksApiService';
-// 
+//
 // обявлення нового класу
 // const booksApiService = new BooksApiService;
-// 
+//
 // функція для отримання необхібних данних
 // async function getBookDetails() {
 //   try {
