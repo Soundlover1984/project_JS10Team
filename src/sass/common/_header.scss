@@ -123,11 +123,40 @@ header .header-wrapper {
   cursor: pointer;
 }
 
+<<<<<<< Updated upstream
 // .container {
 //   max-width: 900px;
 //   margin: 0 auto;
 //   padding: 30px;
 // }
+=======
+.menu-bar i {
+  display: block;
+  border-top: 3px solid #444444;
+  border-bottom: 3px solid #444444;
+}
+
+.menu-bar i::after {
+  display: block;
+  content: '';
+  border-top: 3px solid #444444;
+  margin: 6px 0;
+}
+
+.menu-bar button:hover {
+  background: white;
+}
+
+.menu-bar button:hover i {
+  border-color: #222222;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+}
+>>>>>>> Stashed changes
 
 @media (min-width: 550px) {
   .header-navbar {
