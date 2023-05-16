@@ -4,9 +4,9 @@ class BooksApiService {
   constructor() {
     this.BASE_URL = 'https://books-backend.p.goit.global';
     // Для дінамічної зміної book categori
-    this.selectedCategory = nall;
+    this._selectedCategory = 'Business Books';
     // Для дінамічної зміної book Id
-    this.bookId = nall;
+    this._bookId = "643282b1e85766588626a0b4";
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
@@ -80,35 +80,35 @@ class BooksApiService {
 
 
   get selectedCategory() {
-    return this.selectedCategory;
+    return this._selectedCategory;
   }
 
   /**
    * @param {any} categoryName
    */
   set selectedCategory(categoryName) {
-    this.selectedCategory = categoryName;
+    this._selectedCategory = categoryName;
   }
 
   get bookId() {
-    return this.bookId;
+    return this._bookId;
   }
 
   /**
    * @param {any} bookId
    */
   set bookId(bookId) {
-    this.bookId = bookId;
+    this._bookId = bookId;
   }
 }
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
-// const booksApiService = new BooksApiService();
+const booksApiService = new BooksApiService();
 
-// booksApiService.getCategoryList();
-// booksApiService.getTopBooks();
-// booksApiService.getCategoryBooks();
-// booksApiService.getBookOnId();
+booksApiService.getCategoryList();
+booksApiService.getTopBooks();
+booksApiService.getCategoryBooks();
+booksApiService.getBookOnId();
 
 export { BooksApiService };
 
