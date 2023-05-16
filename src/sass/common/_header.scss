@@ -1,9 +1,17 @@
-form > div {
-  margin: 40px 0;
+.header {
+  padding: 10px 20px;
 }
 
-.header-toggle {
-  padding-right: 10px;
+.header-wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+form > div {
+  margin: 40px 0;
 }
 
 .header-toggle input {
@@ -11,6 +19,7 @@ form > div {
 }
 
 .header-toggle label {
+  cursor: pointer;
   width: 40px;
   height: 20px;
   background: $white-theme-switcher-linear-gradient;
@@ -39,18 +48,6 @@ form > div {
 
 .header-toggle input[id='togle-swith']:checked + label {
   background: $dark-theme-switcher-linear-gradient;
-}
-
-header {
-  padding: 10px 20px;
-}
-
-header .header-wrapper {
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .header-navbar {
@@ -111,6 +108,31 @@ header .header-wrapper {
 .header-current:hover {
   background-color: $yellow-color;
   color: $dark-color;
+  
+a.header-home.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 10px;
+  width: 72px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
+}
+
+a.header-shopping.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 8px;
+  width: 156px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
 }
 
 .header-controls {
@@ -123,12 +145,6 @@ header .header-wrapper {
   background: $primary-background-color;
   cursor: pointer;
 }
-
-// .container {
-//   max-width: 900px;
-//   margin: 0 auto;
-//   padding: 30px;
-// }
 
 @media (min-width: 550px) {
   .header-navbar {
@@ -146,4 +162,22 @@ header .header-wrapper {
   .header-menu {
     display: none;
   }
+}
+
+.sighUp-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $blue-color;
+  border-radius: 20px;
+  color: $white-color;
+  padding: 14px;
+  margin: 12px 24px;
+  border: none;
+  cursor: pointer;
+  width: 184px;
+  height: 48px;
+  font-size: 14px;
+  border: 1.5px solid #111111;
+  border-radius: 18px;
 }
