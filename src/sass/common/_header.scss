@@ -104,6 +104,11 @@ form > div {
   background: white;
 }
 
+.active,
+.header-current:hover {
+  background-color: $yellow-color;
+  color: $dark-color;
+  
 a.header-home.header-active {
   display: flex;
   flex-direction: row;
