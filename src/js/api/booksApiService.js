@@ -82,12 +82,12 @@ class BooksApiService {
 
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
-// const booksApiService = new BooksApiService();
+const booksApiService = new BooksApiService();
 
-// booksApiService.getCategoryList();
-// booksApiService.getTopBooks();
-// booksApiService.getCategoryBooks();
-// booksApiService.getBookOnId();
+booksApiService.getCategoryList();
+booksApiService.getTopBooks();
+booksApiService.getCategoryBooks();
+booksApiService.getBookOnId();
 
 
 export { BooksApiService };
