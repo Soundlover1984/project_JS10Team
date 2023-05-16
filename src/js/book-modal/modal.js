@@ -9,12 +9,8 @@ const booksApiService = new BooksApiService();
 // Ключ для зберігання списку покупок в локальному сховищі
 const SHOPPING_LIST_KEY = 'SHOPPING_LIST_KEY';
 
-// Масив книг
-let bookArray = [];
-
 // Отримання поточних даних з локального сховища
-const currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY));
-
+const currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
 
 // Посилання на елементи DOM
 const refs = {
@@ -29,12 +25,6 @@ const refs = {
 
 refs.removeCover.classList.add('is-hidden');
 
-if (currentStorage) {
-  bookArray = currentStorage;
-} else {
-  localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify([]));
-}
-
 refs.openModalBtn.addEventListener('click', openModal);
 refs.closeModalBtn.addEventListener('click', removeModal);
 refs.btnAddBook.addEventListener('click', addBookBtnClick);
@@ -48,16 +38,11 @@ let currentBookData = null;
  * Отримує дані про книгу та додає їх до масиву книг
  */
 async function addBookBtnClick() {
-  const bookData = await getBookDetails();
-  if (bookData) {
-    currentBookData = bookData;
-    const bookIndex = bookArray.findIndex(book => book._id === currentBookData._id);
-    if (bookIndex === -1) {
-      bookArray.push(bookData);
-      localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(bookArray));
-      refs.btnAddBook.classList.add('is-hidden');
-      refs.removeCover.classList.remove('is-hidden');
-    }
+  const items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+  if (currentBookData && !items.find(book => book._id === currentBookData._id)) {
+    localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(items.concat(currentBookData)));
+    refs.btnAddBook.classList.add('is-hidden');
+    refs.removeCover.classList.remove('is-hidden');
   }
 }
 
@@ -66,15 +51,11 @@ async function addBookBtnClick() {
  * Видаляє поточну книгу з масиву книг
  */
 function removeBookBtnClick() {
-  if (currentBookData) {
-    const bookIndex = bookArray.findIndex(book => book._id === currentBookData._id);
-    if (bookIndex !== -1) {
-      bookArray.splice(bookIndex, 1);
-      localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(bookArray));
-      currentBookData = null;
-      refs.btnAddBook.classList.remove('is-hidden');
-      refs.removeCover.classList.add('is-hidden');
-    }
+  const items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+  if (currentBookData && items.find(book => book._id === currentBookData._id)) {
+    localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(items.filter(book => book._id !== currentBookData._id)));
+    refs.btnAddBook.classList.remove('is-hidden');
+    refs.removeCover.classList.add('is-hidden');
   }
 }
 
@@ -99,12 +80,19 @@ async function getBookDetails() {
 async function openModal() {
   const bookData = await getBookDetails();
   if (bookData) {
+    currentBookData = bookData;
     renderBookDetails(bookData);
     document.body.classList.add('show-modal');
     refs.backdrop.addEventListener('click', backdropClickHandler);
     document.addEventListener('keydown', keydownHandler);
     refs.closeModalBtn.addEventListener('click', removeModal);
+
+  //перевірте, чи вибрано книгу
+  if(currentStorage.find(book=> book._id === bookData._id)) {
+    refs.btnAddBook.classList.add('is-hidden');
+    refs.removeCover.classList.remove('is-hidden');
   }
+}
 }
 
 /**

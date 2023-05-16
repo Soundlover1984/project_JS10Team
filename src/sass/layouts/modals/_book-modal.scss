@@ -92,7 +92,7 @@ body.show-modal .modal-for-book {
   border: 2px solid $dark-color;
   border-radius: 18px;
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 250ms var(--timing-function);
+  transition: opacity $cubic-time, visibility $cubic-time;
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     max-height: calc(100% - 20px * 2);
