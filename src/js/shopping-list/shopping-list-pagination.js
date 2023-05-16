@@ -75,7 +75,7 @@ function addBtn() {
   <li><button class="sh-list__pagination-btn page_back"> < </button></li>
   <li><button class="sh-list__pagination-btn nuber_of_page pageOne currentPage"> 1 </button> </li>
   <li><button class="sh-list__pagination-btn nuber_of_pagepage pageTwo"> 2 </button></li>
-  <!-- <li><button class="sh-list__pagination-btn nuber_of_pagepage pageThre"> 3 </button></li> -->
+  <li><button class="sh-list__pagination-btn nuber_of_pagepage pageThre"> 3 </button></li> 
   <li><button class="sh-list__pagination-btn nuber_of_pagepage btnLoadMore"> ... </button></li>
   <li> <button class="sh-list__pagination-btn nextPage"> > </button> </li>
   <li> <button class="sh-list__pagination-btn lastPage"> >> </button> </li>`

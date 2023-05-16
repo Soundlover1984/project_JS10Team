@@ -70,6 +70,21 @@
   //display: inline-block;
 }
 
+@media screen and (min-width: 40px) and (max-width: 768px) {
+  .pageThre {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+  }
+}
+
 @media (min-width: 768px) {
   .shTitle {
     width: 292px;
@@ -102,6 +117,7 @@
 
   .sh-list__removeWraper {
     display: inline-block;
+    width: 100px;
   }
 }
 

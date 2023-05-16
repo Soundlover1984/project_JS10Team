@@ -5,7 +5,6 @@ import { iconUrls } from './icon-urls';
 // Створення екземпляру BooksApiService
 const booksApiService = new BooksApiService();
 
-
 // Ключ для зберігання списку покупок в локальному сховищі
 const SHOPPING_LIST_KEY = 'SHOPPING_LIST_KEY';
 
@@ -14,7 +13,6 @@ let bookArray = [];
 
 // Отримання поточних даних з локального сховища
 const currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY));
-
 
 // Посилання на елементи DOM
 const refs = {
@@ -51,7 +49,9 @@ async function addBookBtnClick() {
   const bookData = await getBookDetails();
   if (bookData) {
     currentBookData = bookData;
-    const bookIndex = bookArray.findIndex(book => book._id === currentBookData._id);
+    const bookIndex = bookArray.findIndex(
+      book => book._id === currentBookData._id
+    );
     if (bookIndex === -1) {
       bookArray.push(bookData);
       localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(bookArray));
@@ -67,7 +67,9 @@ async function addBookBtnClick() {
  */
 function removeBookBtnClick() {
   if (currentBookData) {
-    const bookIndex = bookArray.findIndex(book => book._id === currentBookData._id);
+    const bookIndex = bookArray.findIndex(
+      book => book._id === currentBookData._id
+    );
     if (bookIndex !== -1) {
       bookArray.splice(bookIndex, 1);
       localStorage.setItem(SHOPPING_LIST_KEY, JSON.stringify(bookArray));
@@ -145,12 +147,14 @@ function createBookDetailsMarkup(bookData) {
         @returns {string} - Розмітка посилань на покупку
         */
 function createBuyLinksMarkup(buyLinks) {
-  const supportedStores = ["Amazon", "Apple Books", "Bookshop"];
+  const supportedStores = ['Amazon', 'Apple Books', 'Bookshop'];
 
-  const filteredLinks = buyLinks.filter(link => supportedStores.includes(link.name));
+  const filteredLinks = buyLinks.filter(link =>
+    supportedStores.includes(link.name)
+  );
 
   return filteredLinks
-    .map((link) => {
+    .map(link => {
       const { name, url } = link;
       const { iconUrl, iconUrl2x } = getIconUrlForStore(name);
       return `<li class="modal-shopping-list__item">
@@ -165,7 +169,7 @@ function createBuyLinksMarkup(buyLinks) {
                 </a>
               </li>`;
     })
-    .join("");
+    .join('');
 }
 
 /**
@@ -219,4 +223,3 @@ function keydownHandler(event) {
     removeModal();
   }
 }
-
