@@ -1,7 +1,6 @@
 import { BooksApiService } from '../api/booksApiService';
-import { createFullMarkup } from './home-collection-markup_n';
-// import { createOneCategoryMarkup } from './home-collection-markup_n';
-import { createOneBookMarkup } from './home-collection-markup_n';
+import { createFullMarkup } from './home-collection-markup';
+import { createOneBookMarkup } from './home-collection-markup';
 import { colorizeCategoryTitle } from './home-collection-utils';
 import { addEventListenerButtonMore } from './home-collection-utils';
 import { addEventListenerBookLink } from './home-collection-utils';

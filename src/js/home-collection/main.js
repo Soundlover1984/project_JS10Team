@@ -1,1 +1,1 @@
-import './home-collection_n';
+import './home-collection';

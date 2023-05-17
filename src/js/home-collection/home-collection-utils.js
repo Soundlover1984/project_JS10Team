@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce';
 import { BooksApiService } from '../api/booksApiService';
-import { getAndParseCategoryBooks } from './home-collection_n';
-import { getAndParseTopBooks } from './home-collection_n';
+import { getAndParseCategoryBooks } from './home-collection';
+import { getAndParseTopBooks } from './home-collection';
 import { openModal } from '../book-modal/modal';
 
 export let amountOfBooks = 5;
