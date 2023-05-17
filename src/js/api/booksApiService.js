@@ -103,8 +103,4 @@ class BooksApiService {
   }
 }
 
-
-
 export { BooksApiService };
-
-

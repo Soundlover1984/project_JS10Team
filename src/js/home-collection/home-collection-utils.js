@@ -34,16 +34,6 @@ export function addEventListenerButtonMore() {
   elem.addEventListener('click', buttonMoreHandler);
 }
 
-async function openBookDetail(bookId) {
-  try {
-    booksApiService.bookId = bookId;
-    openModal();
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to open book detail');
-  }
-}
-
 export function buttonMoreHandler(event) {
   const elButton = event.target;
   if (elButton.className == 'category__button') {
@@ -65,6 +55,15 @@ function bookDetailHandler(event) {
   if (bookEl) {
     const bookId = bookEl.dataset.id;
     openBookDetail(bookId);
+  }
+}
+
+async function openBookDetail(bookId) {
+  try {
+    openModal(bookId);
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to open book detail');
   }
 }
 
