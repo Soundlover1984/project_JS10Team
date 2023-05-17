@@ -1,4 +1,5 @@
 
+
 const refs = {
     btnRemove: document.querySelectorAll('.shop-card__delete'),
 
@@ -14,6 +15,7 @@ const refs = {
   }
   
  
+
 
 export default function createCardBook(book) {
   const oneBook = book
@@ -52,7 +54,6 @@ export default function createCardBook(book) {
   return oneBook;
 }
 
-
 function getPngUrlForStore(storeName) {
   const store = pngUrls.find(item => item.name === storeName);
   if (store) {
@@ -69,12 +70,14 @@ function getPngUrlForStore(storeName) {
 }
 
 function createLinksMarkup(buyLinks) {
-  const supportedStores = ["Amazon", "Apple Books", "Bookshop"];
+  const supportedStores = ['Amazon', 'Apple Books', 'Bookshop'];
 
-  const filteredLinks = buyLinks.filter(link => supportedStores.includes(link.name));
+  const filteredLinks = buyLinks.filter(link =>
+    supportedStores.includes(link.name)
+  );
 
   return filteredLinks
-    .map((link) => {
+    .map(link => {
       const { name, url } = link;
       const { pngUrlx, pngUrl2x } = getPngUrlForStore(name);
       return `
@@ -84,27 +87,26 @@ function createLinksMarkup(buyLinks) {
                                 class="market__png" />
                         </a></li>`;
     })
-    .join("");
+    .join('');
 }
 
 const pngUrls = [
   {
     name: 'Amazon',
-    
+
     pngUrlx: require('../../images/modal/image-1@1x.png'),
     pngUrl2x: require('../../images/modal/image-1@2x.png'),
   },
   {
     name: 'Apple Books',
-   
+
     pngUrlx: require('../../images/modal/image-2@1x.png'),
     pngUrl2x: require('../../images/modal/image-2@2x.png'),
   },
   {
     name: 'Bookshop',
-    
+
     pngUrlx: require('../../images/modal/image3-1x.png'),
     pngUrl2x: require('../../images/modal/image3-2x.png'),
   },
 ];
-
