@@ -1,22 +1,27 @@
 const theBody = document.querySelector('body');
 const openNav = document.querySelector('.header-menu button');
-const closeNav = document.querySelector('.close-nav button');
+const closeNav = document.querySelector('.header-close-nav button');
 const HeaderNavbar = document.querySelector('.header-navbar');
+const toggleButton = document.querySelector('.header-toggle');
 
-function showHide() {
+if(window.location.pathname === "/index.html") {
+  document.querySelector('.header-shopping').classList.remove('header-active');
+  document.querySelector('.header-home').classList.add('header-active');
+} else if(window.location.pathname === "/shopping-list.html") {
+  document.querySelector('.header-home').classList.remove('header-active');
+  document.querySelector('.header-shopping').classList.add('header-active');
+}
+
+function show() {
   HeaderNavbar.classList.toggle('show');
+  toggleButton.style.display = 'none';
 }
 
-openNav.onclick = showHide;
-closeNav.onclick = showHide;
+function hide() {
+  HeaderNavbar.classList.toggle('show');
+  toggleButton.style.display = 'block';
 
-const headerList = document.querySelector(".header-list");
-const active = headerList.querySelector(".header-current");
-
-for (let i = 0; i < active.length; i++) {
-  active[i].addEventListener("click", function() {
-    let current = document.querySelector("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
 }
+
+openNav.onclick = show;
+closeNav.onclick = hide;
