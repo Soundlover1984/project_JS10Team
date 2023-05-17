@@ -50,17 +50,20 @@ async function openModal(bookId) {
   booksApiService.bookId = bookId;
   const bookData = await getBookDetails();
   if (bookData) {
-    currentBookData = bookData;
     renderBookDetails(bookData);
+    currentBookData = bookData;
     document.body.classList.add('show-modal');
     refs.backdrop.addEventListener('click', backdropClickHandler);
     document.addEventListener('keydown', keydownHandler);
     refs.closeModalBtn.addEventListener('click', removeModal);
 
-    //перевірте, чи вибрано книгу
+  
     if (currentStorage.find(book => book._id === bookData._id)) {
       refs.btnAddBook.classList.add('is-hidden');
       refs.removeCover.classList.remove('is-hidden');
+    } else {
+      refs.btnAddBook.classList.remove('is-hidden'); 
+      // Додайте цей рядок для показу кнопки "Додати"
     }
   }
 }
@@ -73,7 +76,7 @@ let currentBookData = null;
  * Отримує дані про книгу та додає їх до масиву книг
  */
 async function addBookBtnClick() {
-  const items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+  let items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
   if (
     currentBookData &&
     !items.find(book => book._id === currentBookData._id)
