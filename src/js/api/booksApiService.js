@@ -101,35 +101,10 @@ class BooksApiService {
   set bookId(bookId) {
     this._bookId = bookId;
   }
-  main;
 }
 
-// Створення екземпляру класу і виклик методів (цей код для прикладу)
-const booksApiService = new BooksApiService();
 
-// booksApiService.getCategoryList();
-// booksApiService.getTopBooks();
-// booksApiService.getCategoryBooks();
-// booksApiService.getBookOnId();
 
 export { BooksApiService };
 
-// приклад підключення до свого файлу
-//
-// імпортуймо до свого файлу
-// import { BooksApiService } from './booksApiService';
-//
-// обявлення нового класу
-// const booksApiService = new BooksApiService;
-//
-// функція для отримання необхібних данних
-// async function getBookDetails() {
-//   try {
-//     const book = await booksApiService.getBookOnId(); //ось тут ставте свій шлях
-//     renderBookDetails(book);
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error('Failed to fetch book details');
-//   }
-// }
-// Далі функцію рендеру
+
