@@ -34,7 +34,7 @@
   color: $blue-color;
 }
 
-.nullInList {
+.shopping-cart-is-empty {
   margin-top: 120px;
   display: flex;
   flex-direction: column;
@@ -72,6 +72,10 @@
 
 .sh-list__pagination-container {
   margin-top: 20px;
+}
+
+.shop-card {
+  margin-bottom: 20px;
 }
 
 @media screen and (min-width: 40px) and (max-width: 768px) {
@@ -120,7 +124,7 @@
   .sh-list__page {
     display: flex;
   }
-  .nullInList {
+  .shopping-cart-is-empty {
     margin-top: 232px;
   }
 
@@ -136,10 +140,6 @@
 
   .sh-list__titleAndCard {
     margin-left: 40px;
-  }
-
-  .shop-card {
-    margin-bottom: 20px;
   }
 }
 
