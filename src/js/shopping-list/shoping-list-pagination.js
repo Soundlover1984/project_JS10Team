@@ -8,30 +8,36 @@ const listWithBoks = document.querySelector('.listWithBoks');
 let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
 localStorage.setItem('currentPage', currentPage);
 
-// localStorage.setItem(
-//   'SHOPPING_LIST_KEY',
-//   '[{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Ilona","age":3,"isHappy":true}, {"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true}]'
-// );
-
 const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 
-function chunkArray(myArray, chunk_size) {
-  let index = 0;
-  const arrayLength = myArray.length;
-  const tempArray = [];
+// function chunkArray(myArray, chunk_size) {
+//   let index = 0;
+//   const arrayLength = myArray.length;
+//   const tempArray = [];
 
-  for (index = 0; index < arrayLength; index += chunk_size) {
-    myChunk = myArray.slice(index, index + chunk_size);
-    tempArray.push(myChunk);
-  }
+//   for (index = 0; index < arrayLength; index += chunk_size) {
+//     myChunk = myArray.slice(index, index + chunk_size);
+//     tempArray.push(myChunk);
+//   }
 
-  return tempArray;
+//   return tempArray;
+// }
+
+// const result = chunkArray(savedSettings, 3);
+// const allPages = result.length;
+// console.log(result);
+// console.log(allPages);
+// createCardBook(savedSettings[0]);
+
+function renderMarkup(books) {
+  const cardsMarkup = createCardBook(books);
+  listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 }
 
-const result = chunkArray(savedSettings, 3);
-const allPages = result.length;
-console.log(result);
-console.log(allPages);
+// function renderMarkup(books) {
+//   const cardsMarkup = books.map(book => createCardBook(book)).join('');
+//   refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
+// }
 
 function controllInLocalStorage() {
   if (savedSettings) {
@@ -39,7 +45,6 @@ function controllInLocalStorage() {
     return;
   }
 }
-console.log('halo');
 
 controllInLocalStorage();
 
@@ -47,29 +52,13 @@ function removeDefaultPage() {
   page.innerHTML = '';
 
   //Викликати функцію що створює картки//
-  createCardBook(result[0]);
+  renderMarkup(savedSettings);
+  // console.log(savedSettings[0]);
 
   if (savedSettings.length > 3) {
     addBtn();
   }
 }
-console.log('halo');
-
-// function createBoksCard(arr) {
-//   const card = arr
-//     .map(
-//       ({ name, age, isHappy }) =>
-//         `<li>
-//   <div class="cards">
-//   <h2>${name}</h2>
-//   <p>${age}</p>
-//   <p>Щаслива?${isHappy}</p>
-//         </div>
-//   </li>`
-//     )
-//     .join('');
-//   return listWithBoks.insertAdjacentHTML('beforeend', card);
-// }
 
 function addBtn() {
   listBtn.insertAdjacentHTML(
@@ -84,6 +73,13 @@ function addBtn() {
   <li> <button class="sh-list__pagination-btn lastPage"> >> </button> </li>`
   );
 }
+
+function renderMarkup(books) {
+  const cardsMarkup = createCardBook(books);
+  listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
+}
+
+// const cardsMarkup =books.map(book =>  ).join('')
 
 listBtn.addEventListener('click', onClick);
 const pageOne = document.querySelector('.pageOne');
@@ -130,16 +126,16 @@ function onClick(evt) {
 // const btnLoadMore = document.querySelector('.btnLoadMore');
 // btnLoadMore.addEventListener('click', onClickMore);
 
-// function onClickMore() {
-//   if (allPages > 3) {
-//     return;
-//   }
-//   pageOne.textContent = 2;
-//   pageTwo.textContent = 3;
-// }
+function onClickMore() {
+  if (allPages > 3) {
+    return;
+  }
+  pageOne.textContent = 2;
+  pageTwo.textContent = 3;
+}
 
-nextPage.addEventListener('click', updatePage('nextPage'));
-lastPage.addEventListener('click', updatePage('page_back'));
+// nextPage.addEventListener('click', updatePage('nextPage'));
+// lastPage.addEventListener('click', updatePage('page_back'));
 
 function updatePage(action) {
   if (action === 'page_back' && currentPage > 1) {
@@ -187,14 +183,14 @@ function addCarenPageStyl() {
   }
 }
 
-const prevButton = document.querySelector('.page_back');
-prevButton.addEventListener('click', () => {
-  updatePage('page_back');
-  //   addCarenPageStyl();
-});
+// const prevButton = document.querySelector('.page_back');
+// prevButton.addEventListener('click', () => {
+//   updatePage('page_back');
+//   //   addCarenPageStyl();
+// });
 
-const nextButton = document.querySelector('.nextPage');
-nextButton.addEventListener('click', () => {
-  updatePage('nextPage');
-  //   addCarenPageStyl();
-});
+// const nextButton = document.querySelector('.nextPage');
+// nextButton.addEventListener('click', () => {
+//   updatePage('nextPage');
+//   //   addCarenPageStyl();
+// });
