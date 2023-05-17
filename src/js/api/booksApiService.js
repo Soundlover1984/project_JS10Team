@@ -4,9 +4,11 @@ class BooksApiService {
   constructor() {
     this.BASE_URL = 'https://books-backend.p.goit.global';
     // Для дінамічної зміної book categori
+
     this._selectedCategory = 'Business Books';
     // Для дінамічної зміної book Id
     this._bookId = '643282b1e85766588626a0b4';
+
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
@@ -99,6 +101,7 @@ class BooksApiService {
   set bookId(bookId) {
     this._bookId = bookId;
   }
+  main;
 }
 
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
