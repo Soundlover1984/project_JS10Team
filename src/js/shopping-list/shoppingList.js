@@ -53,7 +53,7 @@ export default function createCardBook(book) {
                 <div class="shop-card__wrap-third">
                     <p class="shop-card__author">${author}</p>
                     <ul class="market">
-                      ${buy_links ? createLinksMarkup(buy_links) : ''}
+                      ${buy_links ? createLiMarkup(buy_links) : ''}
                     </ul>
                 </div>
             </div>
@@ -63,26 +63,9 @@ export default function createCardBook(book) {
   return oneBook;
 }
 
-function getPngUrlForStore(storeName) {
-  const store = pngUrls.find(item => item.name === storeName);
-  if (store) {
-    return {
-      pngUrlx: store.pngUrlx.src.href,
-      pngUrl2x: store.pngUrl2x.src.href,
-      width: store.pngUrlx.width,
-      height: store.pngUrlx.height,
-    };
-  } else {
-    return {
-      pngUrlx: '',
-      pngUrl2x: '',
-      width: 0,
-      height: 0,
-    };
-  }
-}
 
-function createLinksMarkup(buyLinks) {
+
+function createLiMarkup(buyLinks) {
   const supportedStores = ['Amazon', 'Apple Books', 'Bookshop'];
 
   const filteredLinks = buyLinks.filter(link =>
@@ -104,6 +87,25 @@ function createLinksMarkup(buyLinks) {
                         </a></li>`;
     })
     .join('');
+}
+
+function getPngUrlForStore(storeName) {
+  const store = pngUrls.find(item => item.name === storeName);
+  if (store) {
+    return {
+      pngUrlx: store.pngUrlx.src.href,
+      pngUrl2x: store.pngUrl2x.src.href,
+      width: store.pngUrlx.width,
+      height: store.pngUrlx.height,
+    };
+  } else {
+    return {
+      pngUrlx: '',
+      pngUrl2x: '',
+      width: 0,
+      height: 0,
+    };
+  }
 }
 
 const pngUrls = [
