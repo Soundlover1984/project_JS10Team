@@ -64,7 +64,6 @@ function bookDetailHandler(event) {
   const bookEl = event.target.closest('.book__link');
   if (bookEl) {
     const bookId = bookEl.dataset.id;
-    // console.log('bookId:', bookId);
     openBookDetail(bookId);
   }
 }
@@ -74,16 +73,10 @@ export function addEventListenerWindow() {
   window.addEventListener('resize', debounce(limitBookHandler, 250));
 }
 
-function limitBookHandler() {
+export function limitBookHandler() {
   amountOfBooksOld = amountOfBooks;
   const currentWidth = window.innerWidth;
-  console.log('currentWidth:', currentWidth);
   amountOfBooks = getBookAmount(currentWidth);
-  console.log('amountOfBooks:', amountOfBooks);
-  console.log(
-    document.querySelector('.home-collection__title').textContent ===
-      'Best Sellers Books'
-  );
   if (
     amountOfBooksOld != amountOfBooks &&
     document.querySelector('.home-collection__title').textContent ===

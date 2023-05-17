@@ -1,5 +1,4 @@
 export function createFullMarkup(collection) {
-  // console.log('collection:', collection);
   return collection
     .map(category => {
       const { books, list_name } = category;
@@ -17,7 +16,6 @@ export function createFullMarkup(collection) {
 }
 
 export function createOneCategoryMarkup(books) {
-  // console.log('books:', books);
   const markup = books
     .map(book => {
       return `
