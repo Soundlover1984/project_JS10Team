@@ -15,7 +15,6 @@ const currentStorage =
 // Посилання на елементи DOM
 const refs = {
   bookModal: document.querySelector('.content-conteiner'),
-  openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
   backdrop: document.querySelector('.js-backdrop'),
   btnAddBook: document.querySelector('.js-btn-modal-add-book'),
@@ -25,7 +24,6 @@ const refs = {
 
 refs.removeCover.classList.add('is-hidden');
 
-refs.openModalBtn.addEventListener('click', openModal);
 refs.closeModalBtn.addEventListener('click', removeModal);
 refs.btnAddBook.addEventListener('click', addBookBtnClick);
 refs.removeBtn.addEventListener('click', removeBookBtnClick);
