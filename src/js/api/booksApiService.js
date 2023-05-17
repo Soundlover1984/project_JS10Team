@@ -8,7 +8,7 @@ class BooksApiService {
     this._selectedCategory = 'Business Books';
     // Для дінамічної зміної book Id
     this._bookId = '643282b1e85766588626a0b4';
-    main;
+
     // нижче можна додавати свої this якщо буде потреба (повідомляти тім ліда)
   }
 
@@ -20,7 +20,7 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/category-list`);
       const categoryList = response.data;
-      console.log('Category List:', categoryList);
+      // console.log('Category List:', categoryList);
       return categoryList;
     } catch (error) {
       console.error(error);
@@ -36,7 +36,7 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/top-books`);
       const topBooks = response.data;
-      console.log('Top Books:', topBooks);
+      // console.log('Top Books:', topBooks);
       return topBooks;
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ class BooksApiService {
         },
       });
       const booksCategori = response.data;
-      console.log('BooksCategori:', booksCategori);
+      // console.log('BooksCategori:', booksCategori);
       return booksCategori;
     } catch (error) {
       console.error(error);
@@ -72,7 +72,7 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/${this.bookId}`);
       const book = response.data;
-      console.log('Book:', book);
+      // console.log('Book:', book);
       return book;
     } catch (error) {
       console.error(error);
@@ -107,10 +107,10 @@ class BooksApiService {
 // Створення екземпляру класу і виклик методів (цей код для прикладу)
 const booksApiService = new BooksApiService();
 
-booksApiService.getCategoryList();
-booksApiService.getTopBooks();
-booksApiService.getCategoryBooks();
-booksApiService.getBookOnId();
+// booksApiService.getCategoryList();
+// booksApiService.getTopBooks();
+// booksApiService.getCategoryBooks();
+// booksApiService.getBookOnId();
 
 export { BooksApiService };
 
