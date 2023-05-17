@@ -106,47 +106,47 @@ function createLinksMarkup(buyLinks) {
     .join('');
 }
 
-// const pngUrls = [
-//   {
-//     name: 'Amazon',
+const pngUrls = [
+  {
+    name: 'Amazon',
 
-//     pngUrlx: {
-//       src: new URL('../../images/modal/image-1@1x.png', import.meta.url),
-//       width: 32,
-//       height: 11,
-//     },
-//     pngUrl2x: {
-//       src: new URL('../../images/modal/image-1@2x.png', import.meta.url),
-//       width: 48,
-//       height: 15,
-//     },
-//   },
-//   {
-//     name: 'Apple Books',
+    pngUrlx: {
+      src: new URL('../../images/modal/image-1@1x.png', import.meta.url),
+      width: 32,
+      height: 11,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image-1@2x.png', import.meta.url),
+      width: 48,
+      height: 15,
+    },
+  },
+  {
+    name: 'Apple Books',
 
-//     pngUrlx: {
-//       src: new URL('../../images/modal/image-2@1x.png', import.meta.url),
-//       width: 16,
-//       height: 16,
-//     },
-//     pngUrl2x: {
-//       src: new URL('../../images/modal/image-2@2x.png', import.meta.url),
-//       width: 28,
-//       height: 27,
-//     },
-//   },
-//   {
-//     name: 'Bookshop',
+    pngUrlx: {
+      src: new URL('../../images/modal/image-2@1x.png', import.meta.url),
+      width: 16,
+      height: 16,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image-2@2x.png', import.meta.url),
+      width: 28,
+      height: 27,
+    },
+  },
+  {
+    name: 'Bookshop',
 
-//     pngUrlx: {
-//       src: new URL('../../images/modal/image3-1x.png', import.meta.url),
-//       width: 16,
-//       height: 16,
-//     },
-//     pngUrl2x: {
-//       src: new URL('../../images/modal/image3-2x.png', import.meta.url),
-//       width: 32,
-//       height: 30,
-//     }, 
-//   },
-// ];
+    pngUrlx: {
+      src: new URL('../../images/modal/image3-1x.png', import.meta.url),
+      width: 16,
+      height: 16,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image3-2x.png', import.meta.url),
+      width: 32,
+      height: 30,
+    }, 
+  },
+];
