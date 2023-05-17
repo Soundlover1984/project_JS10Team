@@ -9,8 +9,7 @@ const booksApiService = new BooksApiService();
 const SHOPPING_LIST_KEY = 'SHOPPING_LIST_KEY';
 
 // Отримання поточних даних з локального сховища
-const currentStorage =
-  JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+let currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
 
 // Посилання на елементи DOM
 const refs = {
@@ -43,27 +42,29 @@ async function getBookDetails() {
   }
 }
 
+
 /**
  * Відкриття модального вікна з деталями про книгу
  */
 async function openModal(bookId) {
+  currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY));
   booksApiService.bookId = bookId;
   const bookData = await getBookDetails();
   if (bookData) {
-    renderBookDetails(bookData);
     currentBookData = bookData;
+    renderBookDetails(bookData);
     document.body.classList.add('show-modal');
     refs.backdrop.addEventListener('click', backdropClickHandler);
     document.addEventListener('keydown', keydownHandler);
     refs.closeModalBtn.addEventListener('click', removeModal);
 
-  
+    //перевірте, чи вибрано книгу
     if (currentStorage.find(book => book._id === bookData._id)) {
       refs.btnAddBook.classList.add('is-hidden');
       refs.removeCover.classList.remove('is-hidden');
     } else {
-      refs.btnAddBook.classList.remove('is-hidden'); 
-      // Додайте цей рядок для показу кнопки "Додати"
+      refs.btnAddBook.classList.remove('is-hidden');
+      refs.removeCover.classList.add('is-hidden');
     }
   }
 }
