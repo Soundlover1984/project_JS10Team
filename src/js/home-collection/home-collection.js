@@ -2,14 +2,25 @@ import debounce from 'lodash.debounce';
 import { BooksApiService } from '../api/booksApiService';
 import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-oneBookMarkup';
-// import { openBookDetail } from './../book-modal/modal';
+import { openModal } from './../book-modal/modal';
 
+export let c = 1;
 const markupContainer = document.querySelector('.home-collection');
 const booksApiService = new BooksApiService();
 
-async function drawTopBooks() {
+function sectionLoad() {
+  drawTopBooks();
+  // drawCategoryBooks(categoryName);
+
+  addEventListenerForBook();
+  handleWindowResize();
+  window.addEventListener('resize', debounce(handleWindowResize, 50));
+}
+
+export async function drawTopBooks() {
   try {
-    const categories = await booksApiService.getTopBooks();
+    let categories = await booksApiService.getTopBooks();
+
     markupContainer.innerHTML = `
           <h1 class="home-collection__h1">title h1</h1>
           <h2 class="home-collection__title">Best Sellers Books</h2>
@@ -25,7 +36,7 @@ async function drawTopBooks() {
   }
 }
 
-async function drawCategoryBooks(categoryName) {
+export async function drawCategoryBooks(categoryName) {
   try {
     booksApiService.selectedCategory = categoryName;
     const books = await booksApiService.getCategoryBooks();
@@ -42,9 +53,6 @@ async function drawCategoryBooks(categoryName) {
     throw new Error('Failed to fetch category books');
   }
 }
-
-export { drawTopBooks };
-export { drawCategoryBooks };
 
 function colorizeCategoryTitle() {
   try {
@@ -78,10 +86,47 @@ function buttonMoreHandler(event) {
   }
 }
 
+function addEventListenerForBook() {
+  const elem = document.querySelector('.home-collection');
+  elem.addEventListener('click', bookDetailHandler);
+}
+
+function bookDetailHandler(event) {
+  const bookEl = event.target.closest('.book__link');
+  if (bookEl) {
+    const bookId = bookEl.dataset.id;
+    console.log('bookId:', bookId);
+    openBookDetail(bookId);
+  }
+}
+
+async function openBookDetail(bookId) {
+  try {
+    booksApiService.bookId = bookId;
+    openModal();
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to open book detail');
+  }
+}
+
+export function handleWindowResize() {
+  const currentWidth = window.innerWidth;
+  console.log('currentWidth:', currentWidth);
+
+  if (currentWidth < 768) {
+    bookAmount = 1;
+  } else if (currentWidth >= 768 && currentWidth < 1440) {
+    bookAmount = 3;
+  } else {
+    bookAmount = 5;
+  }
+}
+
+sectionLoad();
+//------------------------------------------------------------
+
 //========================================
-drawTopBooks();
-// drawCategoryBooks(categoryName);
-//----------------------------------------
 // categoryName:
 
 // 'Advice How-To and Miscellaneous';

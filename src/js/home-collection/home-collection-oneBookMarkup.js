@@ -1,17 +1,16 @@
 // import { openModal } from './../book-modal/modal';
 const defaultBookImage = require('../../images/defaultBook_180_x_256.png');
 
-function createOneBookMarkup(book) {
+export function createOneBookMarkup(book) {
   const { _id, author, title, list_name, book_image = defaultBookImage } = book;
   return `
     <li class="book">
-      <a class='book__link'>
+      <a class='book__link' data-id="${_id}">
         <div class="book__frame">
           <img
             class="book__image"
             src='${book_image}'
             alt='book image'
-            data-id="${_id}"
             loading="lazy"
           />
         </div>      
@@ -21,5 +20,3 @@ function createOneBookMarkup(book) {
     </li>
     `;
 }
-
-export { createOneBookMarkup };
