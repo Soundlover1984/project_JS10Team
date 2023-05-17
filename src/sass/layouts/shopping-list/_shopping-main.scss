@@ -70,6 +70,10 @@
   //display: inline-block;
 }
 
+.sh-list__pagination-container {
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 40px) and (max-width: 768px) {
   .pageThre {
     position: absolute;
@@ -102,11 +106,16 @@
   .sh-list__books__containner {
     width: 322px;
   }
+
+  .sh-list__pagination-container {
+    margin-top: 40px;
+  }
 }
 
 @media (min-width: 1440px) {
   .shTitle {
     margin-top: 0px;
+    margin-left: 0px;
   }
   .sh-list__page {
     display: flex;
@@ -115,11 +124,22 @@
     margin-top: 232px;
   }
 
+  .listWithBoks {
+    margin-top: -192px;
+  }
   .sh-list__removeWraper {
     display: flex;
   }
   .sh-list__container {
     margin-top: 40px;
+  }
+
+  .sh-list__titleAndCard {
+    margin-left: 40px;
+  }
+
+  .shop-card {
+    margin-bottom: 20px;
   }
 }
 

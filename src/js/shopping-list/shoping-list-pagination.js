@@ -29,19 +29,20 @@ const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 // console.log(allPages);
 // createCardBook(savedSettings[0]);
 
-function renderMarkup(books) {
-  const cardsMarkup = createCardBook(books);
-  listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
-}
-
 // function renderMarkup(books) {
-//   const cardsMarkup = books.map(book => createCardBook(book)).join('');
-//   refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
+//   const cardsMarkup = createCardBook(books);
+//   listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 // }
+
+function renderMarkup(books) {
+  const cardsMarkup = books.map(book => createCardBook(book)).join('');
+  refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
+}
 
 function controllInLocalStorage() {
   if (savedSettings) {
     removeDefaultPage();
+
     return;
   }
 }
@@ -53,7 +54,6 @@ function removeDefaultPage() {
 
   //Викликати функцію що створює картки//
   renderMarkup(savedSettings);
-  // console.log(savedSettings[0]);
 
   if (savedSettings.length > 3) {
     addBtn();

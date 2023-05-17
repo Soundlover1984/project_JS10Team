@@ -1,7 +1,7 @@
 import './js/api/booksApiService';
-import './js/home-collection/main';
+// import './js/home-collection/main';
 import './js/auth-modal/auth-modal';
-import './js/book-modal/modal';
+// import './js/book-modal/modal';
 import './js/dark-theme/dark-theme';
 import './js/firebase/auth';
 import './js/header/header';
