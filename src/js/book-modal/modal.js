@@ -24,7 +24,6 @@ const refs = {
 
 refs.removeCover.classList.add('is-hidden');
 
-refs.openModalBtn.addEventListener('click', openModal);
 refs.closeModalBtn.addEventListener('click', removeModal);
 refs.btnAddBook.addEventListener('click', addBookBtnClick);
 refs.removeBtn.addEventListener('click', removeBookBtnClick);
