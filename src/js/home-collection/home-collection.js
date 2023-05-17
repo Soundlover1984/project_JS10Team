@@ -9,7 +9,7 @@ const markupContainer = document.querySelector('.home-collection');
 const booksApiService = new BooksApiService();
 
 function sectionLoad() {
-  drawTopBooks();
+  // drawTopBooks();
   // drawCategoryBooks(categoryName);
 
   addEventListenerForBook();
