@@ -40,11 +40,6 @@
 
   &__icon {
     fill: currentColor;
-
-    @media screen and (min-width: 768px) {
-      width: 24px;
-      height: 24px;
-    }
   }
 
   @media screen and (min-width: 768px) {
@@ -62,7 +57,7 @@ body.show-modal .backdrop {
 }
 
 body.show-modal .modal-for-book {
-  transform: translate(-50%, -50%) scale(2.3);
+  transform: translate(-50%, -50%);
 }
 
 .backdrop {
@@ -143,7 +138,7 @@ body.show-modal .modal-for-book {
     }
   }
 
-  &_title {
+  &__title {
     margin-bottom: 4px;
     font-weight: 700;
     font-size: 16px;
