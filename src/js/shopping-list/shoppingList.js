@@ -1,9 +1,7 @@
 
-
-
 const refs = {
     btnRemove: document.querySelectorAll('.shop-card__delete'),
-    shopCard: document.querySelector('.listWithBoks'),
+
   };
   
   refs.btnRemove.forEach((btn) => {
@@ -15,10 +13,7 @@ const refs = {
     localStorage.removeItem(SHOPPING_LIST_KEY);
   }
   
-  function renderMarkup(books) {
-    const cardsMarkup = books.map((book) => createCardBookMarkup(book)).join('');
-    refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
-  }
+ 
 
 export default function createCardBook(book) {
   const oneBook = book
@@ -87,16 +82,7 @@ function createLinksMarkup(buyLinks) {
                             <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x" 
                             src="${pngUrlx}" alt="${name}" width="32"
                                 class="market__png" />
-                        </a></li>
-                        <li class="market__marketplace"><a href="">${url}
-                            <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x"
-                             src="${pngUrlx}"
-                                alt="${name}" width="16" class="market__png" />
-                        </a></li>
-                        <li class="market__marketplace"><a href="">${url}
-                            <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x" 
-                            src="${pngUrlx}"
-                                alt="${name}" width="16" class="market__png" />`;
+                        </a></li>`;
     })
     .join("");
 }
