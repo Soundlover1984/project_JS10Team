@@ -116,8 +116,10 @@
   }
 
   .sh-list__removeWraper {
-    display: inline-block;
-    width: 100px;
+    display: flex;
+  }
+  .sh-list__container {
+    margin-top: 40px;
   }
 }
 
