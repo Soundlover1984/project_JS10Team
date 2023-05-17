@@ -36,7 +36,7 @@ class BooksApiService {
     try {
       const response = await axios.get(`${this.BASE_URL}/books/top-books`);
       const topBooks = response.data;
-      console.log('Top Books:', topBooks);
+      // console.log('Top Books:', topBooks);
       return topBooks;
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ class BooksApiService {
         },
       });
       const booksCategori = response.data;
-      console.log('BooksCategori:', booksCategori);
+      // console.log('BooksCategori:', booksCategori);
       return booksCategori;
     } catch (error) {
       console.error(error);

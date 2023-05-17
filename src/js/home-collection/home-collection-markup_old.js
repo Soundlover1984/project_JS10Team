@@ -1,4 +1,4 @@
-import { createOneCategoryMarkup } from './home-collection-oneCategoryMarkup';
+import { createOneCategoryMarkup } from './home-collection-oneCategoryMarkup_old';
 
 export function createFullMarkup(collection) {
   return collection

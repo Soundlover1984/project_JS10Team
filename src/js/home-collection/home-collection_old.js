@@ -1,8 +1,8 @@
 import debounce from 'lodash.debounce';
 import { BooksApiService } from '../api/booksApiService';
-import { createFullMarkup } from './home-collection-markup';
-import { createOneBookMarkup } from './home-collection-oneBookMarkup';
-import { openModal } from './../book-modal/modal';
+import { createFullMarkup } from './home-collection-markup_old';
+import { createOneBookMarkup } from './home-collection-oneBookMarkup__old';
+import { openModal } from '../book-modal/modal';
 
 export let c = 1;
 const markupContainer = document.querySelector('.home-collection');
@@ -11,10 +11,9 @@ const booksApiService = new BooksApiService();
 function sectionLoad() {
   // drawTopBooks();
   // drawCategoryBooks(categoryName);
-
-  addEventListenerForBook();
-  handleWindowResize();
-  window.addEventListener('resize', debounce(handleWindowResize, 50));
+  // addEventListenerForBook();
+  // handleWindowResize();
+  // window.addEventListener('resize', debounce(handleWindowResize, 50));
 }
 
 export async function drawTopBooks() {
