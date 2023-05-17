@@ -46,7 +46,8 @@ async function getBookDetails() {
 /**
  * Відкриття модального вікна з деталями про книгу
  */
-async function openModal() {
+async function openModal(bookId) {
+  booksApiService.bookId = bookId;
   const bookData = await getBookDetails();
   if (bookData) {
     currentBookData = bookData;
