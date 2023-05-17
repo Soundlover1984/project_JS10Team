@@ -114,11 +114,11 @@ export function handleWindowResize() {
   console.log('currentWidth:', currentWidth);
 
   if (currentWidth < 768) {
-    bookAmount = 1;
+    return 1;
   } else if (currentWidth >= 768 && currentWidth < 1440) {
-    bookAmount = 3;
+    return 3;
   } else {
-    bookAmount = 5;
+    return 5;
   }
 }
 
