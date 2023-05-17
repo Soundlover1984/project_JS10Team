@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { BooksApiService } from '../api/booksApiService';
 import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-markup';
@@ -7,42 +8,62 @@ import { addEventListenerBookLink } from './home-collection-utils';
 import { amountOfBooks } from './home-collection-utils';
 import { addEventListenerWindow } from './home-collection-utils';
 import { limitBookHandler } from './home-collection-utils';
-
+//=======================================================================================
+// sectionLoad() - load functions on this page ("main" function)
+// getAndParseTopBooks(amountOfBooks) - fetch an render "ALL CATEGORIES" (or "Top Books")
+// getAndParseCategoryBooks(categoryName, amountOfBooks) - fetch an render one category
+//=======================================================================================
 const markupContainer = document.querySelector('.home-collection');
-
-const booksApiService = new BooksApiService();
 
 function sectionLoad() {
   addEventListenerWindow();
   limitBookHandler();
   getAndParseTopBooks(amountOfBooks);
-  // getAndParseCategoryBooks('Childrens Middle Grade Hardcover', amountOfBooks);
+  // getAndParseCategorsyBooks('Childrens Middle Grade Hardcover', 100); // amountOfBooks = 100
 }
 
 export async function getAndParseTopBooks(amountOfBooks) {
   try {
     const booksApiService = new BooksApiService();
     const topBooksFromBack = await booksApiService.getTopBooks();
-    const topBooksLimited = limitBooksInTopBooks(
-      topBooksFromBack,
-      amountOfBooks
-    );
-    renderTopBooks(topBooksLimited);
-    addEventListenerBookLink();
-    addEventListenerButtonMore();
+    if (topBooksFromBack.length != 0) {
+      const topBooksLimited = limitBooksInTopBooks(
+        topBooksFromBack,
+        amountOfBooks
+      );
+      renderTopBooks(topBooksLimited);
+      addEventListenerBookLink();
+      addEventListenerButtonMore();
+    } else {
+      document.querySelector('.home-collection__title').textContent = '';
+      Notiflix.Notify.warning('Unfortunately, nothing was found', {
+        timeout: '2000',
+      });
+    }
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch top books');
   }
 }
 
-export async function getAndParseCategoryBooks(categoryName, amountOfBooks) {
+export async function getAndParseCategoryBooks(
+  categoryName,
+  amountOfBooks = 100
+) {
   try {
     const booksApiService = new BooksApiService();
     booksApiService.selectedCategory = categoryName;
     const booksFromBack = await booksApiService.getCategoryBooks();
-    const books = limitBooksInBooks(booksFromBack, 100); // amountOfBooks = 100
-    renderBooks(books);
+    const books = limitBooksInBooks(booksFromBack, amountOfBooks);
+    if (books.length != 0) {
+      renderBooks(books);
+    } else {
+      document.querySelector('.home-collection__title').textContent = '';
+      Notiflix.Notify.warning('Unfortunately, nothing was found', {
+        timeout: '2000',
+      });
+      getAndParseTopBooks(amountOfBooks);
+    }
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category books');
