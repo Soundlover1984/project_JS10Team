@@ -10,14 +10,8 @@ let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
 localStorage.setItem('currentPage', currentPage);
 
 //Інфо з Локального сховища
-// const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
+const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 
-//Штучні Локальні дані
-localStorage.setItem(
-  'ui-theme',
-  '[{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Ilona","age":3,"isHappy":true}, {"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true}]'
-);
-const savedSettings = JSON.parse(localStorage.getItem('ui-theme'));
 
 function chunkArray(myArray, chunk_size) {
   let index = 0;
