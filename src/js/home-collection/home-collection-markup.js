@@ -38,7 +38,7 @@ export function createOneBookMarkup(book) {
             alt='book image'
             loading="lazy"
           />
-        </div>      
+        </div>     
         <h3 class="book__title" >${title}</h3>
         <p class="book__author">${author}</p>
       </a>
