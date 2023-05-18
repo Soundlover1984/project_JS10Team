@@ -28,6 +28,7 @@ let viewportWidth = document.documentElement.clientWidth;
 controllInLocalStorage();
 
 function controllInLocalStorage() {
+  console.log('viewportWidth', viewportWidth);
   if (savedSettings) {
     controllOfViewport(viewportWidth);
     return;
@@ -46,16 +47,21 @@ function controllOfViewport(param) {
     let buttonsPerPage = 2;
 
     removeDefaultPage(allBoks, perPage, buttonsPerPage);
+
+    console.log('its mobil');
   } else if (param > DesctopViveport) {
     let perPage = 3;
     let buttonsPerPage = 3;
 
     removeDefaultPage(allBoks, perPage, buttonsPerPage);
+
+    console.log('its desctop');
   }
 }
 
 function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
   let result = chunkArray(savedSettings, itemsPerPage);
+
   let allPages = result.length;
 
   removeImg();
@@ -115,6 +121,7 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
 }
 
 function renderMarkup(books) {
+  console.log('books', books);
   const cardsMarkup = createCardBook(books);
   listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 }
