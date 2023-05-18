@@ -31,12 +31,12 @@ export const iconUrls = [
   {
     name: 'Bookshop',
     iconUrl: {
-      src: new URL('../../images/modal/image-3@1x.png', import.meta.url),
+      src: new URL('../../images/modal/image3-1x.png', import.meta.url),
       width: 38,
       height: 36,
     },
     iconUrl2x: {
-      src: new URL('../../images/modal/image-3@2x.png', import.meta.url),
+      src: new URL('../../images/modal/image3-2x.png', import.meta.url),
       width: 38,
       height: 36,
     },
