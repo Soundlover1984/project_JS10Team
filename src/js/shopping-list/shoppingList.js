@@ -1,21 +1,30 @@
+
+
 const refs = {
-  btnRemove: document.querySelectorAll('.shop-card__delete'),
-  shopCard: document.querySelector('.listWithBoks'),
+    btnRemove: document.querySelectorAll('.shop-card__delete'),
+
 };
 
-refs.btnRemove.forEach(btn => {
-  btn.addEventListener('click', onRemoveCard);
-});
+  
+  refs.btnRemove.forEach((btn) => {
+    btn.addEventListener('click', onRemoveCard);
+  });
+  
+  function onRemoveCard(ev) {
+     if (ev.target.dataset.action !== 'delete') {
+    return;
+    }
 
-function onRemoveCard(ev) {
-  ev.preventDefault();
-  localStorage.removeItem(SHOPPING_LIST_KEY);
-}
+    const closetNode = ev.target.closest('.shop-card');
+    const bookRemoveId = closetNode.dataset.id;
 
-function renderMarkup(books) {
-  const cardsMarkup = books.map(book => createCardBookMarkup(book)).join('');
-  refs.shopCard.insertAdjacentHTML('beforeend', cardsMarkup);
-}
+    bookRemoveId.classList.add('is-hidden');
+    bookRemoveId.remove();
+    localStorage.removeItem(SHOPPING_LIST_KEY);
+  }
+  
+ 
+
 
 export default function createCardBook(book) {
   const oneBook = book
@@ -44,7 +53,7 @@ export default function createCardBook(book) {
                 <div class="shop-card__wrap-third">
                     <p class="shop-card__author">${author}</p>
                     <ul class="market">
-                      ${buy_links ? createLinksMarkup(buy_links) : ''}
+                      ${buy_links ? createLiMarkup(buy_links) : ''}
                     </ul>
                 </div>
             </div>
@@ -54,22 +63,9 @@ export default function createCardBook(book) {
   return oneBook;
 }
 
-function getPngUrlForStore(storeName) {
-  const store = pngUrls.find(item => item.name === storeName);
-  if (store) {
-    return {
-      pngUrlx: store.pngUrlx,
-      pngUrl2x: store.pngUrl2x,
-    };
-  } else {
-    return {
-      pngUrlx: '',
-      pngUrl2x: '',
-    };
-  }
-}
 
-function createLinksMarkup(buyLinks) {
+
+function createLiMarkup(buyLinks) {
   const supportedStores = ['Amazon', 'Apple Books', 'Bookshop'];
 
   const filteredLinks = buyLinks.filter(link =>
@@ -79,43 +75,80 @@ function createLinksMarkup(buyLinks) {
   return filteredLinks
     .map(link => {
       const { name, url } = link;
-      const { pngUrlx, pngUrl2x } = getPngUrlForStore(name);
+      const { pngUrlx, pngUrl2x, width, height } = getPngUrlForStore(name);
       return `
-                <li class="market__marketplace"><a href="">${url}
-                            <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x" 
-                            src="${pngUrlx}" alt="${name}" width="32"
-                                class="market__png" />
-                        </a></li>
-                        <li class="market__marketplace"><a href="">${url}
-                            <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x"
-                             src="${pngUrlx}"
-                                alt="${name}" width="16" class="market__png" />
-                        </a></li>
-                        <li class="market__marketplace"><a href="">${url}
+                <li class="market__marketplace"><a href="${url}">
                             <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x" 
                             src="${pngUrlx}"
-                                alt="${name}" width="16" class="market__png" />`;
+                            alt="${name}" 
+                            width="${width}"
+                            height="${height}"
+                            class="market__png" />
+                        </a></li>`;
     })
     .join('');
+}
+
+function getPngUrlForStore(storeName) {
+  const store = pngUrls.find(item => item.name === storeName);
+  if (store) {
+    return {
+      pngUrlx: store.pngUrlx.src.href,
+      pngUrl2x: store.pngUrl2x.src.href,
+      width: store.pngUrlx.width,
+      height: store.pngUrlx.height,
+    };
+  } else {
+    return {
+      pngUrlx: '',
+      pngUrl2x: '',
+      width: 0,
+      height: 0,
+    };
+  }
 }
 
 const pngUrls = [
   {
     name: 'Amazon',
 
-    pngUrlx: require('../../images/modal/image-1@1x.png'),
-    pngUrl2x: require('../../images/modal/image-1@2x.png'),
+    pngUrlx: {
+      src: new URL('../../images/modal/image-1@1x.png', import.meta.url),
+      width: 32,
+      height: 11,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image-1@2x.png', import.meta.url),
+      width: 48,
+      height: 15,
+    },
   },
   {
     name: 'Apple Books',
 
-    pngUrlx: require('../../images/modal/image-2@1x.png'),
-    pngUrl2x: require('../../images/modal/image-2@2x.png'),
+    pngUrlx: {
+      src: new URL('../../images/modal/image-2@1x.png', import.meta.url),
+      width: 16,
+      height: 16,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image-2@2x.png', import.meta.url),
+      width: 28,
+      height: 27,
+    },
   },
   {
     name: 'Bookshop',
 
-    pngUrlx: require('../../images/modal/image3-1x.png'),
-    pngUrl2x: require('../../images/modal/image3-2x.png'),
+    pngUrlx: {
+      src: new URL('../../images/modal/image3-1x.png', import.meta.url),
+      width: 16,
+      height: 16,
+    },
+    pngUrl2x: {
+      src: new URL('../../images/modal/image3-2x.png', import.meta.url),
+      width: 32,
+      height: 30,
+    }, 
   },
 ];

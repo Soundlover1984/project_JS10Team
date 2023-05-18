@@ -9,13 +9,11 @@ const booksApiService = new BooksApiService();
 const SHOPPING_LIST_KEY = 'SHOPPING_LIST_KEY';
 
 // Отримання поточних даних з локального сховища
-const currentStorage =
-  JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+let currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
 
 // Посилання на елементи DOM
 const refs = {
   bookModal: document.querySelector('.content-conteiner'),
-  openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
   backdrop: document.querySelector('.js-backdrop'),
   btnAddBook: document.querySelector('.js-btn-modal-add-book'),
@@ -25,7 +23,6 @@ const refs = {
 
 refs.removeCover.classList.add('is-hidden');
 
-refs.openModalBtn.addEventListener('click', openModal);
 refs.closeModalBtn.addEventListener('click', removeModal);
 refs.btnAddBook.addEventListener('click', addBookBtnClick);
 refs.removeBtn.addEventListener('click', removeBookBtnClick);
@@ -45,10 +42,13 @@ async function getBookDetails() {
   }
 }
 
+
 /**
  * Відкриття модального вікна з деталями про книгу
  */
-async function openModal() {
+async function openModal(bookId) {
+  currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY));
+  booksApiService.bookId = bookId;
   const bookData = await getBookDetails();
   if (bookData) {
     currentBookData = bookData;
@@ -62,6 +62,9 @@ async function openModal() {
     if (currentStorage.find(book => book._id === bookData._id)) {
       refs.btnAddBook.classList.add('is-hidden');
       refs.removeCover.classList.remove('is-hidden');
+    } else {
+      refs.btnAddBook.classList.remove('is-hidden');
+      refs.removeCover.classList.add('is-hidden');
     }
   }
 }
@@ -74,7 +77,7 @@ let currentBookData = null;
  * Отримує дані про книгу та додає їх до масиву книг
  */
 async function addBookBtnClick() {
-  const items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
+  let items = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
   if (
     currentBookData &&
     !items.find(book => book._id === currentBookData._id)
