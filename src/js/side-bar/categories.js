@@ -1,6 +1,5 @@
 import Notiflix from 'notiflix';
 import { BooksApiService } from '../api/booksApiService';
-// import { drawCategoryTitle } from './createCategoryTitle';
 import { getAndParseTopBooks } from '../home-collection/home-collection';
 import { getAndParseCategoryBooks } from '../home-collection/home-collection';
 Notiflix.Notify.init({
@@ -11,10 +10,7 @@ Notiflix.Notify.init({
 });
 
 const booksApiService = new BooksApiService();
-// const homeSubtitle = document.querySelector('.home-collection__title');
-// const categoryList = document.querySelector(
-//   '.home-collection__categories-list--topBooks'
-// );
+
 const categoriesContainer = document.querySelector('.categories__list');
 
 let name = '';
@@ -22,7 +18,6 @@ async function displayCategories() {
   try {
     const categoryList = await booksApiService.getCategoryList();
     createCategoriesList(categoryList);
-    // getSelectCategory();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category list');
@@ -53,13 +48,9 @@ async function clickOnCategories(event) {
   name = event.target.textContent;
 
   booksApiService.selectedCategory = name;
-  console.log(name);
+
   if (name === 'All categories') {
-    //   homeSubtitle.innerHTML = `<h2 class="home-collection__title">
-    //   Best Sellers
-    //   <span class="home-collection__title--last-word" style="color: #4f2ee8">Books</span>
-    // </h2>`;
-    await getAndParseTopBooks(name);
+    await getAndParseTopBooks();
   } else {
     await getSelectCategory(name);
   }
@@ -68,7 +59,7 @@ async function clickOnCategories(event) {
 async function getSelectCategory(name) {
   try {
     const listBooks = await booksApiService.getCategoryBooks(name);
-    console.log('hvkfbwjhfjhabdvlhbawedhvjwae', listBooks);
+
     renderSelectBooks(listBooks);
   } catch (error) {
     console.error(error);
@@ -77,13 +68,6 @@ async function getSelectCategory(name) {
 }
 
 async function renderSelectBooks(books) {
-  // console.log(books);
-  // await drawCategoryTitle(name);
-  // console.log(
-  //   'це заголовок моєї катогорії - ',
-  //   booksApiService.selectedCategory
-  // );
-  // categoryList.innerHTML = '';
   if (books.length === 0) {
     Notiflix.Notify.info(
       'Unfortunately, nothing was found. Please try changing the parameters and performing a new search.',
