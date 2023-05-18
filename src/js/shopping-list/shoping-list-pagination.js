@@ -15,7 +15,7 @@ function chunkArray(myArray, chunk_size) {
   const tempArray = [];
 
   for (index = 0; index < arrayLength; index += chunk_size) {
-    myChunk = myArray.slice(index, index + chunk_size);
+    let myChunk = myArray.slice(index, index + chunk_size);
     tempArray.push(myChunk);
   }
 
