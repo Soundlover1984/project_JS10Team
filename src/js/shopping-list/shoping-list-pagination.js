@@ -3,19 +3,11 @@ import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
-// const listBtn = document.querySelector('.sh-list__pagination');
 const cardWithImg = document.querySelector('.shopping-cart-is-empty');
 const listWithBoks = document.querySelector('.listWithBoks');
 
-let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
-localStorage.setItem('currentPage', currentPage);
-
 //Інфо з Локального сховища
-// const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
-
-//Штучні Локальні дані
-localStorage.setItem('ui-theme', '[]');
-const savedSettings = JSON.parse(localStorage.getItem('ui-theme'));
+const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 
 function chunkArray(myArray, chunk_size) {
   let index = 0;
@@ -34,14 +26,13 @@ let allBoks = savedSettings.length;
 let viewportWidth = document.documentElement.clientWidth;
 
 function controllInLocalStorage() {
+  console.log('viewportWidth', viewportWidth);
   if (savedSettings) {
     controllOfViewport(viewportWidth);
     return;
   }
   return Notiflix.Notify.info('Your shopping list is empty. Please add a book');
 }
-
-controllInLocalStorage();
 
 /// Перевірка на ширину вюпорта
 
@@ -68,6 +59,7 @@ function controllOfViewport(param) {
 
 function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
   let result = chunkArray(savedSettings, itemsPerPage);
+
   let allPages = result.length;
 
   removeImg();
@@ -127,11 +119,13 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
 }
 
 function renderMarkup(books) {
+  console.log('books', books);
   const cardsMarkup = createCardBook(books);
   listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 }
 
-console.log(cardWithImg);
 function removeImg() {
   cardWithImg.innerHTML = '';
 }
+
+controllInLocalStorage();
