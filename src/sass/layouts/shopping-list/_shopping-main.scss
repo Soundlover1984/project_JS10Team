@@ -17,7 +17,6 @@
   width: 193px;
   height: 38px;
   margin-left: 20px;
-  margin-top: 40px;
 
   font-family: 'DM Sans';
   font-style: normal;
@@ -75,6 +74,14 @@
   margin-bottom: 20px;
 }
 
+.sh-list__container {
+  padding-top: 40px;
+}
+
+.shopping-cart-is-empty {
+  margin-top: 40px;
+}
+
 @media (min-width: 768px) {
   .shTitle {
     width: 292px;
@@ -108,22 +115,24 @@
   }
   .shopping-cart-is-empty {
     margin-top: 232px;
+    margin-left: 315px;
   }
 
   .listWithBoks {
     margin-top: -192px;
+    width: 996;
   }
 
   .sh-list__removeWraper {
     display: flex;
   }
 
-  .sh-list__container {
-    margin-top: 40px;
-  }
+  // .sh-list__container {
+  //   // margin-top: 40px;
+  //   padding-top: 40px;
+  // }
   .sh-list__titleAndCard {
     margin-left: 40px;
-    // display: flex;
   }
 }
 

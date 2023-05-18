@@ -1,4 +1,5 @@
 import '../side-bar/supportCreateList';
+import '../side-bar/supportSwiper';
 import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
@@ -22,22 +23,31 @@ function chunkArray(myArray, chunk_size) {
   return tempArray;
 }
 
-let allBoks = savedSettings.length;
 let viewportWidth = document.documentElement.clientWidth;
 
 controllInLocalStorage();
 
 function controllInLocalStorage() {
-  if (savedSettings) {
-    controllOfViewport(viewportWidth);
+  console.log();
+  if (!savedSettings) {
+    return Notiflix.Notify.info(
+      'Your shopping list is empty. Please add a book'
+    );
+  } else if (savedSettings.length === 0) {
+    return Notiflix.Notify.info(
+      'Your shopping list is empty. Please add a book'
+    );
+
     return;
+  } else if (savedSettings.length > 0) {
+    controllOfViewport(viewportWidth);
   }
-  return Notiflix.Notify.info('Your shopping list is empty. Please add a book');
+  return;
 }
 
 /// Перевірка на ширину вюпорта
-
 function controllOfViewport(param) {
+  let booksSommKommer = savedSettings.length;
   let MobilViveport = 375;
   let DesctopViveport = 768;
 
@@ -45,16 +55,18 @@ function controllOfViewport(param) {
     let perPage = 4;
     let buttonsPerPage = 2;
 
-    removeDefaultPage(allBoks, perPage, buttonsPerPage);
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
   } else if (param > DesctopViveport) {
     let perPage = 3;
     let buttonsPerPage = 3;
 
-    removeDefaultPage(allBoks, perPage, buttonsPerPage);
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
   }
 }
 
+//Функція що готує сторінку до рендирингу в залежності вюпорту дає кількість кнопок
 function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
+  let thisBooks = savedSettings.length;
   let result = chunkArray(savedSettings, itemsPerPage);
   let allPages = result.length;
 
@@ -97,28 +109,22 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
     pagination.on('afterMove', ({ page }) => createPage(page));
 
     function createPage(page) {
-      if (page === 1) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[0]);
-      } else if (page === 2) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[1]);
-      } else if (page === 3) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[2]);
-      } else if (page === 4) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[3]);
+      for (let i = 1; i <= page; i += 1) {
+        if (page === i) {
+          listWithBoks.innerHTML = '';
+          renderMarkup(result[i - 1]);
+        }
       }
     }
   }
 }
 
+//Функція що рендирить сторінку
 function renderMarkup(books) {
   const cardsMarkup = createCardBook(books);
   listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 }
-
+//Функція що очищає сторінку якщо корзина пуста
 function removeImg() {
   cardWithImg.innerHTML = '';
 }
