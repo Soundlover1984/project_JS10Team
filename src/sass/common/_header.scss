@@ -186,10 +186,10 @@ a.header-shopping.header-active {
     display: block;
   }
   .header-navbar ul {
-=========
+  
   a.header-home.header-active {
     display: flex;
->>>>>>>>> Temporary merge branch 2
+
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -200,6 +200,7 @@ a.header-shopping.header-active {
     background: $yellow-color;
     border-radius: 36px;
   }
+}
 
   a.header-shopping.header-active {
     display: flex;
@@ -225,7 +226,7 @@ a.header-shopping.header-active {
     background: $primary-background-color;
     cursor: pointer;
   }
-
+}
   @media (min-width: 768px) {
     .header-sighUp {
       display: block;
@@ -246,7 +247,7 @@ a.header-shopping.header-active {
       display: none;
     }
   }
-}
+
 
 .sighUp-btn {
   display: flex;
@@ -264,6 +265,4 @@ a.header-shopping.header-active {
   font-size: 14px;
   border: 1.5px solid #111111;
   border-radius: 18px;
-}
-
-
+}}
