@@ -15,8 +15,6 @@ const closeBtn = document.querySelector('.header__close-btn');
 const pageWrapper = document.querySelector('.page-wrapper');
 const categoriesList = document.querySelector('.categories__list');
 
-console.dir(homeCollectionTitle);
-
 
 if(window.location.pathname === "/index.html") {
   document.querySelector('.header-home').classList.add('header-active');
