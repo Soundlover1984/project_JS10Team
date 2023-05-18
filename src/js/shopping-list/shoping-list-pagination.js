@@ -22,22 +22,32 @@ function chunkArray(myArray, chunk_size) {
   return tempArray;
 }
 
-let allBoks = savedSettings.length;
 let viewportWidth = document.documentElement.clientWidth;
 
 controllInLocalStorage();
 
 function controllInLocalStorage() {
-  if (savedSettings) {
-    controllOfViewport(viewportWidth);
+  console.log();
+  if (!savedSettings) {
+    return Notiflix.Notify.info(
+      'Your shopping list is empty. Please add a book'
+    );
+  } else if (savedSettings.length === 0) {
+    return Notiflix.Notify.info(
+      'Your shopping list is empty. Please add a book'
+    );
+
     return;
+  } else if (savedSettings.length > 0) {
+    controllOfViewport(viewportWidth);
   }
-  return Notiflix.Notify.info('Your shopping list is empty. Please add a book');
+  return;
 }
 
 /// Перевірка на ширину вюпорта
 
 function controllOfViewport(param) {
+  let booksSommKommer = savedSettings.length;
   let MobilViveport = 375;
   let DesctopViveport = 768;
 
@@ -45,16 +55,17 @@ function controllOfViewport(param) {
     let perPage = 4;
     let buttonsPerPage = 2;
 
-    removeDefaultPage(allBoks, perPage, buttonsPerPage);
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
   } else if (param > DesctopViveport) {
     let perPage = 3;
     let buttonsPerPage = 3;
 
-    removeDefaultPage(allBoks, perPage, buttonsPerPage);
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
   }
 }
 
 function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
+  let thisBooks = savedSettings.length;
   let result = chunkArray(savedSettings, itemsPerPage);
   let allPages = result.length;
 
@@ -113,6 +124,8 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
     }
   }
 }
+
+// return Notiflix.Notify.info('Your shopping list is empty. Please add a book');
 
 function renderMarkup(books) {
   const cardsMarkup = createCardBook(books);
