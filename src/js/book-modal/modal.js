@@ -13,7 +13,7 @@ let currentStorage = JSON.parse(localStorage.getItem(SHOPPING_LIST_KEY)) || [];
 
 // Посилання на елементи DOM
 const refs = {
-  bookModal: document.querySelector('.content-conteiner'),
+  bookModal: document.querySelector('.content-container'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
   backdrop: document.querySelector('.js-backdrop'),
   btnAddBook: document.querySelector('.js-btn-modal-add-book'),
