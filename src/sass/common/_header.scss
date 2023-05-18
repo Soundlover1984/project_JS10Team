@@ -156,3 +156,59 @@ a.header-shopping.header-active {
   background: $yellow-color;
   border-radius: 36px;
 }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-menu button {
+  border: none;
+  background: $primary-background-color;
+  cursor: pointer;
+}
+
+// .container {
+//   max-width: 900px;
+//   margin: 0 auto;
+//   padding: 30px;
+// }
+
+@media (min-width: 550px) {
+  .header-navbar {
+    all: unset;
+    display: block;
+  }
+  .header-navbar ul {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .header-navbar ul a {
+    font-size: inherit;
+  }
+  .header-close-nav,
+  .header-menu {
+    display: none;
+  }
+}
+
+.sighUp-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $blue-color;
+  border-radius: 20px;
+  color: $white-color;
+  padding: 14px;
+  margin: 12px 24px;
+  border: none;
+  cursor: pointer;
+  width: 184px;
+  height: 48px;
+  font-size: 14px;
+  border: 1.5px solid #111111;
+  border-radius: 18px;
+}
+}
+
