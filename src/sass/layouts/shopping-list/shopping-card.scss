@@ -31,8 +31,9 @@
     }
 
     &__inform {
-            @media screen and (min-width: 1440px) {
+         @media screen and (min-width: 1440px) {
                 width: 808px;
+
                 }
         }
 
@@ -161,4 +162,11 @@
 
     }
 
+}
+
+.shop-card___inform{
+    @media screen and (min-width: 1440px) {
+            width: 808px;
+    
+        }
 }
