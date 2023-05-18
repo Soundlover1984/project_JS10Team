@@ -1,4 +1,5 @@
 import '../side-bar/supportCreateList';
+import '../side-bar/supportSwiper';
 import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
