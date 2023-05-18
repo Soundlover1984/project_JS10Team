@@ -24,13 +24,13 @@
   background: $primary-background-color;
 }
 
-.header__toggle-menu {
+.header__buttons-menu {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.header__switch-btn {
+.header__toggle {
   display: inline-block;
   width: 40px; /* ширина */
   height: 20px; /* высота */
@@ -45,7 +45,7 @@
   transition-duration: 300ms; /* анимация */
 }
 
-.header__switch-btn::after {
+.header__toggle::after {
   content: '';
   height: 18px; /* высота кнопки */
   width: 20px; /* ширина кнопки */
@@ -58,7 +58,7 @@
   z-index: 1;
 }
 
-.header__switch-on {
+.header__toggle-on {
   background: $dark-theme-switcher-linear-gradient;
 }
 
@@ -87,7 +87,7 @@
   color:  white;
 }
 
-.header__switch-on::after {
+.header__toggle-on::after {
   left: 20px;
 }
 
