@@ -13,6 +13,27 @@ body {
   }
 }
 
+html.dark-theme, .dark-theme body {
+  background-color: #000;
+  color: #fff;
+}
+
+.dark-theme a {
+  color: #ffffff;
+}
+
+.dark-theme li {
+  color: #ffffff;
+}
+
+.dark-theme h1 {
+  color: #ffffff;
+}
+
+.dark-theme p {
+  color: #ffffff;
+}
+
 
 h1,
 h2,
