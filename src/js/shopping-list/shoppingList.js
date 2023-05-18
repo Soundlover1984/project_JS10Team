@@ -20,7 +20,7 @@ const refs = {
 
     bookRemoveId.classList.add('is-hidden');
     bookRemoveId.remove();
-    localStorage.removeItem(SHOPPING_LIST_KEY);
+    
   }
   
  
