@@ -12,6 +12,10 @@ const shoppingSvg = document.querySelector('.header-shopping');
 
 const burgerBtn = document.querySelector('.header__burger-btn');
 const closeBtn = document.querySelector('.header__close-btn');
+const pageWrapper = document.querySelector('.page-wrapper');
+const categoriesList = document.querySelector('.categories__list');
+
+console.dir(homeCollectionTitle);
 
 
 if(window.location.pathname === "/index.html") {
@@ -27,6 +31,13 @@ switchBtn.addEventListener('click', onSwitchClick);
 function onSwitchClick() {
 
   if(!switchBtn.classList.contains('header__switch-on')){
+    pageWrapper.style.backgroundColor = "black";
+    categoriesList.childNodes.forEach((item) => {
+      try {
+        item.style.color = "white";
+      }
+      catch (err) {}
+    });
     this.classList.add('header__switch-on');
     headerContainer.classList.add('header__dark-theme');
     burgerSvg.classList.add('header__burderSvg-dark');
@@ -35,6 +46,13 @@ function onSwitchClick() {
     headerShopping.style.color = "white";
     shoppingSvg.classList.add('header__closeSvg-dark');
   } else {
+    pageWrapper.style.backgroundColor = "transparent";
+    categoriesList.childNodes.forEach((item) => {
+      try {
+        item.style.color = "#1119";
+      }
+      catch (err) {}
+    });
     this.classList.remove('header__switch-on');
     headerContainer.classList.remove('header__dark-theme');
     burgerSvg.classList.remove('header__burderSvg-dark');
