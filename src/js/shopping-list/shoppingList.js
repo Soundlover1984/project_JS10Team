@@ -1,36 +1,44 @@
 
-
 const refs = {
-    btnRemove: document.querySelectorAll('.shop-card__delete'),
-
+  btnRemove: document.querySelectorAll('.shop-card__delete'),
 };
 
-  
-  refs.btnRemove.forEach((btn) => {
-    btn.addEventListener('click', onRemoveCard);
-  });
-  
-  function onRemoveCard(ev) {
-     if (ev.target.dataset.action !== 'delete') {
-    return;
-    }
+window.addEventListener('load', () => {
+  const refs = {
+    btnRemove: document.querySelectorAll('.shop-card__delete'),
+  };
 
-    const closetNode = ev.target.closest('.shop-card');
-    const bookRemoveId = closetNode.dataset.id;
-
-    bookRemoveId.classList.add('is-hidden');
-    bookRemoveId.remove();
-    
+  for (let i = 0; i < refs.btnRemove.length; i++) {
+    refs.btnRemove[i].addEventListener('click', onRemoveCard);
   }
-  
- 
+});
 
+function onRemoveCard(ev) {
+  const bookShopCard = ev.target.closest('.shop-card');
+  // const bookId = bookShopCard.dataset.id;
+  bookShopCard.classList.add('is-hidden');
+  bookShopCard.remove();
+
+  const arrayObjs = [{_id: " "}, {_id: " "}, {_id: " "}];
+  const newArrayObj = arrayObjs.filter((item) => item._id !== 'SHOPPING_LIST_KEY');
+
+  localStorage.removeItem("SHOPPING_LIST_KEY");
+}
 
 export default function createCardBook(book) {
   const oneBook = book
-    .map(({ book_image, title, list_name, description, author, buy_links }) => {
-      return `  <li class="shop-card">
-            <div>
+    .map(
+      ({
+        book_image,
+        title,
+        list_name,
+        _id,
+        description,
+        author,
+        buy_links,
+      }) => {
+        return `  <li data-id="${_id}" class="shop-card">
+            <div class="shop-card__div-img">
                <img class="shop-card__img" src="${book_image}" alt="${title}" width="100" height="142" /> 
             </div>
             <div class="shop-card___inform">
@@ -46,7 +54,7 @@ export default function createCardBook(book) {
                         </svg>
                     </button>
                 </div>
-                <div class="shop-card__wrap-second">
+<div class="shop-card__wrap-second">
                     <p class="shop-card__title">${description}
                     </p>
                 </div>
@@ -58,12 +66,11 @@ export default function createCardBook(book) {
                 </div>
             </div>
         </li>`;
-    })
+      }
+    )
     .join('');
   return oneBook;
 }
-
-
 
 function createLiMarkup(buyLinks) {
   const supportedStores = ['Amazon', 'Apple Books', 'Bookshop'];
@@ -149,6 +156,6 @@ const pngUrls = [
       src: new URL('../../images/modal/image3-2x.png', import.meta.url),
       width: 32,
       height: 30,
-    }, 
+    },
   },
 ];
