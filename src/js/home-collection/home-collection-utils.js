@@ -76,13 +76,15 @@ export function limitBookHandler() {
   amountOfBooksOld = amountOfBooks;
   const currentWidth = window.innerWidth;
   amountOfBooks = getBookAmount(currentWidth);
-  if (
-    amountOfBooksOld != amountOfBooks &&
-    document.querySelector('.home-collection__title').textContent ===
-      'Best Sellers Books'
-  ) {
-    getAndParseTopBooks(amountOfBooks);
-  }
+  try {
+    if (
+      amountOfBooksOld != amountOfBooks &&
+      document.querySelector('.home-collection__title').textContent ===
+        'Best Sellers Books'
+    ) {
+      getAndParseTopBooks(amountOfBooks);
+    }
+  } catch (err) {}
 }
 
 function getBookAmount(currentWidth) {
