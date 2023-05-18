@@ -22,6 +22,10 @@ html.dark-theme, .dark-theme body {
   background-color: $dark-gray-color;
 }
 
+.dark-theme .btn-close__icon{
+  color: #fff;
+}
+
 
 .dark-theme a {
   color: #ffffff;
