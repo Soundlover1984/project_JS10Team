@@ -13,6 +13,7 @@ import { limitBookHandler } from './home-collection-utils';
 
 // getAndParseTopBooks(amountOfBooks) - fetch and render "ALL CATEGORIES" (or "Top Books")
 // getAndParseCategoryBooks(categoryName, amountOfBooks) - fetch an render one category
+// (amountOfBooks = 100)
 //=======================================================================================
 const markupContainer = document.querySelector('.home-collection');
 
