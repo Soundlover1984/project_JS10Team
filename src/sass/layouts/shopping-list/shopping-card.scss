@@ -1,56 +1,15 @@
+
 .shop-card {
-  display: flex;
-  justify-content: space-between;
-  max-width: 335px;
-  height: 170px;
-  padding: 14px;
-  border: 2px solid rgba(79, 46, 232, 0.4);
-  border-radius: 16px;
-  @media screen and (min-width: 768px) {
-    padding: 24px;
-    max-width: 704px;
-    height: 213px;
-  }
-
-  @media screen and (min-width: 1200px) {
-    max-width: 996px;
-  }
-  &__img {
-    display: block;
-    border-radius: 8px;
-    @media screen and (min-width: 768px) {
-           width: 116px;
-        }
-  }
-
-  &__inform {
-    margin-left: 14px;
-
-    @media screen and (min-width: 768px) {
-      margin-left: 24px;
-    }
-  }
-
-  &__wrap-first {
     display: flex;
     justify-content: space-between;
-  }
-
-  &__name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 144px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 18px;
-    letter-spacing: -0.04em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    
+    max-width: 335px;
+    height: 170px;
+    padding: 14px;
+    border: 2px solid rgba(79, 46, 232, 0.4);
+    border-radius: 16px;
     @media screen and (min-width: 768px) {
             padding: 24px;
-            width: 704px;
+            max-width: 704px;
             height: 213px;
         }
 
@@ -59,7 +18,7 @@
     }
     &__div-img{
         margin-right: 14px;
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 1440px) {
                 margin-right: 24px;
             }
     }
@@ -68,21 +27,20 @@
         border-radius: 8px;
         @media screen and (min-width: 768px) {
                width: 116px;
-               
-            }
-    }
-    &__inform {
-        @media screen and (min-width: 1440px) {
-            width: 808px;
             }
     }
 
-  
+    &__inform {
+            @media screen and (min-width: 1440px) {
+                width: 808px;
+                }
+        }
+
         &__wrap-first {
             display: flex;
             justify-content: space-between;
         }
-    
+
         &__name {
             text-overflow: ellipsis;
             overflow: hidden;
@@ -98,7 +56,7 @@
                     max-width: 450px;
                 }
         }
-    
+
         &__category {
             text-overflow: ellipsis;
             overflow: hidden;
@@ -111,11 +69,11 @@
             color: $text-gray-color;
             margin-bottom: 8px;
             @media screen and (min-width: 768px) {
-                    max-width: 700px;
+                    max-width: 450px;
                     margin-bottom: 14px;
                 }
         }
-    
+
         &__delete {
             padding: 0;
             height: 29px;
@@ -132,7 +90,7 @@
             transition: $cubic-time;
             &:hover,
             &:focus{
-             fill: $dark-color;   
+             fill: $dark-color;
             }
             @media screen and (min-width: 768px) {
                 width: 34px;
@@ -144,7 +102,7 @@
             @media screen and (min-width: 768px) {
                     margin-bottom: 32px;
                 }
-           
+
         }
         &__title{
             text-overflow: ellipsis;
@@ -156,9 +114,9 @@
             letter-spacing: -0.04em;
             @media screen and (min-width: 768px) {
                     height: 53px;
-                    width: 508px;
+                    max-width: 508px;
                 }
-            @media screen and (min-width: 1440px) {
+            @media screen and (min-width: 1200px) {
                 width: 808px;
             }
         }
@@ -175,30 +133,32 @@
             letter-spacing: -0.04em;
             color: $text-gray-color;
         }
-
 }
 
-.market {
-  display: flex;
-  align-items: baseline;
-  @media screen and (min-width: 768px) {
-    align-items: center;
-  }
-  &__marketplace {
-    margin-right: 8px;
+
+ .market{
+    display: flex;
+    align-items: baseline;
     @media screen and (min-width: 768px) {
-      margin-right: 16px;
+            align-items: center;
+        }
+    &__marketplace{
+        margin-right: 8px;
+        @media screen and (min-width: 768px) {
+                margin-right: 16px;
+            }
+        &:nth-last-child(-n+1) {
+                margin-right: 0px;
+            }
     }
-    &:nth-last-child(-n + 1) {
-      margin-right: 0px;
+    &__png{
+        filter: grayscale(100%);
+        transition: $cubic-time;
+        &:hover,
+        &:focus{
+            filter: grayscale(100%) drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.15));
+        }
+
     }
-  }
-  &__png {
-    filter: grayscale(100%);
-    transition: $cubic-time;
-    &:hover,
-    &:focus {
-      filter: grayscale(100%) drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.15));
-    }
-  }
+
 }

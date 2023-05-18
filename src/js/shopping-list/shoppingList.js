@@ -19,7 +19,7 @@ function onRemoveCard(ev) {
   bookShopCard.classList.add('is-hidden');
   bookShopCard.remove();
 
-  const arrayObjs = [{_id: " "}, {_id: " "}, {_id: " "}];
+  const arrayObjs = [{ _id: " " }, { _id: " " }, { _id: " " }];
   const newArrayObj = arrayObjs.filter((item) => item._id !== 'SHOPPING_LIST_KEY');
 
   localStorage.removeItem("SHOPPING_LIST_KEY");
