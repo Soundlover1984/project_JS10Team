@@ -18,6 +18,11 @@ html.dark-theme, .dark-theme body {
   color: #fff;
 }
 
+.dark-theme .modal-for-book{
+  background-color: $dark-gray-color;
+}
+
+
 .dark-theme a {
   color: #ffffff;
   fill: white;
