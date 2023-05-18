@@ -7,7 +7,6 @@ import './js/firebase/auth';
 import './js/header/header';
 import './js/other/scrollUp';
 import './js/other/spinerLoader';
-
 import './js/side-bar/categories';
 import './js/side-bar/supportFundArray';
 import './js/side-bar/supportCreateList';
