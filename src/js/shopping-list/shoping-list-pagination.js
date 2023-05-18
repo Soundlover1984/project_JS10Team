@@ -109,18 +109,11 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
     pagination.on('afterMove', ({ page }) => createPage(page));
 
     function createPage(page) {
-      if (page === 1) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[0]);
-      } else if (page === 2) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[1]);
-      } else if (page === 3) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[2]);
-      } else if (page === 4) {
-        listWithBoks.innerHTML = '';
-        renderMarkup(result[3]);
+      for (let i = 1; i <= page; i += 1) {
+        if (page === i) {
+          listWithBoks.innerHTML = '';
+          renderMarkup(result[i - 1]);
+        }
       }
     }
   }
