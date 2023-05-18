@@ -1,12 +1,10 @@
 // @media screen and (min-width: 768px) {
 //   max-width: none;
 //   width: 768px;
-//   padding: 0px 32px;
 // }
 
 // @media screen and (min-width: 1440px) {
 //   width: 1440px;
-//   padding: 0px 24px;
 // }
 
 .home-collection {
@@ -100,12 +98,11 @@
   }
 
   // ----
-  &__link {
-  }
 
   &__frame {
     border-radius: 8px;
     background-color: $primary-background-color;
+    margin-bottom: 14px;
     position: relative;
     overflow: hidden;
     &:hover::before {
@@ -117,7 +114,7 @@
     width: 335px;
     height: 485px;
     border-radius: 8px;
-    margin-bottom: 14px;
+
     @media screen and (min-width: 768px) {
       width: 218px;
       height: 316px;
