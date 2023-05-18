@@ -25,6 +25,8 @@ function chunkArray(myArray, chunk_size) {
 let allBoks = savedSettings.length;
 let viewportWidth = document.documentElement.clientWidth;
 
+controllInLocalStorage();
+
 function controllInLocalStorage() {
   console.log('viewportWidth', viewportWidth);
   if (savedSettings) {
@@ -127,5 +129,3 @@ function renderMarkup(books) {
 function removeImg() {
   cardWithImg.innerHTML = '';
 }
-
-controllInLocalStorage();
