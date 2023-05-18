@@ -21,11 +21,13 @@ const refs = {
   removeBtn: document.querySelector('.js-btn-modal-remove-book'),
 };
 
-refs.removeCover.classList.add('is-hidden');
+try {
+  refs.removeCover.classList.add('is-hidden');
 
-refs.closeModalBtn.addEventListener('click', removeModal);
-refs.btnAddBook.addEventListener('click', addBookBtnClick);
-refs.removeBtn.addEventListener('click', removeBookBtnClick);
+  refs.closeModalBtn.addEventListener('click', removeModal);
+  refs.btnAddBook.addEventListener('click', addBookBtnClick);
+  refs.removeBtn.addEventListener('click', removeBookBtnClick);
+} catch (err) {}
 
 /**
  * Отримання деталей про книгу

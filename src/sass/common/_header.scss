@@ -84,7 +84,7 @@
 }
 
 .header__link-light {
-  color: white;
+  color:  white;
 }
 
 .header__switch-on::after {
@@ -131,131 +131,28 @@
   gap: 8px;
 }
 
-.active,
-.header-current:hover {
-  background-color: $yellow-color;
-  color: $dark-color;
+a.header-home.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 10px;
+  width: 72px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
+}
 
-  a.header-home.header-active {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    gap: 10px;
-    width: 72px;
-    height: 34px;
-    background: $yellow-color;
-    border-radius: 36px;
-  }
-
-  a.header-shopping.header-active {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 8px;
-    width: 156px;
-    height: 34px;
-    background: $yellow-color;
-    border-radius: 36px;
-  }
-
-  .header-controls {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .header-menu button {
-    border: none;
-    background: $primary-background-color;
-    cursor: pointer;
-  }
-
-  @media (min-width: 550px) {
-    .header-navbar {
-      all: unset;
-      display: block;
-    }
-    .header-navbar ul {
-      a.header-home.header-active {
-        display: flex;
-
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 8px 16px;
-        gap: 10px;
-        width: 72px;
-        height: 34px;
-        background: $yellow-color;
-        border-radius: 36px;
-      }
-    }
-
-    a.header-shopping.header-active {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 7px 16px;
-      gap: 8px;
-      width: 156px;
-      height: 34px;
-      background: $yellow-color;
-      border-radius: 36px;
-    }
-
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .header-menu button {
-      border: none;
-      background: $primary-background-color;
-      cursor: pointer;
-    }
-  }
-  @media (min-width: 768px) {
-    .header-sighUp {
-      display: block;
-    }
-    .header-navbar {
-      all: unset;
-      display: block;
-    }
-    .header-navbar ul {
-      flex-direction: row;
-      gap: 20px;
-    }
-    .header-navbar ul a {
-      font-size: inherit;
-    }
-    .header-close-nav,
-    .header-menu {
-      display: none;
-    }
-  }
-
-  .sighUp-btn {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: $blue-color;
-    border-radius: 20px;
-    color: $white-color;
-    padding: 14px;
-    margin: 12px 24px;
-    border: none;
-    cursor: pointer;
-    width: 184px;
-    height: 48px;
-    font-size: 14px;
-    border: 1.5px solid #111111;
-    border-radius: 18px;
-  }
+a.header-shopping.header-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 8px;
+  width: 156px;
+  height: 34px;
+  background: $yellow-color;
+  border-radius: 36px;
 }
