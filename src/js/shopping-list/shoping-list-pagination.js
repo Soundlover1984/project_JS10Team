@@ -4,7 +4,7 @@ import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
 // const listBtn = document.querySelector('.sh-list__pagination');
-const page = document.querySelector('.shopping-cart-is-empty');
+const cardWithImg = document.querySelector('.shopping-cart-is-empty');
 const listWithBoks = document.querySelector('.listWithBoks');
 
 let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
@@ -67,10 +67,10 @@ function controllOfViewport(param) {
 }
 
 function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
-  const result = chunkArray(savedSettings, itemsPerPage);
+  let result = chunkArray(savedSettings, itemsPerPage);
   let allPages = result.length;
 
-  page.innerHTML = '';
+  removeImg();
 
   renderMarkup(result[0]);
 
@@ -129,4 +129,9 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
 function renderMarkup(books) {
   const cardsMarkup = createCardBook(books);
   listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
+}
+
+console.log(cardWithImg);
+function removeImg() {
+  cardWithImg.innerHTML = '';
 }
