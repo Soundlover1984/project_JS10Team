@@ -13,3 +13,4 @@ import './js/side-bar/categories';
 import './js/side-bar/supportFundArray';
 import './js/side-bar/supportCreateList';
 import './js/side-bar/supportSwiper';
+import './js/side-bar/createCategoryTitle';
