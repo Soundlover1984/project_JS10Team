@@ -15,13 +15,14 @@ const closeBtn = document.querySelector('.header__close-btn');
 const pageWrapper = document.querySelector('.page-wrapper');
 const categoriesList = document.querySelector('.categories__list');
 
-
-if(window.location.pathname === "/index.html") {
+if(window.location.pathname === "/index.html" || window.location.pathname === "/project_js10team/index.html") {
   document.querySelector('.header-home').classList.add('header-active');
   document.querySelector('.header-shopping').classList.remove('header-active');
-} else if(window.location.pathname === "/shopping-list.html") {
+} else if(window.location.pathname === "/shopping-list.html" || window.location.pathname === "/project_js10team/shopping-list.html") {
   document.querySelector('.header-shopping').classList.add('header-active');
   document.querySelector('.header-home').classList.remove('header-active');
+} else {
+  document.querySelector('.header-home').classList.add('header-active');
 }
 
 switchBtn.addEventListener('click', onSwitchClick);
