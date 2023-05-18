@@ -10,8 +10,10 @@ import { addEventListenerWindow } from './home-collection-utils';
 import { limitBookHandler } from './home-collection-utils';
 //=======================================================================================
 // sectionLoad() - load functions on this page ("main" function)
-// getAndParseTopBooks(amountOfBooks) - fetch an render "ALL CATEGORIES" (or "Top Books")
+
+// getAndParseTopBooks(amountOfBooks) - fetch and render "ALL CATEGORIES" (or "Top Books")
 // getAndParseCategoryBooks(categoryName, amountOfBooks) - fetch an render one category
+// (amountOfBooks = 100)
 //=======================================================================================
 const markupContainer = document.querySelector('.home-collection');
 
@@ -19,7 +21,7 @@ function sectionLoad() {
   addEventListenerWindow();
   limitBookHandler();
   getAndParseTopBooks(amountOfBooks);
-  // getAndParseCategorsyBooks('Childrens Middle Grade Hardcover', 100); // amountOfBooks = 100
+  // getAndParseCategoryBooks('Childrens Middle Grade Hardcover', 100); // amountOfBooks = 100
 }
 
 export async function getAndParseTopBooks(amountOfBooks) {
