@@ -1,6 +1,7 @@
 import '../side-bar/supportCreateList';
 import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
+import Notiflix from 'notiflix';
 
 // const listBtn = document.querySelector('.sh-list__pagination');
 const page = document.querySelector('.shopping-cart-is-empty');
@@ -10,14 +11,11 @@ let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
 localStorage.setItem('currentPage', currentPage);
 
 //Інфо з Локального сховища
-const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
+// const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 
 //Штучні Локальні дані
-// localStorage.setItem(
-//   'ui-theme',
-//   '[{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Ilona","age":3,"isHappy":true}, {"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true},{"name":"Mango","age":3,"isHappy":true}]'
-// );
-// const savedSettings = JSON.parse(localStorage.getItem('ui-theme'));
+localStorage.setItem('ui-theme', '[]');
+const savedSettings = JSON.parse(localStorage.getItem('ui-theme'));
 
 function chunkArray(myArray, chunk_size) {
   let index = 0;
@@ -40,7 +38,7 @@ function controllInLocalStorage() {
     controllOfViewport(viewportWidth);
     return;
   }
-  return;
+  return Notiflix.Notify.info('Your shopping list is empty. Please add a book');
 }
 
 controllInLocalStorage();
