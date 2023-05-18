@@ -1,13 +1,13 @@
 import Notiflix from 'notiflix';
 import { BooksApiService } from '../api/booksApiService';
 import { drawCategoryTitle } from './createCategoryTitle';
-import { drawTopBooks } from '../home-collection/home-collection';
+// import { drawTopBooks } from '../home-collection/home-collection';
 import { createOneCategoryMarkup } from '../home-collection/home-collection-markup';
 
 Notiflix.Notify.init({
   info: {
     background: '#4F2EE8',
-    notiflixIconColor: '#fff',
+    notinflixIconColor: '#fff',
   },
 });
 
