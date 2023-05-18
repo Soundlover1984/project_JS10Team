@@ -6,3 +6,4 @@ import './js/side-bar/supportCreateList';
 import './js/side-bar/supportSwiper';
 import './js/other/scrollUp';
 import './js/header/header';
+import './js/auth-modal/auth-modal';
