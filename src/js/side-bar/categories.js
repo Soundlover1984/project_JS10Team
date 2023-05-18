@@ -1,9 +1,7 @@
 import Notiflix from 'notiflix';
 import { BooksApiService } from '../api/booksApiService';
-import { drawCategoryTitle } from './createCategoryTitle';
-// import { drawTopBooks } from '../home-collection/home-collection';
-import { createOneCategoryMarkup } from '../home-collection/home-collection-markup';
-
+import { getAndParseTopBooks } from '../home-collection/home-collection';
+import { getAndParseCategoryBooks } from '../home-collection/home-collection';
 Notiflix.Notify.init({
   info: {
     background: '#4F2EE8',
@@ -12,17 +10,14 @@ Notiflix.Notify.init({
 });
 
 const booksApiService = new BooksApiService();
-const homeSubtitle = document.querySelector('.home-collection__title');
-const categoryList = document.querySelector(
-  '.home-collection__categories-list--topBooks'
-);
+
 const categoriesContainer = document.querySelector('.categories__list');
 
+let name = '';
 async function displayCategories() {
   try {
     const categoryList = await booksApiService.getCategoryList();
     createCategoriesList(categoryList);
-    getSelectCategory();
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category list');
@@ -38,9 +33,9 @@ async function displayCategories() {
 
 displayCategories();
 
-categoriesContainer.addEventListener('click', selectCategory);
+categoriesContainer.addEventListener('click', clickOnCategories);
 
-async function selectCategory(event) {
+async function clickOnCategories(event) {
   if (!event.target.classList.contains('categories__item')) {
     return;
   }
@@ -50,27 +45,22 @@ async function selectCategory(event) {
     item.classList.remove('categories-is-active')
   );
   event.target.classList.add('categories-is-active');
-  const selectedCategoryName = event.target.textContent;
+  name = event.target.textContent;
 
-  booksApiService.selectedCategory = selectedCategoryName;
-  console.log(selectedCategoryName);
-  if (selectedCategoryName === 'All categories') {
-    homeSubtitle.innerHTML = `<h2 class="home-collection__title">
-    Best Sellers
-    <span class="home-collection__title--last-word" style="color: #4f2ee8">Books</span>
-  </h2>`;
-    await drawTopBooks();
+  booksApiService.selectedCategory = name;
+
+  if (name === 'All categories') {
+    await getAndParseTopBooks();
   } else {
-    await getSelectCategory(selectedCategoryName);
+    await getSelectCategory(name);
   }
 }
 
-async function getSelectCategory(selectedCategoryName) {
+async function getSelectCategory(name) {
   try {
-    const listSelectCategoryBooks = await booksApiService.getCategoryBooks(
-      selectedCategoryName
-    );
-    renderSelectBooks(listSelectCategoryBooks);
+    const listBooks = await booksApiService.getCategoryBooks(name);
+
+    renderSelectBooks(listBooks);
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch category list');
@@ -78,12 +68,6 @@ async function getSelectCategory(selectedCategoryName) {
 }
 
 async function renderSelectBooks(books) {
-  await drawCategoryTitle(booksApiService.selectedCategory);
-  console.log(
-    'це заголовок моєї катогорії - ',
-    booksApiService.selectedCategory
-  );
-  categoryList.innerHTML = '';
   if (books.length === 0) {
     Notiflix.Notify.info(
       'Unfortunately, nothing was found. Please try changing the parameters and performing a new search.',
@@ -101,8 +85,6 @@ async function renderSelectBooks(books) {
       }
     );
   } else {
-    const oneBook = createOneCategoryMarkup(books);
-    console.log('це розмітка моєї категорії - ', oneBook);
-    categoryList.insertAdjacentHTML('beforeend', oneBook);
+    getAndParseCategoryBooks(name);
   }
 }
