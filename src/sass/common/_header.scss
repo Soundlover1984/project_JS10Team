@@ -83,6 +83,10 @@
   fill: $primary-background-color;
 }
 
+.dark-theme.header__link {
+  color: $dark-color;
+}
+
 .header__link-light {
   color:  white;
 }
