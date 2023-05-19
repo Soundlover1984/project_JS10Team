@@ -4,6 +4,13 @@ import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
+Notiflix.Notify.init({
+  info: {
+    background: '#4F2EE8',
+    notinflixIconColor: '#fff',
+  },
+});
+
 const cardWithImg = document.querySelector('.shopping-cart-is-empty');
 const listWithBoks = document.querySelector('.listWithBoks');
 
@@ -28,17 +35,38 @@ let viewportWidth = document.documentElement.clientWidth;
 controllInLocalStorage();
 
 function controllInLocalStorage() {
-  console.log();
   if (!savedSettings) {
     return Notiflix.Notify.info(
-      'Your shopping list is empty. Please add a book'
+      'Your shopping list is empty. Please add a book',
+      {
+        width: '500px',
+        position: 'center-center',
+        fontSize: '20px',
+        messageMaxLength: 500,
+        opacity: 0.6,
+        cssAnimation: true,
+        cssAnimationDuration: 1000,
+        cssAnimationStyle: 'zoom',
+        clickToClose: true,
+        showOnlyTheLastOne: true,
+      }
     );
   } else if (savedSettings.length === 0) {
     return Notiflix.Notify.info(
-      'Your shopping list is empty. Please add a book'
+      'Your shopping list is empty. Please add a book',
+      {
+        width: '500px',
+        position: 'center-center',
+        fontSize: '20px',
+        messageMaxLength: 500,
+        opacity: 0.6,
+        cssAnimation: true,
+        cssAnimationDuration: 1000,
+        cssAnimationStyle: 'zoom',
+        clickToClose: true,
+        showOnlyTheLastOne: true,
+      }
     );
-
-    return;
   } else if (savedSettings.length > 0) {
     controllOfViewport(viewportWidth);
   }
@@ -49,18 +77,18 @@ function controllInLocalStorage() {
 function controllOfViewport(param) {
   let booksSommKommer = savedSettings.length;
   let MobilViveport = 375;
-  let DesctopViveport = 768;
+  // let DesctopViveport = 768;
 
-  if (param < MobilViveport) {
-    let perPage = 4;
-    let buttonsPerPage = 2;
-
-    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
-  } else if (param > DesctopViveport) {
+  if (param > MobilViveport) {
     let perPage = 3;
     let buttonsPerPage = 3;
-
     removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    return;
+  } else if (param <= MobilViveport) {
+    let perPage = 2;
+    let buttonsPerPage = 4;
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    return;
   }
 }
 
