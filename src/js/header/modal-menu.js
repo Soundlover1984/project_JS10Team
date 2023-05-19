@@ -1,4 +1,3 @@
-
 (() => {
   const mobileMenu = document.querySelector('.js-menu-container');
   const openMenuBtn = document.querySelector('.js-open-menu');
@@ -6,10 +5,11 @@
   let isMenuOpen = false;
 
   const toggleMenu = () => {
-    isMenuOpen = !isMenuOpen;
-    openMenuBtn.setAttribute('aria-expanded', isMenuOpen);
+    const isMenuOpen =
+      openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+    openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
-
+    mobileMenu.classList.remove('visually-hidden');
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100vh';
@@ -27,8 +27,7 @@
     if (!e.matches) return;
     mobileMenu.classList.remove('is-open');
     openMenuBtn.setAttribute('aria-expanded', false);
-    document.body.style.overflow = '';
-    document.body.style.height = '';
+    mobileMenu.classList.add('visually-hidden');
+    bodyScrollLock.enableBodyScroll(document.body);
   });
 })();
-
