@@ -1,7 +1,8 @@
 import debounce from 'lodash.debounce';
 import '../side-bar/supportCreateList';
 import '../side-bar/supportSwiper';
-import createCardBook from './shoppingList';
+// import { createCardBook } from './shopping-list-markup';
+import createCardBook from './shopping-list';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
@@ -14,6 +15,9 @@ Notiflix.Notify.init({
 
 const cardWithImg = document.querySelector('.shopping-cart-is-empty');
 const listWithBoks = document.querySelector('.listWithBoks');
+
+let MobilViveport = 375;
+// let DestopViveport = 768;
 
 //Інфо з Локального сховища
 const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
@@ -35,7 +39,7 @@ let viewportWidth = document.documentElement.clientWidth;
 
 shoppingListPagination();
 
-function shoppingListPagination() {
+export function shoppingListPagination() {
   if (!savedSettings || savedSettings.length === 0) {
     return Notiflix.Notify.info(
       'Your shopping list is empty. Please add a book',
@@ -62,8 +66,6 @@ function shoppingListPagination() {
 function controllOfViewport(param) {
   console.log('param:', param);
   let booksSommKommer = savedSettings.length;
-  let MobilViveport = 375;
-  // let DesctopViveport = 768;
 
   if (param > MobilViveport) {
     let perPage = 3;
@@ -85,7 +87,6 @@ function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
   let allPages = result.length;
 
   removeImg();
-
   renderMarkup(result[0]);
 
   if (savedSettings.length > 3) {
@@ -142,7 +143,7 @@ function renderMarkup(books) {
 function removeImg() {
   cardWithImg.innerHTML = '';
 }
-
+//----------------------------------------------------------------
 function addEventListenerWindow() {
   window.addEventListener('resize', debounce(widthHandler, 250));
 }
