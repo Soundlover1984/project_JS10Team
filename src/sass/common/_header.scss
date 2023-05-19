@@ -169,12 +169,12 @@ a.header-shopping.header-active {
 }
 
 .menu-container {
-  position: fixed;
+  position: absolute;
   top: 60px;
   left: 0;
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding: 20;
   background-image: url('/src/images/mobile-modal-menu/group-6@1x.png'), url('/src/images/mobile-modal-menu/group-6@2x.png'), radial-gradient(183.6% 183.01% at 59.76% -23.42%, #4F2EE8 18.03%, #FFFFFF 100%);
@@ -192,14 +192,15 @@ a.header-shopping.header-active {
 
   &.is-open {
     transform: translateX(0);
-    top: 62px;
+    top: 64px;
   }
 }
 
 .menu-items {
   display: flex;
+  margin-left: 109px;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   flex-direction: column;
   gap: 16px;
 
@@ -220,31 +221,40 @@ a.header-shopping.header-active {
 }
 
 .mobile-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-flex-direction: row;
-align-items: flex-start;
-&__home {
+  margin-top: 163px;
+      letter-spacing: -.04em;
+        text-transform: uppercase;
+        color: #fff;
+        flex-direction: column;
+        justify-content: center;
+        // align-items: center;
+        align-items: flex-start;
+        gap: 25px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        transition: opacity .25s cubic-bezier(.4, 0, .2, 1), visibility .25s cubic-bezier(.4, 0, .2, 1);
+        display: flex;
 
-padding: 8px 16px;
-gap: 10px;
-background-color: #eac645;
+  &__home {
 
-width: 72px;
-height: 34px;
-color: $dark-color;
-background: #EAC645;
-border-radius: 36px;
-}
-  &__home,
-  &__shopping {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  
-    border-radius: 36px;
     padding: 8px 16px;
+    gap: 10px;
+    background-color: #eac645;
+
+    width: 72px;
+    height: 34px;
+    color: $dark-color;
+    background: #EAC645;
+    border-radius: 36px;
+  }
+  // &__home,
+  &__shopping {
+        border-radius: 36px;
+          align-items: center;
+          gap: 7px;
+          // padding: 8px 16px;
+          display: flex;
     // transition: color 250ms;
   
     &__home:hover, &__home:hover,
