@@ -4,6 +4,13 @@ import { getAndParseCategoryBooks } from './home-collection';
 import { getAndParseTopBooks } from './home-collection';
 import { openModal } from '../book-modal/modal';
 
+//=======================================================================================
+// colorizeCategoryTitle()
+// addEventListenerButtonMore()
+// addEventListenerBookLink()
+// addEventListenerWindow()
+//=======================================================================================
+
 export let amountOfBooks = 5;
 let amountOfBooksOld = amountOfBooks;
 
@@ -28,10 +35,15 @@ export function colorizeCategoryTitle() {
 //------------------------------------------
 
 export function addEventListenerButtonMore() {
-  const elem = document.querySelector(
-    '.home-collection__categories-list--topBooks'
-  );
-  elem.addEventListener('click', buttonMoreHandler);
+  try {
+    const elem = document.querySelector(
+      '.home-collection__categories-list--topBooks'
+    );
+    elem.addEventListener('click', buttonMoreHandler);
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to add event listener button more');
+  }
 }
 
 export function buttonMoreHandler(event) {
@@ -46,8 +58,13 @@ export function buttonMoreHandler(event) {
 //------------------------------------------
 
 export function addEventListenerBookLink() {
-  const elem = document.querySelector('.home-collection');
-  elem.addEventListener('click', bookDetailHandler);
+  try {
+    const elem = document.querySelector('.home-collection');
+    elem.addEventListener('click', bookDetailHandler);
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to add event listener book link');
+  }
 }
 
 function bookDetailHandler(event) {

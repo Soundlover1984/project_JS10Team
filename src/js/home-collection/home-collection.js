@@ -9,6 +9,7 @@ import { addEventListenerBookLink } from './home-collection-utils';
 import { amountOfBooks } from './home-collection-utils';
 import { addEventListenerWindow } from './home-collection-utils';
 import { limitBookHandler } from './home-collection-utils';
+
 //=======================================================================================
 // sectionLoad() - load functions on this page ("main" function)
 
