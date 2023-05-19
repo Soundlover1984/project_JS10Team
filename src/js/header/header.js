@@ -1,14 +1,28 @@
 const burgerBtn = document.querySelector('.header__burger-btn');
 const closeBtn = document.querySelector('.header__close-btn');
+const headerHomeText = document.querySelector('.header-home');
+const headerShopListText = document.querySelector('.header-shopping');
+const iconShopDarkTheme = document.querySelector('.icon-dark-theme');
 
 if(window.location.pathname === "/index.html" || window.location.pathname === "/project_js10team/index.html") {
-  document.querySelector('.header-home').classList.add('header-active');
-  document.querySelector('.header-shopping').classList.remove('header-active');
+  headerHomeText.classList.add('header-active');
+  headerShopListText.classList.remove('header-active');
+
+  if (headerHomeText.classList.contains('header-active')) {
+    headerHomeText.style.color = 'black';
+  }
 } else if(window.location.pathname === "/shopping-list.html" || window.location.pathname === "/project_js10team/shopping-list.html") {
-  document.querySelector('.header-shopping').classList.add('header-active');
-  document.querySelector('.header-home').classList.remove('header-active');
+  headerShopListText.classList.add('header-active');
+  headerHomeText.classList.remove('header-active');
+
+
+  if (headerShopListText.classList.contains('header-active')) {
+    headerShopListText.style.color = 'black';
+    iconShopDarkTheme.classList.add('shop__iconSvg-dark');
+  }
+
 } else {
-  document.querySelector('.header-home').classList.add('header-active');
+  headerHomeText.classList.add('header-active');
 }
 
 burgerBtn.addEventListener('click', onClickBurder);
