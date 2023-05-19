@@ -1,8 +1,8 @@
 import debounce from 'lodash.debounce';
 import '../side-bar/supportCreateList';
 import '../side-bar/supportSwiper';
-// import { createCardBook } from './shopping-list-markup';
-import createCardBook from './shopping-list';
+import { createCardBook } from './shopping-list-markup';
+// import { createCardBook } from './shopping-list';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
