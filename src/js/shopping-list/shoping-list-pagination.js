@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import '../side-bar/supportCreateList';
 import '../side-bar/supportSwiper';
 import createCardBook from './shoppingList';
@@ -32,26 +33,10 @@ function chunkArray(myArray, chunk_size) {
 
 let viewportWidth = document.documentElement.clientWidth;
 
-controllInLocalStorage();
+shoppingListPagination();
 
-function controllInLocalStorage() {
-  if (!savedSettings) {
-    return Notiflix.Notify.info(
-      'Your shopping list is empty. Please add a book',
-      {
-        width: '500px',
-        position: 'center-center',
-        fontSize: '20px',
-        messageMaxLength: 500,
-        opacity: 0.6,
-        cssAnimation: true,
-        cssAnimationDuration: 1000,
-        cssAnimationStyle: 'zoom',
-        clickToClose: true,
-        showOnlyTheLastOne: true,
-      }
-    );
-  } else if (savedSettings.length === 0) {
+function shoppingListPagination() {
+  if (!savedSettings || savedSettings.length === 0) {
     return Notiflix.Notify.info(
       'Your shopping list is empty. Please add a book',
       {
@@ -75,6 +60,7 @@ function controllInLocalStorage() {
 
 /// Перевірка на ширину вюпорта
 function controllOfViewport(param) {
+  console.log('param:', param);
   let booksSommKommer = savedSettings.length;
   let MobilViveport = 375;
   // let DesctopViveport = 768;
@@ -155,4 +141,12 @@ function renderMarkup(books) {
 //Функція що очищає сторінку якщо корзина пуста
 function removeImg() {
   cardWithImg.innerHTML = '';
+}
+
+function addEventListenerWindow() {
+  window.addEventListener('resize', debounce(widthHandler, 250));
+}
+
+function widthHandler(event) {
+  controllInLocalStorage();
 }
