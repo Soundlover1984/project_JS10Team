@@ -12,3 +12,4 @@ import './js/side-bar/supportFundArray';
 import './js/side-bar/supportCreateList';
 import './js/side-bar/supportSwiper';
 import './js/side-bar/createCategoryTitle';
+import './js/header/modal-menu';
