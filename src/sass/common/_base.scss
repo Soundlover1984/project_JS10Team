@@ -26,6 +26,23 @@ html.dark-theme, .dark-theme body {
   color: #fff;
 }
 
+.dark-theme .header__close-btn svg {
+  fill: #fff;
+}
+
+.dark-theme .header__svg-light{
+  fill: #fff;
+}
+
+.dark-theme .categories-is-active {
+  color: $yellow-color;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.dark-theme .mobile-nav__icon{
+fill: #fff;
+}
 
 .dark-theme a {
   color: #ffffff;
