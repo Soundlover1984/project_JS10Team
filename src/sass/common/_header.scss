@@ -14,10 +14,14 @@
 
 .header__container {
   display: flex;
+  min-width: 375px;
+  max-width: 1440px;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
-  min-width: 375px;
+  width: 100%;
+  margin: 0 auto;
   height: 64px;
   border: 1.5px solid $dark-color;
   border-radius: 0 0 8px 8px;
@@ -27,7 +31,10 @@
 .header__buttons-menu {
   display: flex;
   align-items: center;
+  gap: 8px;
+@media screen and (min-width: 767px) {
   gap: 14px;
+}
 }
 
 .header__toggle {
@@ -81,6 +88,14 @@
 
 .header__closeSvg-dark {
   fill: $primary-background-color;
+}
+
+.shop__iconSvg-dark {
+  fill: $dark-color;
+}
+
+.dark-theme.header__link {
+  color: $dark-color;
 }
 
 .header__link-light {
@@ -155,4 +170,118 @@ a.header-shopping.header-active {
   height: 34px;
   background: $yellow-color;
   border-radius: 36px;
+}
+
+// ___________________________________додати стилів
+.menu-container.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.menu-container {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: 20;
+  background-image: url('/src/images/mobile-modal-menu/group-6@1x.png'), url('/src/images/mobile-modal-menu/group-6@2x.png'), radial-gradient(183.6% 183.01% at 59.76% -23.42%, #4F2EE8 18.03%, #FFFFFF 100%);
+  background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+  z-index: 999;
+
+  transform: translateX(100%);
+  transition: transform 250ms;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  &.is-open {
+    transform: translateX(0);
+    top: 64px;
+  }
+}
+
+.menu-items {
+  display: flex;
+  margin-left: 109px;
+  justify-content: center;
+  // align-items: center;
+  flex-direction: column;
+  gap: 16px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+
+  color: $white-color;
+  // transition:
+
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.mobile-nav {
+  margin-top: 163px;
+      letter-spacing: -.04em;
+        text-transform: uppercase;
+        color: #fff;
+        flex-direction: column;
+        justify-content: center;
+        // align-items: center;
+        align-items: flex-start;
+        gap: 25px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        transition: opacity .25s cubic-bezier(.4, 0, .2, 1), visibility .25s cubic-bezier(.4, 0, .2, 1);
+        display: flex;
+
+  &__home {
+
+    padding: 8px 16px;
+    gap: 10px;
+    background-color: #eac645;
+
+    width: 72px;
+    height: 34px;
+    color: $dark-color;
+    background: #EAC645;
+    border-radius: 36px;
+  }
+  // &__home,
+  &__shopping {
+        border-radius: 36px;
+          align-items: center;
+          gap: 7px;
+          // padding: 8px 16px;
+          display: flex;
+    // transition: color 250ms;
+
+    &__home:hover, &__home:hover,
+  &__shopping, &__shopping:focus {
+      box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.shopping-icon {
+  padding-left: 4px;
+  fill: #FFFFFF;
+  // transition: fill 250ms $timing-function;
+
+  &:hover,
+  &:focus {
+    fill: red;
+  }
 }
