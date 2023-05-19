@@ -4,6 +4,13 @@ import { getAndParseCategoryBooks } from './home-collection';
 import { getAndParseTopBooks } from './home-collection';
 import { openModal } from '../book-modal/modal';
 
+//=======================================================================================
+// colorizeCategoryTitle()
+// addEventListenerButtonMore()
+// addEventListenerBookLink()
+// addEventListenerWindow()
+//=======================================================================================
+
 export let amountOfBooks = 5;
 let amountOfBooksOld = amountOfBooks;
 
