@@ -1,5 +1,5 @@
-export function createCardBook(book) {
-  const oneBook = book
+export function createCardsMarkup(books) {
+  const cardsMarkup = books
     .map(
       ({
         book_image,
@@ -42,7 +42,7 @@ export function createCardBook(book) {
       }
     )
     .join('');
-  return oneBook;
+  return cardsMarkup;
 }
 
 function createLiMarkup(buyLinks) {
