@@ -7,3 +7,4 @@ import './js/side-bar/supportSwiper';
 import './js/other/scrollUp';
 import './js/header/header';
 import './js/auth-modal/auth-modal';
+import './js/header/modal-menu';

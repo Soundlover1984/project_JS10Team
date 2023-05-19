@@ -60,7 +60,7 @@ async function openModal(bookId) {
     refs.closeModalBtn.addEventListener('click', removeModal);
 
     //перевірте, чи вибрано книгу
-    if (currentStorage.find(book => book._id === bookData._id)) {
+    if (currentStorage && currentStorage.find(book => book._id === bookData._id)) {
       refs.btnAddBook.classList.add('is-hidden');
       refs.removeCover.classList.remove('is-hidden');
     } else {

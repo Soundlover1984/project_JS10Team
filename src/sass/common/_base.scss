@@ -3,7 +3,7 @@ body {
   font-weight: 400;
   letter-spacing: -0.04em;
 
-  color: #111111;
+  color: $dark-color;
   background-color: $primary-background-color;
   transition: background-color $cubic-time;
 
@@ -14,12 +14,39 @@ body {
 }
 
 html.dark-theme, .dark-theme body {
-  background-color: #000;
+  background-color: $dark-gray-color;
   color: #fff;
+}
+
+.dark-theme .modal-for-book{
+  background-color: $dark-gray-color;
+}
+
+.dark-theme .btn-close__icon{
+  color: #fff;
+}
+
+.dark-theme .header__close-btn svg {
+  fill: #fff;
+}
+
+.dark-theme .header__svg-light{
+  fill: #fff;
+}
+
+.dark-theme .categories-is-active {
+  color: $yellow-color;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.dark-theme .mobile-nav__icon{
+fill: #fff;
 }
 
 .dark-theme a {
   color: #ffffff;
+  fill: white;
 }
 
 .dark-theme li {
@@ -30,10 +57,18 @@ html.dark-theme, .dark-theme body {
   color: #ffffff;
 }
 
+.dark-theme h3 {
+  color: #ffffff;
+}
+
 .dark-theme p {
   color: #ffffff;
 }
 
+.dark-theme header {
+  background-color: $dark-gray-color;
+  border: 1px solid #fff;
+}
 
 h1,
 h2,

@@ -103,7 +103,7 @@ function createLiMarkup(buyLinks) {
       const { name, url } = link;
       const { pngUrlx, pngUrl2x, width, height } = getPngUrlForStore(name);
       return `
-                <li class="market__marketplace"><a href="${url}">
+                <li class="market__marketplace"><a href="${url}" target="_blank" rel="noopener noreferrer nofollow" >
                             <img srcset="${pngUrlx} 1x, ${pngUrl2x} 2x" 
                             src="${pngUrlx}"
                             alt="${name}" 
