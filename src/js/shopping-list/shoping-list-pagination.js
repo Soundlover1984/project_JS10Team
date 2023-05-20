@@ -2,10 +2,8 @@ import debounce from 'lodash.debounce';
 import '../side-bar/supportCreateList';
 import '../side-bar/supportSwiper';
 import { createCardsMarkup } from './shopping-list-markup';
-// import { createCardBook } from './shopping-list';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
-
 Notiflix.Notify.init({
   info: {
     background: '#4F2EE8',
@@ -52,17 +50,17 @@ export function shoppingListPagination() {
 /// Перевірка на ширину вюпорта
 function controllOfViewport(param) {
   console.log('param:', param);
-  let booksSommKommer = localStorageShoppingList.length;
+  let shoppingListLength = localStorageShoppingList.length;
 
   if (param > MobilViveport) {
-    let perPage = 3;
-    let buttonsPerPage = 3;
-    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    itemsPerPage = 3;
+    buttonsPerPage = 3;
+    removeDefaultPage(shoppingListLength, itemsPerPage, buttonsPerPage);
     return;
   } else if (param <= MobilViveport) {
-    let perPage = 2;
-    let buttonsPerPage = 4;
-    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    itemsPerPage = 2;
+    buttonsPerPage = 4;
+    removeDefaultPage(shoppingListLength, itemsPerPage, buttonsPerPage);
     return;
   }
 }
@@ -130,7 +128,7 @@ function createChunkOfBooks(fullList, chunk_size) {
 }
 
 //Функція що рендирить сторінку
-function renderMarkup(books) {
+export function renderMarkup(books) {
   const cardsMarkup = createCardsMarkup(books);
   cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 }
