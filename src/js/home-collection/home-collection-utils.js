@@ -1,4 +1,6 @@
 import debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
+
 import { BooksApiService } from '../api/booksApiService';
 import { getAndParseCategoryBooks } from './home-collection';
 import { getAndParseTopBooks } from './home-collection';
@@ -9,7 +11,17 @@ import { openModal } from '../book-modal/modal';
 // addEventListenerButtonMore()
 // addEventListenerBookLink()
 // addEventListenerWindow()
+// noDataNotify()
 //=======================================================================================
+
+export function notifyInit() {
+  Notiflix.Notify.init({
+    info: {
+      background: '#4F2EE8',
+      notinflixIconColor: '#fff',
+    },
+  });
+}
 
 export let amountOfBooks = 5;
 let amountOfBooksOld = amountOfBooks;
@@ -46,7 +58,7 @@ export function addEventListenerButtonMore() {
   }
 }
 
-export function buttonMoreHandler(event) {
+function buttonMoreHandler(event) {
   const elButton = event.target;
   if (elButton.className == 'category__button') {
     const categoryName =
@@ -112,4 +124,19 @@ function getBookAmount(currentWidth) {
   } else {
     return 5;
   }
+}
+//------------------------------------------
+export function noDataNotify() {
+  Notiflix.Notify.info('Unfortunately, nothing was found', {
+    width: '500px',
+    position: 'center-center',
+    fontSize: '20px',
+    messageMaxLength: 500,
+    opacity: 0.6,
+    cssAnimation: true,
+    cssAnimationDuration: 1000,
+    cssAnimationStyle: 'zoom',
+    clickToClose: true,
+    showOnlyTheLastOne: true,
+  });
 }
