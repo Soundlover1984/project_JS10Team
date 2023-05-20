@@ -62,8 +62,9 @@ function controllOfViewport(param) {
 }
 
 function renderPage(totalItems, itemsPerPage, visiblePages) {
-  let chunks = createChunkOfBooks(shoppingList, itemsPerPage);
   removeDefaultEmptyText();
+
+  let chunks = createChunkOfBooks(shoppingList, itemsPerPage);
   renderMarkup(chunks[0]);
 
   if (shoppingListLength > 3) {
@@ -98,14 +99,14 @@ function renderPage(totalItems, itemsPerPage, visiblePages) {
 
     const pagination = new Pagination(container, options);
     pagination.on('afterMove', ({ page }) => createPage(page));
+  }
+}
 
-    function createPage(page) {
-      for (let i = 1; i <= page; i += 1) {
-        if (page === i) {
-          cardsContainer.innerHTML = '';
-          renderMarkup(result[i - 1]);
-        }
-      }
+function createPage(page) {
+  for (let i = 1; i <= page; i += 1) {
+    if (page === i) {
+      cardsContainer.innerHTML = '';
+      renderMarkup(result[i - 1]);
     }
   }
 }
@@ -113,8 +114,6 @@ function renderPage(totalItems, itemsPerPage, visiblePages) {
 function removeDefaultEmptyText() {
   defaultEmptyText.innerHTML = '';
 }
-
-function renderPage() {}
 
 function createChunkOfBooks(fullList, chunkSize) {
   const arrayLength = fullList.length;
