@@ -11,21 +11,19 @@ Notiflix.Notify.init({
   },
 });
 
-const defaultEmptyListText = document.querySelector('.shopping-cart-is-empty');
+const defaultEmptyText = document.querySelector('.shopping-cart-is-empty');
 const cardsContainer = document.querySelector('.listWithBoks');
 
 let MobilViveport = 375;
 // let DestopViveport = 768;
 
-//Інфо з Локального сховища
-const localStorageShoppingList = JSON.parse(
-  localStorage.getItem('SHOPPING_LIST_KEY')
-);
+const shoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
+const shoppingListLength = shoppingList.length;
 
 let viewportWidth = document.documentElement.clientWidth;
 
 export function shoppingListPagination() {
-  if (!localStorageShoppingList || localStorageShoppingList.length === 0) {
+  if (!shoppingList || shoppingListLength === 0) {
     return Notiflix.Notify.info(
       'Your shopping list is empty. Please add a book',
       {
@@ -41,38 +39,34 @@ export function shoppingListPagination() {
         showOnlyTheLastOne: true,
       }
     );
-  } else if (localStorageShoppingList.length > 0) {
+  } else if (shoppingListLength > 0) {
     controllOfViewport(viewportWidth);
   }
   return;
 }
 
-/// Перевірка на ширину вюпорта
 function controllOfViewport(param) {
   console.log('param:', param);
-  let shoppingListLength = localStorageShoppingList.length;
 
   if (param > MobilViveport) {
     itemsPerPage = 3;
     buttonsPerPage = 3;
-    removeDefaultPage(shoppingListLength, itemsPerPage, buttonsPerPage);
+    renderPage(shoppingListLength, itemsPerPage, buttonsPerPage);
     return;
   } else if (param <= MobilViveport) {
     itemsPerPage = 2;
     buttonsPerPage = 4;
-    removeDefaultPage(shoppingListLength, itemsPerPage, buttonsPerPage);
+    renderPage(shoppingListLength, itemsPerPage, buttonsPerPage);
     return;
   }
 }
 
-function removeDefaultPage(totalItems, itemsPerPage, visiblePages) {
-  const defaultEmptyText = document.querySelector('.shopping-cart-is-empty');
-  defaultEmptyText.innerHTML = '';
-
-  let chunks = createChunkOfBooks(localStorageShoppingList, itemsPerPage);
+function renderPage(totalItems, itemsPerPage, visiblePages) {
+  let chunks = createChunkOfBooks(shoppingList, itemsPerPage);
+  removeDefaultEmptyText();
   renderMarkup(chunks[0]);
 
-  if (localStorageShoppingList.length > 3) {
+  if (shoppingListLength > 3) {
     const container = document.getElementById('pagination');
 
     const options = {
@@ -116,14 +110,19 @@ function removeDefaultPage(totalItems, itemsPerPage, visiblePages) {
   }
 }
 
-function createChunkOfBooks(fullList, chunk_size) {
+function removeDefaultEmptyText() {
+  defaultEmptyText.innerHTML = '';
+}
+
+function renderPage() {}
+
+function createChunkOfBooks(fullList, chunkSize) {
   const arrayLength = fullList.length;
   const oneChunk = [];
 
-  for (let i = 0; i < arrayLength; i += chunk_size) {
-    oneChunk.push(fullList.slice(i, i + chunk_size));
+  for (let i = 0; i < arrayLength; i += chunkSize) {
+    oneChunk.push(fullList.slice(i, i + chunkSize));
   }
-  console.log('oneChunk:', oneChunk);
   return oneChunk;
 }
 
