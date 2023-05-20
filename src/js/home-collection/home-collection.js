@@ -1,14 +1,15 @@
-import Notiflix from 'notiflix';
-
 import { BooksApiService } from '../api/booksApiService';
 import { createFullMarkup } from './home-collection-markup';
 import { createOneBookMarkup } from './home-collection-markup';
+
 import { colorizeCategoryTitle } from './home-collection-utils';
 import { addEventListenerButtonMore } from './home-collection-utils';
 import { addEventListenerBookLink } from './home-collection-utils';
 import { amountOfBooks } from './home-collection-utils';
 import { addEventListenerWindow } from './home-collection-utils';
 import { limitBookHandler } from './home-collection-utils';
+import { notifyInit } from './home-collection-utils';
+import { noDataNotify } from './home-collection-utils';
 
 //=======================================================================================
 // sectionLoad() - load functions on this page ("main" function)
@@ -18,16 +19,10 @@ import { limitBookHandler } from './home-collection-utils';
 // (amountOfBooks = 100)
 //=======================================================================================
 
-Notiflix.Notify.init({
-  info: {
-    background: '#4F2EE8',
-    notinflixIconColor: '#fff',
-  },
-});
-
 const markupContainer = document.querySelector('.home-collection');
 
 function sectionLoad() {
+  notifyInit();
   addEventListenerWindow();
   limitBookHandler();
   getAndParseTopBooks(amountOfBooks);
@@ -48,18 +43,7 @@ export async function getAndParseTopBooks(amountOfBooks) {
       addEventListenerButtonMore();
     } else {
       document.querySelector('.home-collection__title').textContent = '';
-      Notiflix.Notify.info('Unfortunately, nothing was found', {
-        width: '500px',
-        position: 'center-center',
-        fontSize: '20px',
-        messageMaxLength: 500,
-        opacity: 0.6,
-        cssAnimation: true,
-        cssAnimationDuration: 1000,
-        cssAnimationStyle: 'zoom',
-        clickToClose: true,
-        showOnlyTheLastOne: true,
-      });
+      noDataNotify();
     }
   } catch (error) {
     console.error(error);
@@ -80,18 +64,7 @@ export async function getAndParseCategoryBooks(
       renderBooks(books);
     } else {
       document.querySelector('.home-collection__title').textContent = '';
-      Notiflix.Notify.info('Unfortunately, nothing was found', {
-        width: '500px',
-        position: 'center-center',
-        fontSize: '20px',
-        messageMaxLength: 500,
-        opacity: 0.6,
-        cssAnimation: true,
-        cssAnimationDuration: 1000,
-        cssAnimationStyle: 'zoom',
-        clickToClose: true,
-        showOnlyTheLastOne: true,
-      });
+      noDataNotify();
       getAndParseTopBooks(amountOfBooks);
     }
   } catch (error) {
