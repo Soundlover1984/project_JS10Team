@@ -23,6 +23,7 @@ async function displayCategories() {
   try {
     Loading.hourglass({
       backgroundColor: 'rgba(0,0,0,0.4)',
+      svgColor: '#4f2ee8',
     });
     const categoryList = await booksApiService.getCategoryList();
     createCategoriesList(categoryList);
@@ -70,6 +71,7 @@ async function getSelectCategory(name) {
   try {
      Loading.hourglass({
        backgroundColor: 'rgba(0,0,0,0.4)',
+       svgColor: '#4f2ee8',
      });
     const listBooks = await booksApiService.getCategoryBooks(name);
     renderSelectBooks(listBooks);

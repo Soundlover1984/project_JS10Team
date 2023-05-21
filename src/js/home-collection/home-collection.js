@@ -34,6 +34,7 @@ export async function getAndParseTopBooks(amountOfBooks) {
   try {
     Loading.hourglass({
       backgroundColor: 'rgba(0,0,0,0.4)',
+      svgColor: '#4f2ee8',
     });
     const booksApiService = new BooksApiService();
     const topBooksFromBack = await booksApiService.getTopBooks();
@@ -66,6 +67,7 @@ export async function getAndParseCategoryBooks(
     const booksApiService = new BooksApiService();
     Loading.hourglass({
       backgroundColor: 'rgba(0,0,0,0.4)',
+      svgColor: '#4f2ee8',
     });
     booksApiService.selectedCategory = categoryName;
     const booksFromBack = await booksApiService.getCategoryBooks();
