@@ -28,7 +28,7 @@ export function emptyShoppingListNotify() {
 const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
 const cardsContainer = document.querySelector('.books__list');
 
-const ViewportConst = {
+const viewportConst = {
   mobile_S: 320,
   mobile_M: 375,
   mobile_L: 425,
@@ -55,4 +55,4 @@ const paginationTemplate = {
     '</a>',
 };
 
-export { ViewportConst, emptyShoppingPage, cardsContainer, paginationTemplate };
+export { viewportConst, emptyShoppingPage, cardsContainer };

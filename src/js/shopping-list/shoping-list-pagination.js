@@ -8,12 +8,11 @@ import { createCardsMarkup } from './shopping-list-markup';
 
 import { notifyInit } from './shoping-list-utils';
 import { emptyShoppingListNotify } from './shoping-list-utils';
-
+import { paginationTemplate } from './shoping-list-utils';
 import {
-  ViewportConst,
+  viewportConst,
   emptyShoppingPage,
   cardsContainer,
-  paginationTemplate,
 } from './shoping-list-utils';
 
 let previousViewport = getCurrentViewport();
@@ -36,7 +35,11 @@ function shoppingListPagination(shoppingList) {
     shoppingList,
     paginationParameters
   );
-  renderShoppingListCurrentPage(paginatedShoppingList, paginationParameters);
+  renderShoppingListCurrentPage(
+    shoppingList.length,
+    paginatedShoppingList,
+    paginationParameters
+  );
 }
 
 function clearEmptyShoppingPage() {
@@ -44,6 +47,7 @@ function clearEmptyShoppingPage() {
 }
 
 function renderShoppingListCurrentPage(
+  totalItemsAmount,
   paginatedShoppingList,
   paginationParameters
 ) {
@@ -51,42 +55,36 @@ function renderShoppingListCurrentPage(
   // console.log('paginationParameters:', paginationParameters);
   // console.log('paginatedShoppingList:', paginatedShoppingList);
 
-  if (paginatedShoppingList.length < 2) {
-    console.log('One Page');
-    const cardsMarkup = createCardsMarkup(paginatedShoppingList[0]);
-    cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
-  } else {
-    console.log('Some pages');
+  const paginationContainer = document.getElementById('pagination');
 
-    const paginationOptions = {
-      totalItems: paginatedShoppingList.length,
-      itemsPerPage: paginationParameters.itemsPerPage,
-      buttonsPerPage: paginationParameters.buttonsPerPage,
-      page: 1,
-      centerAlign: false,
-      firstItemClassName: 'tui-first-child',
-      lastItemClassName: 'tui-last-child',
-      template: paginationTemplate,
-    };
+  const paginationOptions = {
+    totalItems: totalItemsAmount,
+    itemsPerPage: paginationParameters.itemsPerPage,
+    visiblePages: paginationParameters.buttonsPerPage,
+    page: 1,
+    centerAlign: false,
+    firstItemClassName: 'tui-first-child',
+    lastItemClassName: 'tui-last-child',
+    template: paginationTemplate,
+    usageStatistics: false,
+  };
 
-    const pagination = new Pagination(cardsContainer, paginationOptions);
-    // pagination.on('afterMove', ({ createPage }) => createPage(page));
+  const pagination = new Pagination(paginationContainer, paginationOptions);
+  pagination.on('afterMove', ({ page }) =>
+    renderShoppingCardsPage(paginatedShoppingList[page])
+  );
 
-    // const cardsMarkup = createCardsMarkup(paginatedShoppingList[1]);
-    // cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
-  }
+  // pagination.on('afterMove', ({ page }) => console.log(page));
+
+  renderShoppingCardsPage(paginatedShoppingList[1]);
 }
 
-// function createPage(page) {
-//   for (let i = 1; i <= page; i += 1) {
-//     if (page === i) {
-//       cardsContainer.innerHTML = '';
-//       renderMarkup(result[i - 1]);
-//       const cardsMarkup = createCardsMarkup(paginatedShoppingList[1]);
-//       cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
-//     }
-//   }
-// }
+function renderShoppingCardsPage(shoppingListPage) {
+  const cardsMarkup = createCardsMarkup(shoppingListPage);
+  emptyShoppingPage.innerHTML = '';
+  cardsContainer.innerHTML = cardsMarkup;
+  // cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
+}
 
 //----------------------------------------------------------------
 
@@ -111,31 +109,31 @@ function calculatePaginationParameters(currentViewport) {
   let buttonsPerPage;
 
   switch (currentViewport) {
-    case ViewportConst.desktop_4K:
+    case viewportConst.desktop_4K:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case ViewportConst.laptop_L:
+    case viewportConst.laptop_L:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case ViewportConst.laptop:
+    case viewportConst.laptop:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case ViewportConst.tablet:
+    case viewportConst.tablet:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case ViewportConst.mobile_L:
+    case viewportConst.mobile_L:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
-    case ViewportConst.mobile_M:
+    case viewportConst.mobile_M:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
-    case ViewportConst.mobile_S:
+    case viewportConst.mobile_S:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
@@ -169,20 +167,20 @@ function addEventListenerWindow() {
 function viewporthHandler(event) {
   let currentViewport = getCurrentViewport();
 
-  if (currentViewport >= ViewportConst.desktop_4K) {
-    currentViewport = ViewportConst.desktop_4K;
-  } else if (currentViewport >= ViewportConst.laptop_L) {
-    currentViewport = ViewportConst.laptop_L;
-  } else if (currentViewport >= ViewportConst.laptop) {
-    currentViewport = ViewportConst.laptop;
-  } else if (currentViewport >= ViewportConst.tablet) {
-    currentViewport = ViewportConst.tablet;
-  } else if (currentViewport >= ViewportConst.mobile_L) {
-    currentViewport = ViewportConst.mobile_L;
-  } else if (currentViewport >= ViewportConst.mobile_M) {
-    currentViewport = ViewportConst.mobile_M;
+  if (currentViewport >= viewportConst.desktop_4K) {
+    currentViewport = viewportConst.desktop_4K;
+  } else if (currentViewport >= viewportConst.laptop_L) {
+    currentViewport = viewportConst.laptop_L;
+  } else if (currentViewport >= viewportConst.laptop) {
+    currentViewport = viewportConst.laptop;
+  } else if (currentViewport >= viewportConst.tablet) {
+    currentViewport = viewportConst.tablet;
+  } else if (currentViewport >= viewportConst.mobile_L) {
+    currentViewport = viewportConst.mobile_L;
+  } else if (currentViewport >= viewportConst.mobile_M) {
+    currentViewport = viewportConst.mobile_M;
   } else {
-    currentViewport = ViewportConst.mobile_S;
+    currentViewport = viewportConst.mobile_S;
   }
 
   if (previousViewport != currentViewport) {

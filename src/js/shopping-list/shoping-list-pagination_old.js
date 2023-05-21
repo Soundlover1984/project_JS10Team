@@ -1,7 +1,6 @@
-import debounce from 'lodash.debounce';
 import '../side-bar/supportCreateList';
 import '../side-bar/supportSwiper';
-import { createCardsMarkup } from './shopping-list-markup';
+import createCardBook from './shoppingList';
 import Pagination from 'tui-pagination';
 import Notiflix from 'notiflix';
 
@@ -12,23 +11,31 @@ Notiflix.Notify.init({
   },
 });
 
-let MobilViveport = 375;
-// let DestopViveport = 768;
+const cardWithImg = document.querySelector('.shopping-cart-is-empty');
+const listWithBoks = document.querySelector('.listWithBoks');
 
-const defaultTextRef = document.querySelector('.shopping-cart-is-empty');
-const cardsContainer = document.querySelector('.listWithBoks');
+//Інфо з Локального сховища
+const savedSettings = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
 
-const shoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
+function chunkArray(myArray, chunk_size) {
+  let index = 0;
+  const arrayLength = myArray.length;
+  const tempArray = [];
 
-// if (shoppingList) {
-// const shoppingListLength = shoppingList.length;
-// }
+  for (index = 0; index < arrayLength; index += chunk_size) {
+    let myChunk = myArray.slice(index, index + chunk_size);
+    tempArray.push(myChunk);
+  }
 
-// let viewportWidth = document.documentElement.clientWidth;
+  return tempArray;
+}
 
-function shoppingListPagination(shoppingList) {
-  const shoppingListLength = shoppingList.length;
-  if (!shoppingList || shoppingListLength === 0) {
+let viewportWidth = document.documentElement.clientWidth;
+
+controllInLocalStorage();
+
+function controllInLocalStorage() {
+  if (!savedSettings) {
     return Notiflix.Notify.info(
       'Your shopping list is empty. Please add a book',
       {
@@ -44,48 +51,64 @@ function shoppingListPagination(shoppingList) {
         showOnlyTheLastOne: true,
       }
     );
-  } else if (shoppingListLength > 0) {
-    // controlOfViewport(viewportWidth);
-    renderPage(shoppingListLength, itemsPerPage, buttonsPerPage);
+  } else if (savedSettings.length === 0) {
+    return Notiflix.Notify.info(
+      'Your shopping list is empty. Please add a book',
+      {
+        width: '500px',
+        position: 'center-center',
+        fontSize: '20px',
+        messageMaxLength: 500,
+        opacity: 0.6,
+        cssAnimation: true,
+        cssAnimationDuration: 1000,
+        cssAnimationStyle: 'zoom',
+        clickToClose: true,
+        showOnlyTheLastOne: true,
+      }
+    );
+  } else if (savedSettings.length > 0) {
+    controllOfViewport(viewportWidth);
   }
   return;
 }
 
-function controlOfViewport(param) {
-  if (param <= MobilViveport) {
-    itemsPerPage = 2;
-    buttonsPerPage = 4;
-  } else {
-    itemsPerPage = 3;
-    buttonsPerPage = 3;
+/// Перевірка на ширину вюпорта
+function controllOfViewport(param) {
+  let booksSommKommer = savedSettings.length;
+  let MobilViveport = 375;
+  // let DesctopViveport = 768;
+
+  if (param > MobilViveport) {
+    let perPage = 3;
+    let buttonsPerPage = 3;
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    return;
+  } else if (param <= MobilViveport) {
+    let perPage = 2;
+    let buttonsPerPage = 4;
+    removeDefaultPage(booksSommKommer, perPage, buttonsPerPage);
+    return;
   }
-  renderPage(shoppingListLength, itemsPerPage, buttonsPerPage);
-  return;
 }
 
-function createChunkOfBooks(fullList, chunkSize) {
-  const arrayLength = fullList.length;
-  const oneChunk = [];
+//Функція що готує сторінку до рендирингу в залежності вюпорту дає кількість кнопок
+function removeDefaultPage(allBoks, itemsPerPage, visiblePages) {
+  let thisBooks = savedSettings.length;
+  let result = chunkArray(savedSettings, itemsPerPage);
+  let allPages = result.length;
 
-  for (let i = 0; i < arrayLength; i += chunkSize) {
-    oneChunk.push(fullList.slice(i, i + chunkSize));
-  }
-  return oneChunk;
-}
+  removeImg();
 
-function renderPage(totalItems, itemsPerPage, buttonsPerPage) {
-  removeDefaultText();
+  renderMarkup(result[0]);
 
-  let chunks = createChunkOfBooks(shoppingList, itemsPerPage);
-  renderMarkup(chunks[0]);
-
-  if (shoppingListLength > 3) {
-    const paginationContainer = document.querySelector('tui-pagination');
+  if (savedSettings.length > 3) {
+    const container = document.getElementById('pagination');
 
     const options = {
-      totalItems: totalItems,
-      itemsPerPage: itemsPerPage,
-      buttonsPerPage: buttonsPerPage,
+      totalItems: `${allBoks}`,
+      itemsPerPage: `${itemsPerPage}`,
+      visiblePages: `${visiblePages}`,
       page: 1,
       centerAlign: false,
       firstItemClassName: 'tui-first-child',
@@ -109,36 +132,27 @@ function renderPage(totalItems, itemsPerPage, buttonsPerPage) {
       },
     };
 
-    const pagination = new Pagination(paginationContainer, options);
-    pagination.on('afterMove', ({ createPage }) => createPage(page));
-  }
-}
+    const pagination = new Pagination(container, options);
 
-function createPage(page) {
-  for (let i = 1; i <= page; i += 1) {
-    if (page === i) {
-      cardsContainer.innerHTML = '';
-      renderMarkup(result[i - 1]);
+    pagination.on('afterMove', ({ page }) => createPage(page));
+
+    function createPage(page) {
+      for (let i = 1; i <= page; i += 1) {
+        if (page === i) {
+          listWithBoks.innerHTML = '';
+          renderMarkup(result[i - 1]);
+        }
+      }
     }
   }
 }
 
-function removeDefaultText() {
-  defaultTextRef.innerHTML = '';
-}
-
+//Функція що рендирить сторінку
 function renderMarkup(books) {
-  const cardsMarkup = createCardsMarkup(books);
-  cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
+  const cardsMarkup = createCardBook(books);
+  listWithBoks.insertAdjacentHTML('beforeend', cardsMarkup);
 }
-
-//----------------------------------------------------------------
-function addEventListenerWindow() {
-  window.addEventListener('resize', debounce(widthHandler, 250));
+//Функція що очищає сторінку якщо корзина пуста
+function removeImg() {
+  cardWithImg.innerHTML = '';
 }
-
-function widthHandler(event) {
-  controllInLocalStorage();
-}
-
-shoppingListPagination(shoppingList);
