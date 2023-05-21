@@ -1,6 +1,5 @@
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
-import { createShoppingList } from './shoping-list-pagination';
 
 export function notifyInit() {
   Notiflix.Notify.init({
@@ -11,7 +10,7 @@ export function notifyInit() {
   });
 }
 
-export function emptyShopingListNotify() {
+export function emptyShoppingListNotify() {
   Notiflix.Notify.info('Your shopping list is empty. Please add a book', {
     width: '500px',
     position: 'center-center',
@@ -26,10 +25,10 @@ export function emptyShopingListNotify() {
   });
 }
 
-let currentViewport = document.documentElement.clientWidth;
-let previousViewport = currentViewport;
+const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
+const cardsContainer = document.querySelector('.books__list');
 
-const Viewport = {
+const ViewportConst = {
   mobile_S: 320,
   mobile_M: 375,
   mobile_L: 425,
@@ -39,76 +38,21 @@ const Viewport = {
   desktop_4K: 2560,
 };
 
-export function addEventListenerWindow() {
-  window.addEventListener('resize', debounce(viewporthHandler, 250));
-}
+const paginationTemplate = {
+  page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+  currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+  moveButton:
+    '<a href="#" class="tui-page-btn tui-{{type}}">' +
+    '<span class="tui-ico-{{type}}">{{type}}</span>' +
+    '</a>',
+  disabledMoveButton:
+    '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+    '<span class="tui-ico-{{type}}">{{type}}</span>' +
+    '</span>',
+  moreButton:
+    '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+    '<span class="tui-ico-ellip">...</span>' +
+    '</a>',
+};
 
-export function viewporthHandler(event) {
-  currentViewport = document.documentElement.clientWidth;
-
-  if (currentViewport >= Viewport.desktop_4K) {
-    currentViewport = Viewport.desktop_4K;
-  } else if (currentViewport >= Viewport.laptop_L) {
-    currentViewport = Viewport.laptop_L;
-  } else if (currentViewport >= Viewport.laptop) {
-    currentViewport = Viewport.laptop;
-  } else if (currentViewport >= Viewport.tablet) {
-    currentViewport = Viewport.tablet;
-  } else if (currentViewport >= Viewport.mobile_L) {
-    currentViewport = Viewport.mobile_L;
-  } else if (currentViewport >= Viewport.mobile_M) {
-    currentViewport = Viewport.mobile_M;
-  } else {
-    currentViewport = Viewport.mobile_S;
-  }
-
-  if (previousViewport != currentViewport) {
-    createShoppingList();
-    previousViewport = currentViewport;
-  }
-}
-
-export function calculatePaginationParameters() {
-  let itemsPerPage;
-  let buttonsPerPage;
-
-  switch (currentViewport) {
-    case Viewport.desktop_4K:
-      itemsPerPage = 3;
-      buttonsPerPage = 3;
-      break;
-    case Viewport.laptop_L:
-      itemsPerPage = 3;
-      buttonsPerPage = 3;
-      break;
-    case Viewport.laptop:
-      itemsPerPage = 3;
-      buttonsPerPage = 3;
-      break;
-    case Viewport.tablet:
-      itemsPerPage = 3;
-      buttonsPerPage = 3;
-      break;
-    case Viewport.mobile_L:
-      itemsPerPage = 4;
-      buttonsPerPage = 2;
-      break;
-    case Viewport.mobile_M:
-      itemsPerPage = 4;
-      buttonsPerPage = 2;
-      break;
-    case Viewport.mobile_S:
-      itemsPerPage = 4;
-      buttonsPerPage = 2;
-      break;
-    default:
-      itemsPerPage = 4;
-      buttonsPerPage = 2;
-  }
-
-  const paginationParameters = {
-    itemsPerPage: itemsPerPage,
-    buttonsPerPage: buttonsPerPage,
-  };
-  return paginationParameters;
-}
+export { ViewportConst, emptyShoppingPage, cardsContainer, paginationTemplate };

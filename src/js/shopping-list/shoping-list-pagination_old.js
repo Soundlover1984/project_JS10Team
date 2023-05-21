@@ -63,6 +63,16 @@ function controlOfViewport(param) {
   return;
 }
 
+function createChunkOfBooks(fullList, chunkSize) {
+  const arrayLength = fullList.length;
+  const oneChunk = [];
+
+  for (let i = 0; i < arrayLength; i += chunkSize) {
+    oneChunk.push(fullList.slice(i, i + chunkSize));
+  }
+  return oneChunk;
+}
+
 function renderPage(totalItems, itemsPerPage, buttonsPerPage) {
   removeDefaultText();
 
@@ -115,16 +125,6 @@ function createPage(page) {
 
 function removeDefaultText() {
   defaultTextRef.innerHTML = '';
-}
-
-function createChunkOfBooks(fullList, chunkSize) {
-  const arrayLength = fullList.length;
-  const oneChunk = [];
-
-  for (let i = 0; i < arrayLength; i += chunkSize) {
-    oneChunk.push(fullList.slice(i, i + chunkSize));
-  }
-  return oneChunk;
 }
 
 function renderMarkup(books) {
