@@ -1,89 +1,93 @@
 import debounce from 'lodash.debounce';
 import Pagination from 'tui-pagination';
+import { createCardsMarkup } from './shopping-list-markup';
+import { notifyInit } from './shoping-list-const';
+import { emptyShoppingListNotify } from './shoping-list-const';
+import { viewportConst } from './shoping-list-const';
 
 // import '../side-bar/supportCreateList';
 // import '../side-bar/supportSwiper';
 
-import { createCardsMarkup } from './shopping-list-markup';
+//----------------------------------------------------------------
 
-import { notifyInit } from './shoping-list-utils';
-import { emptyShoppingListNotify } from './shoping-list-utils';
-import { paginationTemplate } from './shoping-list-utils';
-import {
-  viewportConst,
-  emptyShoppingPage,
-  cardsContainer,
-} from './shoping-list-utils';
+const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
+const cardsContainer = document.querySelector('.books__list');
+const paginationBarContainer = document.getElementById('pagination');
 
 let previousViewport = getCurrentViewport();
 
-export function createShoppingList() {
+function load() {
+  notifyInit();
+  drawShoppingCardsList();
+  addEventListenerWindow();
+}
+
+export function drawShoppingCardsList() {
   const shoppingList = getSoppingList();
 
   if (!shoppingList || shoppingList.length === 0) {
+    emptyShoppingPage.classList.add('js-hidden');
+    // emptyShoppingPage.innerHTML = '';
     emptyShoppingListNotify();
   } else {
+    emptyShoppingPage.classList.add('js-hidden');
+    // emptyShoppingPage.innerHTML = '';
     shoppingListPagination(shoppingList);
   }
 }
 
 function shoppingListPagination(shoppingList) {
-  clearEmptyShoppingPage();
   const currentViewport = getCurrentViewport();
   const paginationParameters = calculatePaginationParameters(currentViewport);
+  console.log('paginationParameters:', paginationParameters);
   const paginatedShoppingList = createPaginatedShoppingList(
     shoppingList,
-    paginationParameters
+    paginationParameters.itemsPerPage
   );
-  renderShoppingListCurrentPage(
-    shoppingList.length,
-    paginatedShoppingList,
-    paginationParameters
-  );
-}
 
-function clearEmptyShoppingPage() {
-  emptyShoppingPage.innerHTML = '';
-}
-
-function renderShoppingListCurrentPage(
-  totalItemsAmount,
-  paginatedShoppingList,
-  paginationParameters
-) {
-  console.log('paginatedShoppingList.length:', paginatedShoppingList.length);
-  // console.log('paginationParameters:', paginationParameters);
-  // console.log('paginatedShoppingList:', paginatedShoppingList);
-
-  const paginationContainer = document.getElementById('pagination');
+  const paginationBarTemplate = {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  };
 
   const paginationOptions = {
-    totalItems: totalItemsAmount,
+    totalItems: shoppingList.length,
     itemsPerPage: paginationParameters.itemsPerPage,
     visiblePages: paginationParameters.buttonsPerPage,
     page: 1,
     centerAlign: false,
     firstItemClassName: 'tui-first-child',
     lastItemClassName: 'tui-last-child',
-    template: paginationTemplate,
+    template: paginationBarTemplate,
     usageStatistics: false,
   };
 
-  const pagination = new Pagination(paginationContainer, paginationOptions);
-  pagination.on('afterMove', ({ page }) =>
-    renderShoppingCardsPage(paginatedShoppingList[page])
-  );
+  if (shoppingList.length <= paginationParameters.itemsPerPage) {
+    paginationBarContainer.classList.add('js-hidden');
+  } else {
+    paginationBarContainer.classList.remove('js-hidden');
+  }
 
-  // pagination.on('afterMove', ({ page }) => console.log(page));
+  const pagination = new Pagination(paginationBarContainer, paginationOptions);
+  pagination.on('afterMove', ({ page }) => {
+    drawShoppingCardsPage(paginatedShoppingList[page - 1]);
+  });
 
-  renderShoppingCardsPage(paginatedShoppingList[1]);
-}
-
-function renderShoppingCardsPage(shoppingListPage) {
-  const cardsMarkup = createCardsMarkup(shoppingListPage);
-  emptyShoppingPage.innerHTML = '';
-  cardsContainer.innerHTML = cardsMarkup;
-  // cardsContainer.insertAdjacentHTML('beforeend', cardsMarkup);
+  let firstLoadPage = pagination.getCurrentPage();
+  drawShoppingCardsPage(paginatedShoppingList[firstLoadPage - 1]);
 }
 
 //----------------------------------------------------------------
@@ -149,16 +153,18 @@ function calculatePaginationParameters(currentViewport) {
   return paginationParameters;
 }
 
-function createPaginatedShoppingList(shoppingList, paginationParameters) {
-  const { itemsPerPage, buttonsPerPage } = paginationParameters;
-
+function createPaginatedShoppingList(shoppingList, itemsPerPage) {
   const paginatedShoppingList = [];
   for (let i = 0; i < shoppingList.length; i += itemsPerPage) {
     paginatedShoppingList.push(shoppingList.slice(i, i + itemsPerPage));
   }
   return paginatedShoppingList;
 }
-//----------------------------------------------------------------
+
+function drawShoppingCardsPage(shoppingListPage) {
+  const cardsMarkup = createCardsMarkup(shoppingListPage);
+  cardsContainer.innerHTML = cardsMarkup;
+}
 
 function addEventListenerWindow() {
   window.addEventListener('resize', debounce(viewporthHandler, 250));
@@ -184,13 +190,10 @@ function viewporthHandler(event) {
   }
 
   if (previousViewport != currentViewport) {
-    createShoppingList();
+    drawShoppingCardsList();
     previousViewport = currentViewport;
   }
 }
 
 //----------------------------------------------------------------
-notifyInit();
-createShoppingList();
-addEventListenerWindow();
-//----------------------------------------------------------------
+load();
