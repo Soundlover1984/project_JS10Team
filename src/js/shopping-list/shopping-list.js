@@ -200,7 +200,7 @@ function getCurrentMediaWidth() {
 
 function onRemoveCard(event) {
   if (event.target.closest('.shop-card__delete')) {
-    const bookShopCard = ev.target.closest('.shop-card');
+    const bookShopCard = event.target.closest('.shop-card');
     const bookId = bookShopCard.dataset.id;
     removeShopCard(bookShopCard);
     removeFromLocalStorage(bookId);
