@@ -25,7 +25,7 @@ export function emptyShoppingListNotify() {
   });
 }
 
-const viewportMediaConst = {
+export const viewportMediaConst = {
   desktop_4K: 2560,
   laptop_L: 1440,
   laptop: 1024,
@@ -34,5 +34,3 @@ const viewportMediaConst = {
   mobile_M: 375,
   mobile_S: 320,
 };
-
-export { viewportMediaConst };

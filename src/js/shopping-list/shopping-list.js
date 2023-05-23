@@ -8,7 +8,10 @@ import { viewportMediaConst } from './shoping-list-const';
 // import '../side-bar/supportCreateList';
 // import '../side-bar/supportSwiper';
 
-//----------------------------------------------------------------
+//=======================================================================================
+// load() - load functions on this page ("main" function)
+// drawShoppingCardsList() - check local storage and draw shopping list content
+//=======================================================================================
 
 const emptyShoppingPage = document.querySelector('.sh-list__empty');
 const cardsContainer = document.querySelector('.sh-list__books-list');
@@ -26,7 +29,7 @@ export function drawShoppingCardsList() {
   const shoppingList = getSoppingList();
 
   if (!shoppingList || shoppingList.length === 0) {
-    // emptyShoppingPage.classList.add('js-hidden');
+    // emptyShoppingPage.classList.remove('js-hidden');
     emptyShoppingListNotify();
   } else {
     // emptyShoppingPage.classList.add('js-hidden');

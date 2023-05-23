@@ -1,5 +1,4 @@
 import './js/shopping-list/shopping-list';
-import './js/shopping-list/shoping-list-pagination';
 import './js/dark-theme/dark-theme';
 import './js/side-bar/supportFundArray';
 import './js/side-bar/supportCreateList';
