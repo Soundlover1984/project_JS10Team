@@ -11,7 +11,7 @@ import { viewportMediaConst } from './shoping-list-const';
 //----------------------------------------------------------------
 
 const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
-const cardsContainer = document.querySelector('.books__list');
+const cardsContainer = document.querySelector('.sh-list__books-list');
 const paginationBarContainer = document.getElementById('pagination');
 
 let previousMediaWidth = getCurrentMediaWidth();
@@ -227,8 +227,7 @@ function removeFromLocalStorage(id) {
 }
 
 function addEventListenerToRemoveButton() {
-  const btnRemove = document.querySelector('.books__list');
-  btnRemove.addEventListener('click', onRemoveCard);
+  cardsContainer.addEventListener('click', onRemoveCard);
 }
 
 //----------------------------------------------------------------
