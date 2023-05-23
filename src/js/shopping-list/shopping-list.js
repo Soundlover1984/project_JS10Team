@@ -200,15 +200,10 @@ function onRemoveCard(event) {
   if (event.target.closest('.shop-card__delete')) {
     const bookShopCard = event.target.closest('.shop-card');
     const bookId = bookShopCard.dataset.id;
-    removeShopCard(bookShopCard);
+    bookShopCard.remove();
     removeFromLocalStorage(bookId);
     drawShoppingCardsList();
   }
-}
-
-function removeShopCard(bookShopCard) {
-  bookShopCard.classList.add('is-hidden');
-  bookShopCard.remove();
 }
 
 function removeFromLocalStorage(id) {
