@@ -10,7 +10,7 @@ import { viewportMediaConst } from './shoping-list-const';
 
 //----------------------------------------------------------------
 
-const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
+const emptyShoppingPage = document.querySelector('.sh-list__empty');
 const cardsContainer = document.querySelector('.sh-list__books-list');
 const paginationBarContainer = document.getElementById('pagination');
 
