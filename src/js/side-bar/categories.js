@@ -2,12 +2,17 @@ import Notiflix from 'notiflix';
 import { BooksApiService } from '../api/booksApiService';
 import { getAndParseTopBooks } from '../home-collection/home-collection';
 import { getAndParseCategoryBooks } from '../home-collection/home-collection';
+import { Loading } from 'notiflix/build/notiflix-loading-aio'; 
+
 Notiflix.Notify.init({
   info: {
     background: '#4F2EE8',
     notinflixIconColor: '#fff',
   },
 });
+
+
+
 
 const booksApiService = new BooksApiService();
 
@@ -16,10 +21,16 @@ const categoriesContainer = document.querySelector('.categories__list');
 let name = '';
 async function displayCategories() {
   try {
+    Loading.hourglass({
+      backgroundColor: 'rgba(0,0,0,0.4)',
+      svgColor: '#4f2ee8',
+    });
     const categoryList = await booksApiService.getCategoryList();
     createCategoriesList(categoryList);
+    Loading.remove(1000);
   } catch (error) {
     console.error(error);
+    Loading.remove(1000);
     throw new Error('Failed to fetch category list');
   }
 
@@ -58,11 +69,16 @@ async function clickOnCategories(event) {
 
 async function getSelectCategory(name) {
   try {
+     Loading.hourglass({
+       backgroundColor: 'rgba(0,0,0,0.4)',
+       svgColor: '#4f2ee8',
+     });
     const listBooks = await booksApiService.getCategoryBooks(name);
-
     renderSelectBooks(listBooks);
+    Loading.remove(1000);
   } catch (error) {
     console.error(error);
+    Loading.remove(1000);
     throw new Error('Failed to fetch category list');
   }
 }
