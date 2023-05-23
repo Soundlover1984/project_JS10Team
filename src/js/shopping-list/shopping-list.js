@@ -198,8 +198,8 @@ function getCurrentMediaWidth() {
   return currentMediaWidth;
 }
 
-function onRemoveCard(ev) {
-  if (ev.target.closest('.shop-card__delete')) {
+function onRemoveCard(event) {
+  if (event.target.closest('.shop-card__delete')) {
     const bookShopCard = ev.target.closest('.shop-card');
     const bookId = bookShopCard.dataset.id;
     removeShopCard(bookShopCard);
