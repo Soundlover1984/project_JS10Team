@@ -8,6 +8,8 @@ import { addEventListenerBookLink } from './home-collection-utils';
 import { amountOfBooks } from './home-collection-utils';
 import { addEventListenerWindow } from './home-collection-utils';
 import { limitBookHandler } from './home-collection-utils';
+import { notifyInit } from './home-collection-utils';
+import { noDataNotify } from './home-collection-utils';
 
 //=======================================================================================
 // sectionLoad() - load functions on this page ("main" function)
@@ -29,10 +31,6 @@ function sectionLoad() {
 
 export async function getAndParseTopBooks(amountOfBooks) {
   try {
-    Loading.hourglass({
-      backgroundColor: 'rgba(0,0,0,0.4)',
-      svgColor: '#4f2ee8',
-    });
     const booksApiService = new BooksApiService();
     const topBooksFromBack = await booksApiService.getTopBooks();
     if (topBooksFromBack.length != 0) {
@@ -43,14 +41,12 @@ export async function getAndParseTopBooks(amountOfBooks) {
       renderTopBooks(topBooksLimited);
       addEventListenerBookLink();
       addEventListenerButtonMore();
-      Loading.remove(1000);
     } else {
       document.querySelector('.home-collection__title').textContent = '';
       noDataNotify();
     }
   } catch (error) {
     console.error(error);
-    Loading.remove(1000);
     throw new Error('Failed to fetch top books');
   }
 }
@@ -61,25 +57,18 @@ export async function getAndParseCategoryBooks(
 ) {
   try {
     const booksApiService = new BooksApiService();
-    Loading.hourglass({
-      backgroundColor: 'rgba(0,0,0,0.4)',
-      svgColor: '#4f2ee8',
-    });
     booksApiService.selectedCategory = categoryName;
     const booksFromBack = await booksApiService.getCategoryBooks();
     const books = limitBooksInBooks(booksFromBack, amountOfBooks);
     if (books.length != 0) {
       renderBooks(books);
-      Loading.remove(1000);
     } else {
       document.querySelector('.home-collection__title').textContent = '';
       noDataNotify();
       getAndParseTopBooks(amountOfBooks);
-      Loading.remove(1000);
     }
   } catch (error) {
     console.error(error);
-    Loading.remove(1000);
     throw new Error('Failed to fetch category books');
   }
 }

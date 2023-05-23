@@ -14,14 +14,10 @@
 
 .header__container {
   display: flex;
-  min-width: 375px;
-  max-width: 1440px;
-  position: relative;
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
-  width: 100%;
-  margin: 0 auto;
+  min-width: 375px;
   height: 64px;
   border: 1.5px solid $dark-color;
   border-radius: 0 0 8px 8px;
@@ -31,10 +27,7 @@
 .header__buttons-menu {
   display: flex;
   align-items: center;
-  gap: 8px;
-@media screen and (min-width: 767px) {
   gap: 14px;
-}
 }
 
 .header__toggle {

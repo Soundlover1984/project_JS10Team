@@ -139,15 +139,10 @@ function calculatePaginationParameters(currentMediaWidth) {
       buttonsPerPage = 2;
   }
 
-  console.log('itemsPerPage:', itemsPerPage);
-
   const paginationParameters = {
     itemsPerPage: itemsPerPage,
     buttonsPerPage: buttonsPerPage,
   };
-
-  console.log('currentMediaWidth:', currentMediaWidth);
-  console.log('itemsPerPage:', paginationParameters.itemsPerPage);
 
   return paginationParameters;
 }
