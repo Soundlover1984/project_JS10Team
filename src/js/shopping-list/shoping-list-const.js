@@ -25,14 +25,14 @@ export function emptyShoppingListNotify() {
   });
 }
 
-const viewportConst = {
-  mobile_S: 320,
-  mobile_M: 375,
-  mobile_L: 425,
-  tablet: 768,
-  laptop: 1024,
-  laptop_L: 1440,
+const viewportMediaConst = {
   desktop_4K: 2560,
+  laptop_L: 1440,
+  laptop: 1024,
+  tablet: 768,
+  mobile_L: 425,
+  mobile_M: 375,
+  mobile_S: 320,
 };
 
-export { viewportConst };
+export { viewportMediaConst };

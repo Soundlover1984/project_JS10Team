@@ -3,7 +3,7 @@ import Pagination from 'tui-pagination';
 import { createCardsMarkup } from './shopping-list-markup';
 import { notifyInit } from './shoping-list-const';
 import { emptyShoppingListNotify } from './shoping-list-const';
-import { viewportConst } from './shoping-list-const';
+import { viewportMediaConst } from './shoping-list-const';
 
 // import '../side-bar/supportCreateList';
 // import '../side-bar/supportSwiper';
@@ -14,7 +14,7 @@ const emptyShoppingPage = document.querySelector('.shopping-cart-is-empty');
 const cardsContainer = document.querySelector('.books__list');
 const paginationBarContainer = document.getElementById('pagination');
 
-let previousViewport = getCurrentViewport();
+let previousMediaWidth = getCurrentMediaWidth();
 
 function load() {
   notifyInit();
@@ -27,7 +27,6 @@ export function drawShoppingCardsList() {
 
   if (!shoppingList || shoppingList.length === 0) {
     // emptyShoppingPage.classList.add('js-hidden');
-    emptyShoppingPage.innerHTML = '';
     emptyShoppingListNotify();
   } else {
     // emptyShoppingPage.classList.add('js-hidden');
@@ -36,9 +35,20 @@ export function drawShoppingCardsList() {
   }
 }
 
+function getSoppingList() {
+  let shoppingList = [];
+  try {
+    shoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to parse data from localStorage');
+  }
+  return shoppingList;
+}
+
 function shoppingListPagination(shoppingList) {
-  const currentViewport = getCurrentViewport();
-  const paginationParameters = calculatePaginationParameters(currentViewport);
+  const currentMediaWidth = getCurrentMediaWidth();
+  const paginationParameters = calculatePaginationParameters(currentMediaWidth);
   const paginatedShoppingList = createPaginatedShoppingList(
     shoppingList,
     paginationParameters.itemsPerPage
@@ -88,57 +98,39 @@ function shoppingListPagination(shoppingList) {
   let firstLoadPage = pagination.getCurrentPage();
   drawShoppingCardsPage(paginatedShoppingList[firstLoadPage - 1]);
 
-  addEventListenerToRemove();
+  addEventListenerToRemoveButton();
 }
 
-//----------------------------------------------------------------
-
-function getSoppingList() {
-  let shoppingList = [];
-  try {
-    shoppingList = JSON.parse(localStorage.getItem('SHOPPING_LIST_KEY'));
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to parse data from localStorage');
-  }
-  return shoppingList;
-}
-
-function getCurrentViewport() {
-  let currentViewport = document.documentElement.clientWidth;
-  return currentViewport;
-}
-
-function calculatePaginationParameters(currentViewport) {
+function calculatePaginationParameters(currentMediaWidth) {
   let itemsPerPage;
   let buttonsPerPage;
 
-  switch (currentViewport) {
-    case viewportConst.desktop_4K:
+  switch (currentMediaWidth) {
+    case viewportMediaConst.desktop_4K:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case viewportConst.laptop_L:
+    case viewportMediaConst.laptop_L:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case viewportConst.laptop:
+    case viewportMediaConst.laptop:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case viewportConst.tablet:
+    case viewportMediaConst.tablet:
       itemsPerPage = 3;
       buttonsPerPage = 3;
       break;
-    case viewportConst.mobile_L:
+    case viewportMediaConst.mobile_L:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
-    case viewportConst.mobile_M:
+    case viewportMediaConst.mobile_M:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
-    case viewportConst.mobile_S:
+    case viewportMediaConst.mobile_S:
       itemsPerPage = 4;
       buttonsPerPage = 2;
       break;
@@ -147,10 +139,16 @@ function calculatePaginationParameters(currentViewport) {
       buttonsPerPage = 2;
   }
 
+  console.log('itemsPerPage:', itemsPerPage);
+
   const paginationParameters = {
     itemsPerPage: itemsPerPage,
     buttonsPerPage: buttonsPerPage,
   };
+
+  console.log('currentMediaWidth:', currentMediaWidth);
+  console.log('itemsPerPage:', paginationParameters.itemsPerPage);
+
   return paginationParameters;
 }
 
@@ -172,32 +170,35 @@ function addEventListenerWindow() {
 }
 
 function viewporthHandler(event) {
-  let currentViewport = getCurrentViewport();
-
-  if (currentViewport >= viewportConst.desktop_4K) {
-    currentViewport = viewportConst.desktop_4K;
-  } else if (currentViewport >= viewportConst.laptop_L) {
-    currentViewport = viewportConst.laptop_L;
-  } else if (currentViewport >= viewportConst.laptop) {
-    currentViewport = viewportConst.laptop;
-  } else if (currentViewport >= viewportConst.tablet) {
-    currentViewport = viewportConst.tablet;
-  } else if (currentViewport >= viewportConst.mobile_L) {
-    currentViewport = viewportConst.mobile_L;
-  } else if (currentViewport >= viewportConst.mobile_M) {
-    currentViewport = viewportConst.mobile_M;
-  } else {
-    currentViewport = viewportConst.mobile_S;
-  }
-
-  if (previousViewport != currentViewport) {
+  let currentMediaWidth = getCurrentMediaWidth();
+  if (previousMediaWidth != currentMediaWidth) {
     drawShoppingCardsList();
-    previousViewport = currentViewport;
+    previousMediaWidth = currentMediaWidth;
   }
 }
-//----------------------------------------------------------------
 
-async function onRemoveCard(ev) {
+function getCurrentMediaWidth() {
+  let currentViewport = document.documentElement.clientWidth;
+  let currentMediaWidth;
+  if (currentViewport >= viewportMediaConst.desktop_4K) {
+    currentMediaWidth = viewportMediaConst.desktop_4K;
+  } else if (currentViewport >= viewportMediaConst.laptop_L) {
+    currentMediaWidth = viewportMediaConst.laptop_L;
+  } else if (currentViewport >= viewportMediaConst.laptop) {
+    currentMediaWidth = viewportMediaConst.laptop;
+  } else if (currentViewport >= viewportMediaConst.tablet) {
+    currentMediaWidth = viewportMediaConst.tablet;
+  } else if (currentViewport >= viewportMediaConst.mobile_L) {
+    currentMediaWidth = viewportMediaConst.mobile_L;
+  } else if (currentViewport >= viewportMediaConst.mobile_M) {
+    currentMediaWidth = viewportMediaConst.mobile_M;
+  } else {
+    currentMediaWidth = viewportMediaConst.mobile_S;
+  }
+  return currentMediaWidth;
+}
+
+function onRemoveCard(ev) {
   if (ev.target.closest('.shop-card__delete')) {
     const bookShopCard = ev.target.closest('.shop-card');
     const bookId = bookShopCard.dataset.id;
@@ -230,7 +231,7 @@ function removeFromLocalStorage(id) {
   }
 }
 
-function addEventListenerToRemove() {
+function addEventListenerToRemoveButton() {
   const btnRemove = document.querySelector('.books__list');
   btnRemove.addEventListener('click', onRemoveCard);
 }
