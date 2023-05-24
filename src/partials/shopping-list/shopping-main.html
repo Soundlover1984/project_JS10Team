@@ -1,16 +1,17 @@
-
 <div class="sh-list__container sh-list__removeWraper">
-  <div class="sh-list__books__support">
+  <div class="sh-list__books-support">
     <include src="./partials/side-bar/support.html">support</include>
   </div>
   <div class="sh-list__titleAndCard">
-    <h1 class="shTitle">Shopping <span class="shTitle__List">List</span></h1>
-    <div class="shopping-cart-is-empty">
-      <p class="sh-list__default__masseg">
+    <h1 class="sh-list__title">
+      Shopping <span class="sh-list__title--last-word">List</span>
+    </h1>
+    <div class="sh-list__empty">
+      <p class="sh-list__empty-message">
         This page is empty, add some books and proceed to order.
       </p>
-      <div class="sh-list__books__containner">
-        <picture class="sh-list__img__books">
+      <div class="sh-list__empty-imgContainer">
+        <picture class="sh-list__empty-picture">
           <source
             srcset="
               ./images/shopingListImg/emptyList-530.png 1x,
@@ -33,10 +34,9 @@
         </picture>
       </div>
     </div>
-      <ul class="listWithBoks"></ul>
-        <div class="button__from-tui">
-          <div id="pagination" class="tui-pagination"></div>
-      </div>
+    <ul class="sh-list__books-list"></ul>
+    <div class="button__from-tui">
+      <div id="pagination" class="tui-pagination"></div>
     </div>
   </div>
 </div>
