@@ -51,7 +51,7 @@ function createBuyLinksMarkup(buyLinks) {
       const { iconUrl, iconUrl2x, width, height } = getIconUrlForStore(name);
       return `<li class="modal-shopping-list__item">
                         <a class="buy-link" href="${url}" target="_blank" rel="noopener noreferrer nofollow">
-                          <img class="buy-link__img"
+                          <img
                             srcset="${iconUrl} 1x, ${iconUrl2x} 2x"
                             src="${iconUrl}"
                             alt="${name}"
